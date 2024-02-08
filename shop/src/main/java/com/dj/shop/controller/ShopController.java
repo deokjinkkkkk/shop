@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @org.springframework.stereotype.Controller
 public class ShopController {
-	@GetMapping("/home")
+	@GetMapping("/")
 	public String main() {
 		return "pages/index";
 	}

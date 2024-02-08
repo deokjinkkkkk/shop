@@ -4,4 +4,5 @@ import com.dj.shop.vo.UserVO;
 
 public interface UserService {
 	UserVO userSelect(String vo);
+	int saveUser(UserVO vo);
 }

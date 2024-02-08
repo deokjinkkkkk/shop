@@ -5,4 +5,5 @@ import com.dj.shop.vo.UserVO;
 
 public interface UserMapper {
 	UserVO userSelect(String vo);
+	int saveUser(UserVO vo);
 }

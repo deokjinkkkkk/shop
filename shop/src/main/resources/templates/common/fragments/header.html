@@ -52,7 +52,7 @@
 <!-- Head END -->
 <!-- Body BEGIN -->
 <body class="ecommerce">
-    <!-- BEGIN STYLE CUSTOMIZER -->
+        <!-- BEGIN STYLE CUSTOMIZER -->
     <div class="color-panel hidden-sm">
       <div class="color-mode-icons icon-color"></div>
       <div class="color-mode-icons icon-color-close"></div>
@@ -81,22 +81,22 @@
                 <!-- BEGIN TOP BAR MENU -->
                 <div class="col-md-6 col-sm-6 additional-nav">
                     <ul class="list-unstyled list-inline pull-right">
-                        <li><a href="shop-account.html">My Account</a></li>
-                        <li><a href="shop-wishlist.html">My Wishlist</a></li>
-                        <li><a href="shop-checkout.html">Checkout</a></li>
-                        <li><a href="page-login.html">Log In</a></li>
+                        <li th:if="${session.roles != null}"><a href="shop-account.html">My Account</a></li>
+                        <li th:if="${session.roles != null}"><a href="shop-wishlist.html">My Wishlist</a></li>
+                        <li th:if="${session.roles != null}"><a href="shop-checkout.html">Checkout</a></li>
+                        <li th:if="${session.roles == null}"><a href="/login">Log In</a></li>
+                        <li th:if="${session.roles != null}"><a href="/logout" >Log out</a></li>
                     </ul>
                 </div>
                 <!-- END TOP BAR MENU -->
             </div>
         </div>        
     </div>
-    <!-- END TOP BAR -->
 
     <!-- BEGIN HEADER -->
     <div class="header">
       <div class="container">
-        <a class="site-logo" href="shop-index.html"><img src="assets/corporate/img/logos/logo-shop-red.png" alt="Metronic Shop UI"></a>
+        <a class="site-logo" href="/"><img src="assets/corporate/img/logos/logo-shop-red.png" alt="Metronic Shop UI"></a>
 
         <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
 
@@ -118,55 +118,7 @@
                   <em>$1230</em>
                   <a href="javascript:void(0);" class="del-goods">&nbsp;</a>
                 </li>
-                <li>
-                  <a href="shop-item.html"><img src="assets/pages/img/cart-img.jpg" alt="Rolex Classic Watch" width="37" height="34"></a>
-                  <span class="cart-content-count">x 1</span>
-                  <strong><a href="shop-item.html">Rolex Classic Watch</a></strong>
-                  <em>$1230</em>
-                  <a href="javascript:void(0);" class="del-goods">&nbsp;</a>
-                </li>
-                <li>
-                  <a href="shop-item.html"><img src="assets/pages/img/cart-img.jpg" alt="Rolex Classic Watch" width="37" height="34"></a>
-                  <span class="cart-content-count">x 1</span>
-                  <strong><a href="shop-item.html">Rolex Classic Watch</a></strong>
-                  <em>$1230</em>
-                  <a href="javascript:void(0);" class="del-goods">&nbsp;</a>
-                </li>
-                <li>
-                  <a href="shop-item.html"><img src="assets/pages/img/cart-img.jpg" alt="Rolex Classic Watch" width="37" height="34"></a>
-                  <span class="cart-content-count">x 1</span>
-                  <strong><a href="shop-item.html">Rolex Classic Watch</a></strong>
-                  <em>$1230</em>
-                  <a href="javascript:void(0);" class="del-goods">&nbsp;</a>
-                </li>
-                <li>
-                  <a href="shop-item.html"><img src="assets/pages/img/cart-img.jpg" alt="Rolex Classic Watch" width="37" height="34"></a>
-                  <span class="cart-content-count">x 1</span>
-                  <strong><a href="shop-item.html">Rolex Classic Watch</a></strong>
-                  <em>$1230</em>
-                  <a href="javascript:void(0);" class="del-goods">&nbsp;</a>
-                </li>
-                <li>
-                  <a href="shop-item.html"><img src="assets/pages/img/cart-img.jpg" alt="Rolex Classic Watch" width="37" height="34"></a>
-                  <span class="cart-content-count">x 1</span>
-                  <strong><a href="shop-item.html">Rolex Classic Watch</a></strong>
-                  <em>$1230</em>
-                  <a href="javascript:void(0);" class="del-goods">&nbsp;</a>
-                </li>
-                <li>
-                  <a href="shop-item.html"><img src="assets/pages/img/cart-img.jpg" alt="Rolex Classic Watch" width="37" height="34"></a>
-                  <span class="cart-content-count">x 1</span>
-                  <strong><a href="shop-item.html">Rolex Classic Watch</a></strong>
-                  <em>$1230</em>
-                  <a href="javascript:void(0);" class="del-goods">&nbsp;</a>
-                </li>
-                <li>
-                  <a href="shop-item.html"><img src="assets/pages/img/cart-img.jpg" alt="Rolex Classic Watch" width="37" height="34"></a>
-                  <span class="cart-content-count">x 1</span>
-                  <strong><a href="shop-item.html">Rolex Classic Watch</a></strong>
-                  <em>$1230</em>
-                  <a href="javascript:void(0);" class="del-goods">&nbsp;</a>
-                </li>
+                
               </ul>
               <div class="text-right">
                 <a href="shop-shopping-cart.html" class="btn btn-default">View Cart</a>
@@ -183,71 +135,20 @@
             
             <li class="dropdown dropdown-megamenu">
               <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
-                Man
-                
+                가구    
               </a>
               <ul class="dropdown-menu">
-                <li>
-                  <div class="header-navigation-content">
-                    <div class="row">
-                      <div class="col-md-4 header-navigation-col">
-                        <h4>Footwear</h4>
-                        <ul>
-                          <li><a href="shop-product-list.html">Astro Trainers</a></li>
-                          <li><a href="shop-product-list.html">Basketball Shoes</a></li>
-                          <li><a href="shop-product-list.html">Boots</a></li>
-                          <li><a href="shop-product-list.html">Canvas Shoes</a></li>
-                          <li><a href="shop-product-list.html">Football Boots</a></li>
-                          <li><a href="shop-product-list.html">Golf Shoes</a></li>
-                          <li><a href="shop-product-list.html">Hi Tops</a></li>
-                          <li><a href="shop-product-list.html">Indoor and Court Trainers</a></li>
-                        </ul>
-                      </div>
-                      <div class="col-md-4 header-navigation-col">
-                        <h4>Clothing</h4>
-                        <ul>
-                          <li><a href="shop-product-list.html">Base Layer</a></li>
-                          <li><a href="shop-product-list.html">Character</a></li>
-                          <li><a href="shop-product-list.html">Chinos</a></li>
-                          <li><a href="shop-product-list.html">Combats</a></li>
-                          <li><a href="shop-product-list.html">Cricket Clothing</a></li>
-                          <li><a href="shop-product-list.html">Fleeces</a></li>
-                          <li><a href="shop-product-list.html">Gilets</a></li>
-                          <li><a href="shop-product-list.html">Golf Tops</a></li>
-                        </ul>
-                      </div>
-                      <div class="col-md-4 header-navigation-col">
-                        <h4>Accessories</h4>
-                        <ul>
-                          <li><a href="shop-product-list.html">Belts</a></li>
-                          <li><a href="shop-product-list.html">Caps</a></li>
-                          <li><a href="shop-product-list.html">Gloves, Hats and Scarves</a></li>
-                        </ul>
-
-                        <h4>Clearance</h4>
-                        <ul>
-                          <li><a href="shop-product-list.html">Jackets</a></li>
-                          <li><a href="shop-product-list.html">Bottoms</a></li>
-                        </ul>
-                      </div>
-                      <div class="col-md-12 nav-brands">
-                        <ul>
-                          <li><a href="shop-product-list.html"><img title="esprit" alt="esprit" src="assets/pages/img/brands/esprit.jpg"></a></li>
-                          <li><a href="shop-product-list.html"><img title="gap" alt="gap" src="assets/pages/img/brands/gap.jpg"></a></li>
-                          <li><a href="shop-product-list.html"><img title="next" alt="next" src="assets/pages/img/brands/next.jpg"></a></li>
-                          <li><a href="shop-product-list.html"><img title="puma" alt="puma" src="assets/pages/img/brands/puma.jpg"></a></li>
-                          <li><a href="shop-product-list.html"><img title="zara" alt="zara" src="assets/pages/img/brands/zara.jpg"></a></li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </li>
+                <li><a href="shop-product-list.html">침대</a></li>
+                <li><a href="shop-checkout.html">책상</a></li>
+                <li><a href="shop-about.html">의자</a></li>
+                <li><a href="shop-wishlist.html">식탁</a></li>
+                <li><a href="shop-faq.html">옷장</a></li>
               </ul>
             </li>
             
             <li class="dropdown dropdown100 nav-catalogue">
               <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
-                New
+                새로 들어온 상품
                 
               </a>
               <ul class="dropdown-menu">
@@ -301,7 +202,7 @@
             </li>
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
-                Pages 
+                마이페이지
                 
               </a>
                 
@@ -315,7 +216,7 @@
             </li>
             
             
-            <li><a href="http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes&amp;utm_source=download&amp;utm_medium=banner&amp;utm_campaign=metronic_frontend_freebie" target="_blank">Admin theme</a></li>
+            <li><a href="http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes&amp;utm_source=download&amp;utm_medium=banner&amp;utm_campaign=metronic_frontend_freebie" target="_blank">관리자 페이지</a></li>
 
             <!-- BEGIN TOP SEARCH -->
             <li class="menu-search">
@@ -339,6 +240,8 @@
       </div>
     </div>
     <!-- Header END -->
+
+    <!-- END TOP BAR -->
       <![endif]-->
     <script th:src="@{assets/plugins/jquery.min.js}" type="text/javascript"></script>
     <script th:src="@{assets/plugins/jquery-migrate.min.js}" type="text/javascript"></script>

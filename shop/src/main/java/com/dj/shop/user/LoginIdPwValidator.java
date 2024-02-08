@@ -37,7 +37,6 @@ public class LoginIdPwValidator implements UserDetailsService {
 	        String passwd = vo.getUserPwd();
 	        String roles =  vo.getRoles();
 
-	        System.out.println(roles +"===============================================");
 	        return User.builder()
 	                .username(userId)
 	                .password(passwd)
