@@ -7,4 +7,15 @@
 		WHERE email = #{email}
 
 	</select>
+ 	<insert id="saveUser">
+		INSERT INTO USERS(user_number,user_name,email,user_pwd,tel,gender,limit,signout,roles)
+		VALUES(user.seq,#{name},#{email},#{userPwd},#{tel},#{gender},'N','N','N')
+	</insert>
+	
+	<select id="idCheck" resultType="boolean">
+		SELECT CASE WHEN COUNT(email) = 1 THEN 0 ELSE 1 END AS ID 
+		FROM USERS WHERE email = #{email}
+	</select>
+	
+	
 </mapper>

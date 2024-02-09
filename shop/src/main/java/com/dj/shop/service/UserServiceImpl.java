@@ -24,4 +24,10 @@ public class UserServiceImpl implements UserService{
 		return user.saveUser(vo);
 	}
 
+	@Override
+	public boolean idCheck(String id) {
+		// TODO Auto-generated method stub
+		return user.idCheck(id);
+	}
+
 }
