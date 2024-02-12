@@ -30,4 +30,10 @@ public class UserServiceImpl implements UserService{
 		return user.idCheck(id);
 	}
 
+	@Override
+	public boolean emailChk(String email) {
+		// TODO Auto-generated method stub
+		return user.emailChk(email);
+	}
+
 }

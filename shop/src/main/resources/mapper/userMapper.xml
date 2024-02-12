@@ -13,9 +13,13 @@
 	</insert>
 	
 	<select id="idCheck" resultType="boolean">
-		SELECT CASE WHEN COUNT(email) = 1 THEN 0 ELSE 1 END AS ID 
-		FROM USERS WHERE email = #{email}
+		SELECT CASE WHEN COUNT(*) = 1 THEN 0 ELSE 1 END AS ID 
+		FROM USERS WHERE name = #{name}
 	</select>
 	
+	<select id="emailChk" resultType="boolean">
+		SELECT CASE WHEN COUNT(*) = 1 THEN 0 ELSE 1 END AS ID 
+		FROM MEMBER WHERE email = #{email}
+	</select>
 	
 </mapper>
