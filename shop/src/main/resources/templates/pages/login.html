@@ -14,12 +14,13 @@
 	<div id="form-inner-container">
 		<!-- Sign up form -->
 		<div id="sign-up-container">
-			<h3>Get Started</h3>
+			<h3>쇼핑몰</h3>
 			<form method="post" action="/user/signUp" id="signUpProc">
-				<label for="name">아룸</label> 
-				<input type="text" name="name"id="name" placeholder="Name"> 
+				<label for="name">이름</label> 
+				<input type="text" name="name"id="name" placeholder="Name">
+				
 				<label for="email">이메일</label>
-				<input type="email" name="email" id="email" placeholder="Email" th:style="${'width: 45%; display:inline-block'}">
+				<input type="email" name="email" id="email" placeholder="Email" th:style="${'width: 45%; display:inline-block'}" required oninput="checkEmail()">
 				<span th:style="${'color: #7369AB'}">@</span>
 				<select id="emailSel" >
 					<option value diasbled>선택해주세요</option>
@@ -27,14 +28,25 @@
 					<option value="daum.net">daum.net</option>
 					<option value="gmail.com">gmail.com</option>	
 				</select>
-				<button type="button" id="emailChk" >이메일 인증하기</button>
-				<label for="password">비밀번호</label> 
-				<input type="password"name="userPwd" id="userPwd" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;">
-				<label for="password">비밀번호 확인</label> 
-				<input type="password"name="pwdchk" id="passchk" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;">
-				<label for="name">전화번호</label> 
-				<input type="text" name="tel"id="tel" placeholder="010&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;">
-					
+				<span class ="email_chk" style="color:green; display:none;">사용 가능한 이메일 입니다.</span>
+				<span class ="email_alr" style="color:red; display:none;">중복된 이메일 입니다.</span> 
+				<button type="button" id="emailBtn" >이메일 인증하기</button>
+				<br/>
+				<br/>
+				<label for="password">비밀번호</label>
+				 
+				<input type="password"name="userPwd" id="userPwd" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" required oninput="pwdChk()">
+				<span class ="pwd_chk" style="color:green; display:none;">사용 가능한 비밀번호 입니다.</span>
+				<span class ="pwd_bug" style="color:red; display:none;">비밀번호는 영문,숫자를 포함하여 8자 이상이어야 합니다.</span>
+						<label for="password">비밀번호 확인</label> 
+				<input type="password"name="passchk" id="passchk" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" required oninput="pwdChk2()">
+				<span class ="pwdC_chk" style="color:green; display:none;">비밀번호가 일치합니다</span>
+				<span class ="pwdC_bug" style="color:red; display:none;">비밀번호가 일치하지 않습니다.</span> 
+						<label for="name">전화번호</label> 
+				<input type="text" name="tel"id="tel" placeholder="010&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" required oninput="telChk()">
+				<span class ="tel_chk" style="color:red; display:none;">휴대폰 번호를 정확히 입력해주세요</span>
+							<br/>
+				<br/>
 				<div id="form-controls">
 					<button type="button" id="signUp">Sign Up</button>
 					<button type="button" id="toggleSignIn">Sign In</button>
@@ -86,90 +98,145 @@
 //비밀번호 8자 이상 숫자,문자 섞어 스게하기
 //휴대전호 번호 10자 이상 되야 하기
 //빈칸 있으면 경고문 드게 하기
-$("#signUp").click(function() {
-	name = $("#name").val();
-	emailSel  = $("#email").val() + "@ "+$("#emailSel").val();
-	console.log(emailSel);
-	userPwd = $("userPwd").val()
-	passchk = $("passchk").val()
-	tel =$("tel").val()
-	if(name == ''){
-		console.log("이름을 입력하세요")
-		return false
-	}
-	if (emailSel == '') {
-		console.log("이메일 도메인을 선택하세요")
-		return false
-	}
-	
-	if(userPwd == ''){
-		console.log("이름을 입력하세요")
-		return false
-	}
-	if(passchk == ''){
-		console.log("이름을 입력하세요")
-		return false
-	}
-	if(tel == ''){
-		console.log("이름을 입력하세요")
-		return false
-	}
-	if(name == ''){
-		console.log("이름을 입력하세요")
-		return false
-	}
-	if(email ==)
+$("#signUpProc").submit(function(event) {
+    // 유효성 검사 함수 호출
+    if (!validateForm()) {
+        // 유효성 검사를 통과하지 못하면 기본 제출을 막습니다.
+        event.preventDefault();
+        return false;
+    }
 
-	$.ajax({
-		url : "/user/nameChk",
-		data : {
-			"name" : name
-		},
-		success : function(data) {
-			console.log(data);
-			if (data == "success") {
-				console.log("성공하였습니다.")
-				$("#signUpProc").submit
-			} else {
-				console.log("아이디가 중복상태입니다.")
-				$("#name").val('')
-				$('#name').focus()
-			}
-		},
-		error : function(xhr, status, error) {
-			console.log(error)
-		}
-	});
-})
-$("emailChk").click(function(){
-	
-	email = $("#email").val()
-	emailSel  = $("#email").val();
-	emailFull  = email + "@ "+emailSel;
-	if(email != '' &&  emailFull != ''){
-		email
-	}
-	$.ajax({
-		url : "/user/emailChk",
-		data : {
-			"email" : emailFull
-		},
-		success : function(data) {
-			console.log(data);
-			if (data == "success") {
-				console.log("성공하였습니다.")
-				$("#signUpProc").attr("disabled");
-			} else {
-				console.log("이메일이 중복상태입니다.")
-				$("#email").val('');
-				$('#email').focus()
-			}
-		},
-		error : function(xhr, status, error) {
-			console.log(error)
-		}
-	});
-})
+    // 유효성 검사가 통과하면 폼 제출이 계속 진행됩니다.
+});
+
+// 기존 함수들을 활용하여 폼 유효성 검사 수행
+function validateForm() {
+    var name = $("#name").val();
+    var emailSel = $("#email").val() + "@" + $("#emailSel").val();
+    var userPwd = $("#userPwd").val();
+    var passchk = $("#passchk").val();
+    var tel = $("#tel").val();
+
+    // 필수 필드에 대한 유효성 검사
+    if (name === '' || emailSel === '' || userPwd === '' || passchk === '' || tel === '') {
+        console.log("필수 항목을 모두 입력하세요.");
+        return false;
+    }
+
+    // 다른 함수에 있는 유효성 검사 함수 호출
+    if (!checkEmail() || !pwdChk() || !pwdChk2() || !telChk()) {
+        console.log("유효성 검사를 통과하지 못했습니다.");
+        return false;
+    }
+
+    console.log("폼이 성공적으로 제출되었습니다.");
+    return true; // 모든 유효성 검사를 통과했을 때 true 반환
+}
+
+$("#emailBtn").click(function() {
+    emailSel = $("#email").val() + "@ " + $("#emailSel").val();
+    $.ajax({
+        url : "/user/emailChk",
+        type:'post',
+        data : {
+            "email" : email
+        },
+        success : function(data) {
+            console.log(data);
+            if (data == "success") {
+                console.log("성공하였습니다.")
+                $(".email_chk").css("display","inline-block")
+                $(".email_alr").css("display","none")
+            } else {
+                console.log("아이디가 중복상태입니다.")
+                $(".email_alr").css("display","inline-block")
+                $(".email_chk").css("display","none")
+            }
+        },
+        error : function(xhr, status, error) {
+            console.log(error)
+        }
+    });
+});
+
+function checkEmail(){
+    var email  = $("#email").val() + "@"+$("#emailSel").val();
+    $.ajax({
+        url : "/user/emailChk",
+        type:'post',
+        data : {
+            "email" : email
+        },
+        success : function(data) {
+            console.log(data);
+            if (data == "success") {
+                console.log("성공하였습니다.")
+                $(".email_chk").css("display","inline-block")
+                $(".email_alr").css("display","none")
+            } else {
+                console.log("아이디가 중복상태입니다.")
+                $(".email_alr").css("display","inline-block")
+                $(".email_chk").css("display","none")
+            }
+        },
+        error : function(xhr, status, error) {
+            console.log(error)
+        }
+    });
+}
+
+function pwdChk(){
+    var userPwd = $("#userPwd").val()
+    var num = userPwd.search(/[0-9]/g);
+    var eng = userPwd.search(/[a-z]/ig);
+
+    if(userPwd.length < 8 || num < 0 || eng < 0 ){
+        $(".pwd_bug").css("display","inline-block")
+        $(".pwd_chk").css("display","none")
+        return false;
+    } else {
+        $(".pwd_chk").css("display","inline-block")
+        $(".pwd_bug").css("display","none")
+        return true;
+    }
+}
+
+function pwdChk2(){
+    var userPwd = $("#userPwd").val()
+    var passchk = $("#passchk").val()
+
+    if(userPwd != passchk ){
+        $(".pwdC_bug").css("display","inline-block")
+        $(".pwdC_chk").css("display","none")
+        return false;
+    } else {
+        $(".pwdC_chk").css("display","inline-block")
+        $(".pwdC_bug").css("display","none")
+        return true;
+    }
+}
+
+function telChk() {
+    var tel = $("#tel").val();
+
+    if (tel.length == 11 || tel.length == 10) {
+        var telPattern = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})([0-9]{3,4})([0-9]{4})$/;
+
+        if (telPattern.test(tel)) {
+            tel = tel.replace(/^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})([0-9]{3,4})([0-9]{4})$/, "$1$2$3");
+            $("#tel").val(tel);
+            $(".tel_chk").css("display", "none");
+            return true;
+        } else {
+            $(".tel_chk").css("display", "inline-block");
+            return false;
+        }
+    } else {
+        $(".tel_chk").css("display", "inline-block");
+        return false;
+    }
+}
+
 </script>
 </body>
 

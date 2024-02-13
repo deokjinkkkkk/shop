@@ -19,7 +19,7 @@
 	
 	<select id="emailChk" resultType="boolean">
 		SELECT CASE WHEN COUNT(*) = 1 THEN 0 ELSE 1 END AS ID 
-		FROM MEMBER WHERE email = #{email}
+		FROM USERS WHERE email = #{email}
 	</select>
 	
 </mapper>
