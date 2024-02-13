@@ -1,7 +1,7 @@
 # Spring Boot Thymeleaf를 사용한 쇼핑몰
 **DB 설계 (작업중)**
 ![image](https://github.com/deokjinkkkkk/shop/assets/116549186/9748b97b-c3e1-4a02-89f5-d72befb64154)
-**구현 기능**
+**구현 기능** <br/>
 1.위시리스트<br/>
 2.로그인 <br/>
     **security를 사용하여 인증,권한에 따른 접근시스템**<br/>
