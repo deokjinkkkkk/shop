@@ -1,7 +1,8 @@
 package com.dj.shop.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,23 +20,13 @@ public class UserController {
 	UserService userservice;
 	
 	@Autowired
-	EmailService emailSevice;
+	EmailService emailService;
 	@PostMapping("/signUp")
 	public String signUp(UserVO vo) {
 		userservice.saveUser(vo);
 		return "redirect:/login";
 	}
 	
-	@GetMapping("/nameChk")
-	@ResponseBody
-	public String idchk(@RequestParam("name") String name,boolean n) { //아이디가 존재하면 실패 해야하기 때문에 true 인 경우 suceess 하게 구현
-		n = userservice.idCheck(name); //boolean 타입으로 전환
-		if(n) {
-			return "success";
-		}else {
-			return "fail";
-		}
-	}
 	@PostMapping("/emailChk")
 	@ResponseBody
 	public String mailChk(@RequestParam("email") String email, boolean n) {
@@ -46,6 +37,14 @@ public class UserController {
 			return "fail";
 		}
 		
-		
 	}
+	
+	//회원가입 이메일 비밀번호 발급
+		@PostMapping("/mailConfirm")
+		@ResponseBody
+		public String mailCheck(@RequestParam String email,HttpSession session) throws Exception {
+			String code = emailService.sendSimpleMessage(email);
+			session.setAttribute("emailCode", code);
+			return code;
+		}
 }

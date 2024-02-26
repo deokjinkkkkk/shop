@@ -2,6 +2,8 @@ package com.dj.shop.mapper;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.dj.shop.vo.ProductVO;
 
 public interface ProductMapper {
@@ -11,4 +13,6 @@ public interface ProductMapper {
 	public ProductVO getData(String num);
 	public void updateMarket(ProductVO vo);
 	public void deleteMarket(String num);
+	
+	String saveImage(MultipartFile[] file, String saveFolder);
 }

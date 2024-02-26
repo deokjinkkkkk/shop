@@ -12,4 +12,8 @@ public class ShopController {
 	public String login() {
 		return "pages/login";
 	}
+	@GetMapping("/product")
+	public String product() {
+		return "pages/product";
+	}
 }

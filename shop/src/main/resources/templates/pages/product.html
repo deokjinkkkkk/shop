@@ -1,15 +1,110 @@
+<!-- upload.html -->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{common/layouts/layout}"
-      layout:fragment="Content"
+      layout:fragment="Content">
 
-<head>
-	<title>title</title>
-</head>
+<!-- BEGIN SIDEBAR & CONTENT -->
+        <div class="row margin-bottom-40 conatiner">
+  <!-- BEGIN CONTENT -->
+  		<div class="col-md-2"></div>
+          <div class="col-md-8 col-sm-7">
+            <div class="product-page">
+              <div class="row">
+                <div class="col-md-6 col-sm-6">
+                  <div class="product-main-image">
+                    <img id="imgPreview1" src="assets/pages/img/products/model7.jpg" alt="Cool green dress with red bell" class="img-responsive">
+                  </div>
+                  <div class="product-other-images">
+                    <img id="imgPreview2" alt="Berry Lace Dress" src="assets/pages/img/products/model3.jpg"></a>
+                    <img id="imgPreview3" alt="Berry Lace Dress" src="assets/pages/img/products/model4.jpg"></a>
+                  </div>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                  <h2>product Insert</h2>
+            <form action="/uploadProduct" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="proName">Product Name:</label>
+                    <input type="text" name="proName" class="form-control" required>
+                </div>
+                
+				<div class="form-group">
+                    <label for="proName">Product category:</label>
+                    <select id="category" >
+					<option value diasbled>selected</option>
+					<option value="naver.com">침대</option>
+					<option value="daum.net">책상</option>
+					<option value="gmail.com">의자</option>	
+					<option value="gmail.com">식탁</option>	
+					<option value="gmail.com">옷장</option>	
+				</select>
+                    
+                </div>
+                
+                <div class="form-group">
+                    <label for="proContent">Product Content:</label>
+                    <textarea name="proContent" class="form-control" required></textarea>
+                </div>
 
-<body>
-	It works!
-</body>
+                <div class="form-group">
+                    <label for="proPrice">Product Price:</label>
+                    <input type="number" name="proPrice" class="form-control" required>
+                </div>
+				 
+                 <div class="form-group">
+                    <label for="proName">Product cnt:</label>
+                 	<input type="text" name="proName" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="proImg1">Image 1:</label>
+                    <input type="file" name="proImg1" accept="image/*" class="form-control-file" onchange="previewImage(this, 'imgPreview1')" required>
+                </div>
 
+                <div class="form-group">
+                    <label for="proImg2">Image 2:</label>
+                    <input type="file" name="proImg2" accept="image/*" class="form-control-file" onchange="previewImage(this, 'imgPreview2')">
+                </div>
+
+                <div class="form-group">
+                    <label for="proImg3">Image 3:</label>
+                    <input type="file" name="proImg3" accept="image/*" class="form-control-file" onchange="previewImage(this, 'imgPreview3')">
+                </div>
+
+                <!-- 추가적인 상품 정보 입력 필드들을 필요에 따라 추가 -->
+
+                <button type="submit" class="btn btn-primary">Add Product</button>
+            </form>
+
+         
+
+                
+              </div>
+            </div>
+          </div>
+          <!-- END CONTENT -->
+          <div class="col-md-2"></div>
+     </div>
+</div>
+   
+<script type="text/javascript">
+function previewImage(input, previewId) {
+    var preview = document.getElementById(previewId);
+    var file = input.files[0];
+
+    if (file) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            preview.src = e.target.result
+           
+            	preview.setAttribute('data-BigImgsrc', e.target.result);
+
+            
+        };
+
+        reader.readAsDataURL(file);
+    }
+}
+</script>
 </html>
