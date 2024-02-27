@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="mapper.productMapper">
-
+<mapper namespace="com.dj.shop.mapper.ProductMapper">
+<insert id="insertMarket" parameterType="com.dj.shop.vo.ProductVO">
+	<selectKey keyProperty="productNum" resultType="int" order="BEFORE">
+	SELECT NVL(MAX(product_num),0)+1 FROM product
+	</selectKey>
+	INSERT INTO PRODUCT
+	VALUES(#{productNum},#{categoryNum},#{proName},#{proImg1},#{proImg2},#{proImg3},#{proContent},#{proPrice},sysdate,#{proCnt},'N')
+</insert>
 </mapper>

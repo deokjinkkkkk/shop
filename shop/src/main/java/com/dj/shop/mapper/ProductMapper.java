@@ -14,5 +14,5 @@ public interface ProductMapper {
 	public void updateMarket(ProductVO vo);
 	public void deleteMarket(String num);
 	
-	String saveImage(MultipartFile[] file, String saveFolder);
+	public String saveImage(MultipartFile file, String saveFolder);
 }

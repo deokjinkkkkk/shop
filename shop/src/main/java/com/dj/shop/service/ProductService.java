@@ -14,5 +14,5 @@ public interface ProductService {
 	public void updateMarket(ProductVO vo);
 	public void deleteMarket(String num);
 	
-	String saveImage(MultipartFile[] file, String saveFolder);
+	public String saveImage(MultipartFile imgFile, String saveFolder);
 }

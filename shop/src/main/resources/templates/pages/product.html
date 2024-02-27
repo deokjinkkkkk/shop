@@ -4,7 +4,15 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{common/layouts/layout}"
       layout:fragment="Content">
-
+<head>
+      <!--Common Head-->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="viewport"
+              content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0"/>
+        <title></title>
+      </head>
 <!-- BEGIN SIDEBAR & CONTENT -->
         <div class="row margin-bottom-40 conatiner">
   <!-- BEGIN CONTENT -->
@@ -14,7 +22,7 @@
               <div class="row">
                 <div class="col-md-6 col-sm-6">
                   <div class="product-main-image">
-                    <img id="imgPreview1" src="assets/pages/img/products/model7.jpg" alt="Cool green dress with red bell" class="img-responsive">
+                    <img id="imgPreview1" src="assets/pages/img/products/model7.jpg">
                   </div>
                   <div class="product-other-images">
                     <img id="imgPreview2" alt="Berry Lace Dress" src="assets/pages/img/products/model3.jpg"></a>
@@ -22,58 +30,58 @@
                   </div>
                 </div>
                 <div class="col-md-6 col-sm-6">
-                  <h2>product Insert</h2>
-            <form action="/uploadProduct" method="post" enctype="multipart/form-data">
+                  <h1>상품등록</h2>
+            <form action="/product/uploadProduct" method="post" enctype="multipart/form-data">
                 <div class="form-group">
-                    <label for="proName">Product Name:</label>
+                    <label for="proName">상품명</label>
                     <input type="text" name="proName" class="form-control" required>
                 </div>
                 
 				<div class="form-group">
-                    <label for="proName">Product category:</label>
-                    <select id="category" >
-					<option value diasbled>selected</option>
-					<option value="naver.com">ħ��</option>
-					<option value="daum.net">å��</option>
-					<option value="gmail.com">����</option>	
-					<option value="gmail.com">��Ź</option>	
-					<option value="gmail.com">����</option>	
+                    <label for="categoryNum">상품 카테고리</label>
+                    <select id="category" name="categoryNum">
+					<option value diasbled>선택해 주세요</option>
+					<option value="1">침대</option>
+					<option value="2">책상</option>
+					<option value="3">의자</option>	
+					<option value="4">식탁</option>	
+					<option value="5">옷장</option>	
 				</select>
                     
                 </div>
                 
                 <div class="form-group">
-                    <label for="proContent">Product Content:</label>
+                    <label for="proContent">상품 설명</label>
                     <textarea name="proContent" class="form-control" required></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label for="proPrice">Product Price:</label>
+                    <label for="proPrice">상품 가격</label>
                     <input type="number" name="proPrice" class="form-control" required>
                 </div>
 				 
                  <div class="form-group">
-                    <label for="proName">Product cnt:</label>
-                 	<input type="text" name="proName" class="form-control" required>
+                    <label for="proCnt">상품 재고</label>
+                 	<input type="number" name="proCnt" class="form-control" required>
                 </div>
                 <div class="form-group">
-                    <label for="proImg1">Image 1:</label>
-                    <input type="file" name="proImg1" accept="image/*" class="form-control-file" onchange="previewImage(this, 'imgPreview1')" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="proImg2">Image 2:</label>
-                    <input type="file" name="proImg2" accept="image/*" class="form-control-file" onchange="previewImage(this, 'imgPreview2')">
+                    <label for="proImg1">이미지</label>
+                    <input type="file" name="proImage1" accept="image/*" class="form-control-file" onchange="previewImage(this, 'imgPreview1')" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="proImg3">Image 3:</label>
-                    <input type="file" name="proImg3" accept="image/*" class="form-control-file" onchange="previewImage(this, 'imgPreview3')">
+                    <label for="proImg2">이미지 2</label>
+                    <input type="file" name="proImage2" accept="image/*" class="form-control-file" onchange="previewImage(this, 'imgPreview2')">
                 </div>
 
-                <!-- �߰����� ��ǰ ���� �Է� �ʵ���� �ʿ信 ���� �߰� -->
+                <div class="form-group">
+                    <label for="proImg3">이미지 3</label>
+                    <input type="file" name="proImage3" accept="image/*" class="form-control-file" onchange="previewImage(this, 'imgPreview3')">
+                </div>
 
-                <button type="submit" class="btn btn-primary">Add Product</button>
+                <!-- 추가적인 상품 정보 입력 필드들을 필요에 따라 추가 -->
+
+                <button type="submit" class="btn btn-primary">상품 등록</button>
             </form>
 
          

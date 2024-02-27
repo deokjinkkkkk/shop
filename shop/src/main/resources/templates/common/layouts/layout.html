@@ -1,25 +1,16 @@
 <!DOCTYPE html>
-<!--ë¼ì´ë¸ŒëŸ¬ë¦¬ ì°¸ì¡° : Thymeleaf & Thymeleaf Layout -->
+<!--¶óÀÌºê·¯¸® ÂüÁ¶ : Thymeleaf & Thymeleaf Layout -->
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-      <head>
-      <!--Common Head-->
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <meta name="viewport"
-              content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0"/>
-        <title></title>
-      </head>
     <body>
-        <!--Header ì˜ì—­ì„ ì°¸ì¡°í•©ë‹ˆë‹¤.-->
+        <!--Header ¿µ¿ªÀ» ÂüÁ¶ÇÕ´Ï´Ù.-->
         <header th:replace="common/fragments/header::HeaderFragment"></header>
     
-        <!--Content ë‚´ìš© ì˜ì—­ì„ ì°¸ì¡°í•©ë‹ˆë‹¤-->
+        <!--Content ³»¿ë ¿µ¿ªÀ» ÂüÁ¶ÇÕ´Ï´Ù-->
         <th:block layout:fragment="Content"></th:block>
     
-        <!--Footer ì˜ì—­ì„ ì°¸ì¡°í•©ë‹ˆë‹¤.-->
+        <!--Footer ¿µ¿ªÀ» ÂüÁ¶ÇÕ´Ï´Ù.-->
         <footer th:replace="common/fragments/footer::FooterFragment"></footer>
     </body>
 </html>
