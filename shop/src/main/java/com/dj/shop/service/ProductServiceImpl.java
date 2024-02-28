@@ -8,15 +8,19 @@ import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.dj.shop.mapper.ProductMapper;
 import com.dj.shop.vo.ProductVO;
 @Service
 public class ProductServiceImpl implements ProductService{
 	@Value("${saveimg}")
 	private String saveimg;
+	@Autowired
+	private ProductMapper product;
 	@Override
 	public int getTotalCountOfMarket() {
 		// TODO Auto-generated method stub
@@ -24,13 +28,14 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public List<ProductVO> getAllSangpums() {
+	public List<ProductVO> getAllSangpums(ProductVO vo) {
 		// TODO Auto-generated method stub
-		return null;
+		return product.getAllSangpums(vo);
 	}
 
 	@Override
-	public void insertMarket(ProductVO vo) {
+	public int insertMarket(ProductVO vo) {
+		return product.insertMarket(vo);
 		// TODO Auto-generated method stub
 		
 	}

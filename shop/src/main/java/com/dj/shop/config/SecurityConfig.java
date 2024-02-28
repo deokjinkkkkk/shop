@@ -8,6 +8,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.firewall.DefaultHttpFirewall;
+import org.springframework.security.web.firewall.HttpFirewall;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.dj.shop.user.LoginFailHandler;
@@ -24,7 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
         		.csrf().disable() // POST방식 허용
                 .authorizeRequests()
-                	.antMatchers( "/login", "/join","/").permitAll() // 이 URI는 누구든 접근가능
+                	.antMatchers( "/login", "/join","/","/product/insert").permitAll() // 이 URI는 누구든 접근가능
                 	.antMatchers("/admin/**").hasRole("ADMIN") // ADMIN role만 접근 가능
                 	.antMatchers("/home").hasRole("USER") // ADMIN role만 접근 가능
                 .and()
@@ -41,13 +43,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .logoutSuccessUrl("/home") // 로그아웃 성공시 이동할 URL
         			.logoutRequestMatcher(new AntPathRequestMatcher("/logout") ); // 이 URI 호출시 로그아웃
     }
-    
+	
     //인증 예외 추가
     @Override
     public void configure(WebSecurity web) throws Exception {
     	 web.ignoring().antMatchers("/resources/**");
+    	 web.httpFirewall(defaultHttpFirewall());
     }
-    
+	@Bean //url 더블 슬래시 허용 (이미지 불러오기 위해)
+	public HttpFirewall defaultHttpFirewall() {
+	    return new DefaultHttpFirewall();
+	}
     //입력한 ID/PW가 DB와 일치하는지 확인
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -65,5 +71,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public LoginFailHandler loginFailHandler(){
         return new LoginFailHandler();
     }
+    
 }
 

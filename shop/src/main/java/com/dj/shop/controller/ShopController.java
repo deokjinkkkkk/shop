@@ -16,4 +16,9 @@ public class ShopController {
 	public String product() {
 		return "pages/product";
 	}
+	
+	@GetMapping("/table")
+	public String table() {
+		return "pages/table";
+	}
 }
