@@ -24,4 +24,10 @@
 		FROM PRODUCT
 		WHERE CATEGORY_NUM =#{categoryNum}
 	</select>
+	
+	<select id="getData" resultType="com.dj.shop.vo.ProductVO">
+		SELECT * 
+		FROM PRODUCT
+		WHERE product_num =#{productNum}
+	</select>
 </mapper>

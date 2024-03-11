@@ -1,19 +1,22 @@
 package com.dj.shop.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.dj.shop.service.EmailService;
 import com.dj.shop.service.UserService;
 import com.dj.shop.vo.UserVO;
 
-@RestController
+@Controller
 @RequestMapping("/user")
 public class UserController {
 	@Autowired
@@ -21,12 +24,32 @@ public class UserController {
 	
 	@Autowired
 	EmailService emailService;
+	
+	@GetMapping("/myAddress")
+	public String myAddress(UserVO vo, HttpServletRequest request,Model model) {
+		String id = (String) request.getSession().getAttribute("id");
+		vo.setEmail(id);
+		userservice.userSelect(id);
+		model.addAttribute("userList", vo);
+		return "pages/myAddress";
+	}
+	
+	@PostMapping("/iaddress")
+	public String iaddress(UserVO vo, HttpServletRequest request,Model model) {
+		String id = (String) request.getSession().getAttribute("id");
+		vo.setEmail(id);
+		userservice.userSelect(id);
+		model.addAttribute("userList", vo);
+		return "pages/myAddress";
+	}
+
+	
 	@PostMapping("/signUp")
 	public String signUp(UserVO vo) {
 		userservice.saveUser(vo);
 		return "redirect:/login";
 	}
-	
+
 	@PostMapping("/emailChk")
 	@ResponseBody
 	public String mailChk(@RequestParam("email") String email, boolean n) {

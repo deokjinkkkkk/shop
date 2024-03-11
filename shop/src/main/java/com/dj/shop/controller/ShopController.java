@@ -12,13 +12,7 @@ public class ShopController {
 	public String login() {
 		return "pages/login";
 	}
-	@GetMapping("/product")
-	public String product() {
-		return "pages/product";
-	}
+
 	
-	@GetMapping("/table")
-	public String table() {
-		return "pages/table";
-	}
+
 }

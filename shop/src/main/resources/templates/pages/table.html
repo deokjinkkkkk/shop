@@ -115,12 +115,9 @@
               <div class="col-md-4 col-sm-6 col-xs-12" th:each="table : ${tableList}">
                 <div class="product-item">
                   <div class="pi-img-wrapper">
-                    <img th:src="'/image/'+${table.proImg3}" class="img-responsive" th:alt="${table.proName}">
-                    <div>
-                      <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
-                    </div>
+                    <img th:src="'/image/'+${table.proImg1}" class="img-responsive" th:alt="${table.proName}">
                   </div>
-                  <h3><a href="#">Berry Lace Dress Berry Lace Dress</a></h3>
+                  <h3><a th:href="@{/detail(proNum=${table.productNum})}" th:text="${table.proName}"></a></h3>
                   <div class="pi-price" th:text="${table.proPrice}"></div>
                   <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
                 </div>

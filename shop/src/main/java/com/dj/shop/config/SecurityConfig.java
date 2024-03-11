@@ -26,9 +26,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
         		.csrf().disable() // POST방식 허용
                 .authorizeRequests()
-                	.antMatchers( "/login", "/join","/","/product/insert").permitAll() // 이 URI는 누구든 접근가능
-                	.antMatchers("/admin/**").hasRole("ADMIN") // ADMIN role만 접근 가능
-                	.antMatchers("/home").hasRole("USER") // ADMIN role만 접근 가능
+                	.antMatchers( "/login", "/join","/","/product/insert","/**").permitAll() // 이 URI는 누구든 접근가능
+                	//.antMatchers("/admin/**").hasRole("ADMIN") // ADMIN role만 접근 가능
+                	//.antMatchers("/home").hasRole("USER") // ADMIN role만 접근 가능
                 .and()
                     .formLogin()
                     .loginPage("/login")

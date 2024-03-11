@@ -29,24 +29,24 @@
   <!-- Fonts END -->
 
   <!-- Global styles START -->          
-  <link th:href="@{assets/plugins/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
-  <link th:href="@{assets/plugins/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+  <link th:href="@{/assets/plugins/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
+  <link th:href="@{/assets/plugins/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
   <!-- Global styles END --> 
    
   <!-- Page level plugin styles START -->
-  <link th:href="@{assets/pages/css/animate.css}" rel="stylesheet">
-  <link th:href="@{assets/plugins/fancybox/source/jquery.fancybox.css}" rel="stylesheet">
-  <link th:href="@{assets/plugins/owl.carousel/assets/owl.carousel.css}" rel="stylesheet">
+  <link th:href="@{/assets/pages/css/animate.css}" rel="stylesheet">
+  <link th:href="@{/assets/plugins/fancybox/source/jquery.fancybox.css}" rel="stylesheet">
+  <link th:href="@{/assets/plugins/owl.carousel/assets/owl.carousel.css}" rel="stylesheet">
   <!-- Page level plugin styles END -->
 
   <!-- Theme styles START -->
-  <link th:href="@{assets/pages/css/components.css}" rel="stylesheet">
-  <link th:href="@{assets/pages/css/slider.css}" rel="stylesheet">
-  <link th:href="@{assets/pages/css/style-shop.css}" rel="stylesheet" type="text/css">
-  <link th:href="@{assets/corporate/css/style.css}" rel="stylesheet">
-  <link th:href="@{assets/corporate/css/style-responsive.css}" rel="stylesheet">
-  <link th:href="@{assets/corporate/css/themes/red.css}" rel="stylesheet" id="style-color">
-  <link th:href="@{assets/corporate/css/custom.css}" rel="stylesheet">
+  <link th:href="@{/assets/pages/css/components.css}" rel="stylesheet">
+  <link th:href="@{/assets/pages/css/slider.css}" rel="stylesheet">
+  <link th:href="@{/assets/pages/css/style-shop.css}" rel="stylesheet" type="text/css">
+  <link th:href="@{/assets/corporate/css/style.css}" rel="stylesheet">
+  <link th:href="@{/assets/corporate/css/style-responsive.css}" rel="stylesheet">
+  <link th:href="@{/assets/corporate/css/themes/red.css}" rel="stylesheet" id="style-color">
+  <link th:href="@{/assets/corporate/css/custom.css}" rel="stylesheet">
   <!-- Theme styles END -->
 </head>
 <!-- Head END -->
@@ -81,7 +81,7 @@
                 <!-- BEGIN TOP BAR MENU -->
                 <div class="col-md-6 col-sm-6 additional-nav">
                     <ul class="list-unstyled list-inline pull-right">
-                        <li th:if="${session.roles != null}"><a href="shop-account.html">My Account</a></li>
+                        <li th:if="${session.roles != null}"><a href="myAddress">My Account</a></li>
                         <li th:if="${session.roles != null}"><a href="shop-wishlist.html">My Wishlist</a></li>
                         <li th:if="${session.roles != null}"><a href="shop-checkout.html">Checkout</a></li>
                         <li th:if="${session.roles == null}"><a href="/login">Log In</a></li>
@@ -96,7 +96,7 @@
     <!-- BEGIN HEADER -->
     <div class="header">
       <div class="container">
-        <a class="site-logo" href="/"><img src="assets/corporate/img/logos/logo-shop-red.png" alt="Metronic Shop UI"></a>
+        <a class="site-logo" href="/"><img src="/assets/corporate/img/logos/logo-shop-red.png" alt="Metronic Shop UI"></a>
 
         <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
 
@@ -112,7 +112,7 @@
             <div class="top-cart-content">
               <ul class="scroller" style="height: 250px;">
                 <li>
-                  <a href="shop-item.html"><img src="assets/pages/img/cart-img.jpg" alt="Rolex Classic Watch" width="37" height="34"></a>
+                  <a href="shop-item.html"><img src="/assets/pages/img/cart-img.jpg" alt="Rolex Classic Watch" width="37" height="34"></a>
                   <span class="cart-content-count">x 1</span>
                   <strong><a href="shop-item.html">Rolex Classic Watch</a></strong>
                   <em>$1230</em>
@@ -138,60 +138,29 @@
                 가구    
               </a>
               <ul class="dropdown-menu">
-                <li><a href="shop-product-list.html">침대</a></li>
-                <li><a href="shop-checkout.html">책상</a></li>
-                <li><a href="shop-about.html">의자</a></li>
-                <li><a href="shop-wishlist.html">식탁</a></li>
-                <li><a href="shop-faq.html">옷장</a></li>
+                <li><a href="/table">침대</a></li>
+                <li><a href="/bed">책상</a></li>
+                <li><a href="/chair">의자</a></li>
+                <li><a href="/diningtable">식탁</a></li>
+                <li><a href="/diningtable">옷장</a></li>
               </ul>
             </li>
             
             <li class="dropdown dropdown100 nav-catalogue">
               <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
-                새로 들어온 상품
-                
+                새로 들어온 상품    
               </a>
               <ul class="dropdown-menu">
                 <li>
                   <div class="header-navigation-content">
                     <div class="row">
-                      <div class="col-md-3 col-sm-4 col-xs-6">
+                      <div class="col-md-3 col-sm-4 col-xs-6" th:each="product : ${productList}">
                         <div class="product-item">
                           <div class="pi-img-wrapper">
-                            <a href="shop-item.html"><img src="assets/pages/img/products/model4.jpg" class="img-responsive" alt="Berry Lace Dress"></a>
+                            <a href="shop-item.html"><img th:src="'/image/'+${product.proImg1}" class="img-responsive" th:alt="${product.proName}"></a>
                           </div>
-                          <h3><a href="shop-item.html">Berry Lace Dress</a></h3>
-                          <div class="pi-price">$29.00</div>
-                          <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-4 col-xs-6">
-                        <div class="product-item">
-                          <div class="pi-img-wrapper">
-                            <a href="shop-item.html"><img src="assets/pages/img/products/model3.jpg" class="img-responsive" alt="Berry Lace Dress"></a>
-                          </div>
-                          <h3><a href="shop-item.html">Berry Lace Dress</a></h3>
-                          <div class="pi-price">$29.00</div>
-                          <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-4 col-xs-6">
-                        <div class="product-item">
-                          <div class="pi-img-wrapper">
-                            <a href="shop-item.html"><img src="assets/pages/img/products/model7.jpg" class="img-responsive" alt="Berry Lace Dress"></a>
-                          </div>
-                          <h3><a href="shop-item.html">Berry Lace Dress</a></h3>
-                          <div class="pi-price">$29.00</div>
-                          <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-4 col-xs-6">
-                        <div class="product-item">
-                          <div class="pi-img-wrapper">
-                            <a href="shop-item.html"><img src="assets/pages/img/products/model4.jpg" class="img-responsive" alt="Berry Lace Dress"></a>
-                          </div>
-                          <h3><a href="shop-item.html">Berry Lace Dress</a></h3>
-                          <div class="pi-price">$29.00</div>
+                          <h3><a href="shop-item.html" th:text="${product.proName}">Berry Lace Dress</a></h3>
+                          <div class="pi-price" th:text="${product.proPrice}">$29.00</div>
                           <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
                         </div>
                       </div>
@@ -216,7 +185,7 @@
             </li>
             
             
-            <li><a href="http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes&amp;utm_source=download&amp;utm_medium=banner&amp;utm_campaign=metronic_frontend_freebie" target="_blank">관리자 페이지</a></li>
+            <li><a href="/admin/product">관리자 페이지</a></li>
 
             <!-- BEGIN TOP SEARCH -->
             <li class="menu-search">
@@ -243,20 +212,20 @@
 
     <!-- END TOP BAR -->
       <![endif]-->
-    <script th:src="@{assets/plugins/jquery.min.js}" type="text/javascript"></script>
-    <script th:src="@{assets/plugins/jquery-migrate.min.js}" type="text/javascript"></script>
-    <script th:src="@{assets/plugins/bootstrap/js/bootstrap.min.js}" type="text/javascript"></script>      
-    <script th:src="@{assets/corporate/scripts/back-to-top.js}" type="text/javascript"></script>
-    <script th:src="@{assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js}" type="text/javascript"></script>
+    <script th:src="@{/assets/plugins/jquery.min.js}" type="text/javascript"></script>
+    <script th:src="@{/assets/plugins/jquery-migrate.min.js}" type="text/javascript"></script>
+    <script th:src="@{/assets/plugins/bootstrap/js/bootstrap.min.js}" type="text/javascript"></script>      
+    <script th:src="@{/assets/corporate/scripts/back-to-top.js}" type="text/javascript"></script>
+    <script th:src="@{/assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js}" type="text/javascript"></script>
     <!-- END CORE PLUGINS -->
 
     <!-- BEGIN PAGE LEVEL JAVASCRIPTS (REQUIRED ONLY FOR CURRENT PAGE) -->
-    <script th:src="@{assets/plugins/fancybox/source/jquery.fancybox.pack.js}" type="text/javascript"></script><!-- pop up -->
-    <script th:src="@{assets/plugins/owl.carousel/owl.carousel.min.js}" type="text/javascript"></script><!-- slider for products -->
-    <script th:src="@{assets/plugins/bootstrap-touchspin/bootstrap.touchspin.js}" type="text/javascript"></script><!-- Quantity -->
+    <script th:src="@{/assets/plugins/fancybox/source/jquery.fancybox.pack.js}" type="text/javascript"></script><!-- pop up -->
+    <script th:src="@{/assets/plugins/owl.carousel/owl.carousel.min.js}" type="text/javascript"></script><!-- slider for products -->
+    <script th:src="@{/assets/plugins/bootstrap-touchspin/bootstrap.touchspin.js}" type="text/javascript"></script><!-- Quantity -->
 
-    <script th:src="@{assets/corporate/scripts/layout.js}" type="text/javascript"></script>
-    <script th:src="@{assets/pages/scripts/bs-carousel.js}" type="text/javascript"></script>
+    <script th:src="@{/assets/corporate/scripts/layout.js}" type="text/javascript"></script>
+    <script th:src="@{/assets/pages/scripts/bs-carousel.js}" type="text/javascript"></script>
     <script type="text/javascript">
         jQuery(document).ready(function() {
             Layout.init();    

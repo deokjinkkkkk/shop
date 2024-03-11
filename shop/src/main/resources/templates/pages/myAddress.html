@@ -1,0 +1,83 @@
+<!-- upload.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layouts/layout}"
+      layout:fragment="Content">
+<head>
+      <!--Common Head-->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="viewport"
+              content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0"/>
+        <title>마이페이지</title>
+ </head>
+ 
+ <style>
+ .form-control {
+ height:50px;
+ }
+ </style>
+ <div class="main">
+      <div class="container">
+        <ul class="breadcrumb">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="">Store</a></li>
+            <li class="active">My Account Page</li>
+        </ul>
+        <!-- BEGIN SIDEBAR & CONTENT -->
+        <div class="row margin-bottom-40">
+          <!-- BEGIN SIDEBAR -->
+          <div class="sidebar col-md-3 col-sm-3">
+            <ul class="list-group margin-bottom-25 sidebar-menu">
+              <li class="list-group-item clearfix"><a href="javascript:;"><i class="fa fa-angle-right"></i> Restore Password</a></li>
+              <li class="list-group-item clearfix"><a href="javascript:;"><i class="fa fa-angle-right"></i> My account</a></li>
+              <li class="list-group-item clearfix"><a href="javascript:;"><i class="fa fa-angle-right"></i> Address book</a></li>
+              <li class="list-group-item clearfix"><a href="javascript:;"><i class="fa fa-angle-right"></i> Wish list</a></li>
+              <li class="list-group-item clearfix"><a href="javascript:;"><i class="fa fa-angle-right"></i> Returns</a></li>
+              <li class="list-group-item clearfix"><a href="javascript:;"><i class="fa fa-angle-right"></i> Newsletter</a></li>
+            </ul>
+          </div>
+          <!-- END SIDEBAR -->
+
+          <!-- BEGIN CONTENT -->
+          <div class="col-md-9 col-sm-7" >
+             <form action="/user/iaddress" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="proName">수령인</label>
+                    <input type="text" name="proName" class="form-control" required>
+                </div>
+                
+				<div class="form-group" >
+                    <label for="tel" th:style="${'width: 100%'}">연락처</label>
+                <select id="tel1" class="col-md-3 form-control" th:style="${'width: 34%'}">
+					<option value diasbled>선택해 주세요</option>
+					<option value="010">010</option>
+					<option value="011">011</option>
+					<option value="016">016</option>	
+					<option value="017">017</option>	
+					<option value="018">018</option>	
+					<option value="019">019</option>	
+				</select>
+                    <input type="text" name="tel2" class="col-md-3 form-control" th:style="${'width: 33%'}" required>
+                    <input type="text" name="tel3" class="col-md-3 form-control" th:style="${'width: 33%'}" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="proContent">배송지</label><br>
+                    <button type="button" class="btn btn-primary" >우편번호찾기</button>
+                    <input type="text" name="addZip" class="form-control" placeholder="우편번호" readonly>
+                    
+                    <input type="text" name="addAddr" class="form-control" placeholder="주소" required>
+                    <input type="text" name="addAddr2" class="form-control" placeholder="상세주소" required>
+                </div>
+                <button type="submit" class="btn btn-primary">주소지 등록</button>
+            </form>
+          </div>
+          <!-- END CONTENT -->
+        </div>
+        <!-- END SIDEBAR & CONTENT -->
+      </div>
+    </div>
+</html>

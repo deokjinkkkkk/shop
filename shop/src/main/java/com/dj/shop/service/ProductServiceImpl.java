@@ -23,39 +23,35 @@ public class ProductServiceImpl implements ProductService{
 	private ProductMapper product;
 	@Override
 	public int getTotalCountOfMarket() {
-		// TODO Auto-generated method stub
-		return 0;
+		return product.getTotalCountOfMarket();
 	}
 
 	@Override
 	public List<ProductVO> getAllSangpums(ProductVO vo) {
-		// TODO Auto-generated method stub
 		return product.getAllSangpums(vo);
 	}
 
 	@Override
 	public int insertMarket(ProductVO vo) {
-		return product.insertMarket(vo);
-		// TODO Auto-generated method stub
-		
+		return product.insertMarket(vo);		
 	}
 
 	@Override
-	public ProductVO getData(String num) {
-		// TODO Auto-generated method stub
-		return null;
+	public ProductVO getData(int num) {
+		
+		return product.getData(num);
 	}
 
 	@Override
-	public void updateMarket(ProductVO vo) {
-		// TODO Auto-generated method stub
-		
+	public int updateMarket(ProductVO vo) {
+		return product.updateMarket(vo);
+			
 	}
 
 	@Override
-	public void deleteMarket(String num) {
-		// TODO Auto-generated method stub
-		
+	public int deleteMarket(String num) {
+		return product.deleteMarket(num);
+				
 	}
 
 	@Override

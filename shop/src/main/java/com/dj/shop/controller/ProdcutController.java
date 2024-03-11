@@ -23,14 +23,54 @@ public class ProdcutController {
 	@Value("${saveimg}")
 	private String saveimg;
 	
-	@GetMapping("/alltable")
+	@GetMapping("/admin/product")
+	public String product() {
+		return "pages/product";
+	}
+	
+	@GetMapping("/table")
 	public String tableList(@ModelAttribute ProductVO vo, Model model) {
 		vo.setCategoryNum(2);
 		List<ProductVO> tableList = productservice.getAllSangpums(vo);
 		model.addAttribute("tableList",tableList);
 	    return "pages/table";
 	}
+	@GetMapping("/bed")
+	public String bedList(@ModelAttribute ProductVO vo, Model model) {
+		vo.setCategoryNum(1);
+		List<ProductVO> tableList = productservice.getAllSangpums(vo);
+		model.addAttribute("tableList",tableList);
+	    return "pages/table";
+	}
+	@GetMapping("/chair")
+	public String chairList(@ModelAttribute ProductVO vo, Model model) {
+		vo.setCategoryNum(3);
+		List<ProductVO> tableList = productservice.getAllSangpums(vo);
+		model.addAttribute("tableList",tableList);
+	    return "pages/table";
+	}
+	@GetMapping("/diningtable")
+	public String diningtableList(@ModelAttribute ProductVO vo, Model model) {
+		vo.setCategoryNum(4);
+		List<ProductVO> tableList = productservice.getAllSangpums(vo);
+		model.addAttribute("tableList",tableList);
+	    return "pages/table";
+	}
+	@GetMapping("/closet")
+	public String closetList(@ModelAttribute ProductVO vo, Model model) {
+		vo.setCategoryNum(5);
+		List<ProductVO> tableList = productservice.getAllSangpums(vo);
+		model.addAttribute("tableList",tableList);
+	    return "pages/table";
+	}
 	
+	@GetMapping("/detail")
+	public String prDetail(@RequestParam("proNum") int productId, Model model) {
+		
+		ProductVO product =	productservice.getData(productId);
+		model.addAttribute("pro", product);
+	    return "pages/deProduct";
+	}
 	@PostMapping("/product/uploadProduct")
 	public String uploadProduct(ProductVO vo,
 	                            @RequestParam("proImage1") MultipartFile proImage1,
@@ -47,14 +87,7 @@ public class ProdcutController {
 		    productservice.insertMarket(vo);
 		    
 		}
-	    System.out.println(vo.getCategoryNum());
-	    System.out.println(vo.getProCnt());
-	    System.out.println(vo.getProContent());
-	    System.out.println(vo.getProName());
-	    System.out.println(vo.getProPrice());
-	    System.out.println(vo.getProImg1());
-	    System.out.println(vo.getProImg2());
-	    System.out.println(vo.getProImg3());
+
 	    return "redirect:/";
 	}
 	
