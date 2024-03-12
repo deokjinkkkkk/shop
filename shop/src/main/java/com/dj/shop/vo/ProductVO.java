@@ -5,7 +5,7 @@ import java.util.Date;
 import lombok.Data;
 
 @Data
-public class ProductVO {
+public class ProductVO{
 	private int productNum;
 	private int categoryNum; //카테고리 구분
 	private String proName; //상품이름
@@ -18,9 +18,6 @@ public class ProductVO {
 	private int proCnt; //재고
 	private String proDel; //상품 삭제여부
 	
-	//public void updateItemImg(String oriImgName, String imgName, String imgUrl){
-       // this.proImg1 = oriImgName;
-       // this.imgName = imgName;
-       // this.proImg1 = imgUrl;
-   // }
+
+	
 }

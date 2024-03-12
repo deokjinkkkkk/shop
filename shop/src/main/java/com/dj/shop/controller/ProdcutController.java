@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.dj.shop.service.ProductService;
+import com.dj.shop.vo.Criteria;
+import com.dj.shop.vo.PageVO;
 import com.dj.shop.vo.ProductVO;
 
 @Controller
@@ -29,38 +31,41 @@ public class ProdcutController {
 	}
 	
 	@GetMapping("/table")
-	public String tableList(@ModelAttribute ProductVO vo, Model model) {
+	public String tableList(@ModelAttribute ProductVO vo, Model model, Criteria cri) {
 		vo.setCategoryNum(2);
 		List<ProductVO> tableList = productservice.getAllSangpums(vo);
 		model.addAttribute("tableList",tableList);
 	    return "pages/table";
 	}
 	@GetMapping("/bed")
-	public String bedList(@ModelAttribute ProductVO vo, Model model) {
+	public String bedList(@ModelAttribute ProductVO vo, Model model, Criteria cri) {
 		vo.setCategoryNum(1);
 		List<ProductVO> tableList = productservice.getAllSangpums(vo);
 		model.addAttribute("tableList",tableList);
 	    return "pages/table";
 	}
 	@GetMapping("/chair")
-	public String chairList(@ModelAttribute ProductVO vo, Model model) {
+	public String chairList(@ModelAttribute ProductVO vo, Model model, Criteria cri) {
 		vo.setCategoryNum(3);
 		List<ProductVO> tableList = productservice.getAllSangpums(vo);
 		model.addAttribute("tableList",tableList);
 	    return "pages/table";
 	}
 	@GetMapping("/diningtable")
-	public String diningtableList(@ModelAttribute ProductVO vo, Model model) {
+	public String diningtableList(@ModelAttribute ProductVO vo, Model model, Criteria cri) {
 		vo.setCategoryNum(4);
 		List<ProductVO> tableList = productservice.getAllSangpums(vo);
 		model.addAttribute("tableList",tableList);
 	    return "pages/table";
 	}
 	@GetMapping("/closet")
-	public String closetList(@ModelAttribute ProductVO vo, Model model) {
+	public String closetList(@ModelAttribute ProductVO vo, Model model, Criteria cri, PageVO pvo) {
 		vo.setCategoryNum(5);
 		List<ProductVO> tableList = productservice.getAllSangpums(vo);
+		pvo.setCri(cri);
+		pvo.setTotal(0);
 		model.addAttribute("tableList",tableList);
+		model.addAttribute("page",pvo);
 	    return "pages/table";
 	}
 	

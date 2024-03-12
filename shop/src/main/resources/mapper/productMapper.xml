@@ -14,20 +14,26 @@
 		#{proImg3},
 		#{proContent},
 		#{proPrice},
-		sysdate,
+		sysdate(),
 		#{proCnt},
 		'N')
 	</insert>
 	
 	<select id="getAllSangpums" resultType="com.dj.shop.vo.ProductVO">
 		SELECT * 
-		FROM PRODUCT
-		WHERE CATEGORY_NUM =#{categoryNum}
+		FROM PRODUCT p JOIN category a
+		WHERE a.category_num = #{categoryNum};
 	</select>
 	
 	<select id="getData" resultType="com.dj.shop.vo.ProductVO">
 		SELECT * 
 		FROM PRODUCT
 		WHERE product_num =#{productNum}
+	</select>
+	
+	<select id="count" resultType="com.dj.shop.vo.ProductVO">
+		SELECT COUNT(*)
+		FROM PRODUCT p JOIN category a
+		WHERE a.category_num = #{categoryNum};
 	</select>
 </mapper>

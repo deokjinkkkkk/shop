@@ -21,13 +21,15 @@ public class ProductServiceImpl implements ProductService{
 	private String saveimg;
 	@Autowired
 	private ProductMapper product;
+	
 	@Override
-	public int getTotalCountOfMarket() {
-		return product.getTotalCountOfMarket();
+	public int count(ProductVO vo) {
+		return product.count(vo);
 	}
 
 	@Override
 	public List<ProductVO> getAllSangpums(ProductVO vo) {
+		
 		return product.getAllSangpums(vo);
 	}
 

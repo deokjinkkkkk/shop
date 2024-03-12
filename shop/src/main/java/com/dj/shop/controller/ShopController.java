@@ -12,7 +12,11 @@ public class ShopController {
 	public String login() {
 		return "pages/login";
 	}
-
+	
+	@GetMapping("/review")
+	public String review() {
+		return "pages/review";
+	}
 	
 
 }
