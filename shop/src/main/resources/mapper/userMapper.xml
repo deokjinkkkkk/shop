@@ -8,8 +8,12 @@
 
 	</select>
  	<insert id="saveUser">
-		INSERT INTO USERS(user_number,user_name,email,user_pwd,tel,gender,limit,signout,roles)
-		VALUES(user.seq,#{name},#{email},#{userPwd},#{tel},#{gender},'N','N','N')
+ 		<selectKey keyProperty="userNumber"  resultType="int"  order="BEFORE">
+ 		SELECT NVL(MAX(user_number),0) + 1
+ 		FROM users
+ 		</selectKey>
+		INSERT INTO USERS(user_number,name,email,user_pwd,tel,gender,suspen,signout,roles)
+		VALUES(#{userNumber},#{name},#{email},#{userPwd},#{tel},#{gender},'N','N','USER')
 	</insert>
 	
 	<select id="idCheck" resultType="boolean">

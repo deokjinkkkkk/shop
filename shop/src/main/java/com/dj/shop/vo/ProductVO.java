@@ -18,6 +18,8 @@ public class ProductVO{
 	private int proCnt; //재고
 	private String proDel; //상품 삭제여부
 	
+	Integer first;  //페이징 
+	Integer last;
 
 	
 }

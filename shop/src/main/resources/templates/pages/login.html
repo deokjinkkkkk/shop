@@ -24,7 +24,7 @@
 				<label for="email">이메일</label>
 				<input type="email" name="email" id="email" placeholder="Email" th:style="${'width: 45%; display:inline-block'}" required oninput="checkEmail()">
 				<span th:style="${'color: #7369AB'}">@</span>
-				<select id="emailSel" >
+				<select id="domain" >
 					<option value diasbled>선택해주세요</option>
 					<option value="naver.com">naver.com</option>
 					<option value="daum.net">daum.net</option>
@@ -108,6 +108,7 @@ $("#signUp").click(function() {
         event.preventDefault();
         return false;
     }
+    var emailSel = $("#email").val() + "@" + $("#domain").val();
     $("#signUpProc").submit()
     // 유효성 검사가 통과하면 폼 제출이 계속 진행됩니다.
 });
@@ -115,7 +116,7 @@ $("#signUp").click(function() {
 // 기존 함수들을 활용하여 폼 유효성 검사 수행
 function validateForm() {
     var name = $("#name").val();
-    var emailSel = $("#email").val() + "@" + $("#emailSel").val();
+    var emailSel = $("#email").val() + "@" + $("#domain").val();
     var userPwd = $("#userPwd").val();
     var passchk = $("#passchk").val();
     var tel = $("#tel").val();
@@ -137,7 +138,7 @@ function validateForm() {
 }
 
 $("#emailBtn").click(function() {
-    emailSel = $("#email").val() + "@" + $("#emailSel").val();
+    emailSel = $("#email").val() + "@" + $("#domain").val();
     if(emailSel == '@'){
     	console.log("이메일을 입력해주세요")
     	return false;
@@ -172,8 +173,8 @@ $("#emailBtn").click(function() {
 });
 
 function checkEmail(){
-    var email  = $("#email").val() + "@"+$("#emailSel").val();
-    var emailSel = $("#emailSel").val();
+    var email  = $("#email").val() + "@"+$("#domain").val();
+    var emailSel = $("#domain").val();
     if(emailSel == ''){
     	$(".email_com").css("display","inline-block")
     	$(".email_alr").css("display","none")

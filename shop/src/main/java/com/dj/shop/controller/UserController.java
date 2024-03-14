@@ -45,7 +45,8 @@ public class UserController {
 
 	
 	@PostMapping("/signUp")
-	public String signUp(UserVO vo) {
+	public String signUp(UserVO vo, @RequestParam("domain") String domain) {
+		vo.setEmail(vo.getEmail() + '@' + domain);
 		userservice.saveUser(vo);
 		return "redirect:/login";
 	}

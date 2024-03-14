@@ -9,15 +9,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.dj.shop.service.ProductService;
-import com.dj.shop.vo.Criteria;
-import com.dj.shop.vo.PageVO;
+import com.dj.shop.vo.Pagination;
 import com.dj.shop.vo.ProductVO;
 
 @Controller
+@RequestMapping("/product")
 public class ProdcutController {
 	@Autowired
 	ProductService productservice;
@@ -25,47 +26,58 @@ public class ProdcutController {
 	@Value("${saveimg}")
 	private String saveimg;
 	
-	@GetMapping("/admin/product")
+	@GetMapping("/admin")
 	public String product() {
 		return "pages/product";
 	}
 	
 	@GetMapping("/table")
-	public String tableList(@ModelAttribute ProductVO vo, Model model, Criteria cri) {
+	public String tableList(@ModelAttribute ProductVO vo, Model model,Pagination page) {
 		vo.setCategoryNum(2);
 		List<ProductVO> tableList = productservice.getAllSangpums(vo);
 		model.addAttribute("tableList",tableList);
 	    return "pages/table";
 	}
 	@GetMapping("/bed")
-	public String bedList(@ModelAttribute ProductVO vo, Model model, Criteria cri) {
-		vo.setCategoryNum(1);
-		List<ProductVO> tableList = productservice.getAllSangpums(vo);
-		model.addAttribute("tableList",tableList);
+	public String bedList(ProductVO vo, Model model, Pagination page) {
+	    vo.setCategoryNum(1);
+	    Pagination pagination = new Pagination();
+	    pagination.setPageSize(5); //한 페이지에 보여질 페이지 갯수	
+	    pagination.setPageUnit(5);//한 페이지에 출력할 레코드 건수
+			
+		
+		vo.setFirst(pagination.getFirst());
+		vo.setLast(pagination.getLast());
+	    
+	    int totalCount = productservice.count(vo);
+	    page.setTotalRecord(totalCount);
+	    List<ProductVO> tableList = productservice.getAllSangpums(vo);
+	    model.addAttribute("pagination", pagination);
+	    model.addAttribute("tableList", tableList);
+	    
 	    return "pages/table";
 	}
+
 	@GetMapping("/chair")
-	public String chairList(@ModelAttribute ProductVO vo, Model model, Criteria cri) {
+	public String chairList(@ModelAttribute ProductVO vo, Model model, Pagination page) {
 		vo.setCategoryNum(3);
 		List<ProductVO> tableList = productservice.getAllSangpums(vo);
 		model.addAttribute("tableList",tableList);
 	    return "pages/table";
 	}
 	@GetMapping("/diningtable")
-	public String diningtableList(@ModelAttribute ProductVO vo, Model model, Criteria cri) {
+	public String diningtableList(@ModelAttribute ProductVO vo, Model model, Pagination page) {
 		vo.setCategoryNum(4);
 		List<ProductVO> tableList = productservice.getAllSangpums(vo);
 		model.addAttribute("tableList",tableList);
 	    return "pages/table";
 	}
 	@GetMapping("/closet")
-	public String closetList(@ModelAttribute ProductVO vo, Model model, Criteria cri, PageVO pvo) {
+	public String closetList(@ModelAttribute ProductVO vo, Model model, Pagination page) {
 		vo.setCategoryNum(5);
 		List<ProductVO> tableList = productservice.getAllSangpums(vo);
-		pvo.setCri(cri);
-		pvo.setTotal(0);
+
 		model.addAttribute("tableList",tableList);
-		model.addAttribute("page",pvo);
 	    return "pages/table";
 	}
 	
@@ -76,7 +88,7 @@ public class ProdcutController {
 		model.addAttribute("pro", product);
 	    return "pages/deProduct";
 	}
-	@PostMapping("/product/uploadProduct")
+	@PostMapping("/uploadProduct")
 	public String uploadProduct(ProductVO vo,
 	                            @RequestParam("proImage1") MultipartFile proImage1,
 	                            @RequestParam("proImage2") MultipartFile proImage2,

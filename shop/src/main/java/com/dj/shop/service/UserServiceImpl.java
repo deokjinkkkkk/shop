@@ -13,7 +13,7 @@ public class UserServiceImpl implements UserService{
 	
 	@Override
 	public UserVO userSelect(String vo) {
-		// TODO Auto-generated method stub
+		
 		return user.userSelect(vo);
 	}
 
@@ -26,13 +26,13 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public boolean idCheck(String id) {
-		// TODO Auto-generated method stub
+		
 		return user.idCheck(id);
 	}
 
 	@Override
 	public boolean emailChk(String email) {
-		// TODO Auto-generated method stub
+		
 		return user.emailChk(email);
 	}
 

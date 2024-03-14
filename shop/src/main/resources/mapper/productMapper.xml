@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dj.shop.mapper.ProductMapper">
-	<insert id="insertMarket" parameterType="com.dj.shop.vo.ProductVO">
-		<selectKey keyProperty="productNum" resultType="int" order="BEFORE">
-		SELECT NVL(MAX(product_num),0)+1 FROM product
+	<insert id="insertMarket"
+		parameterType="com.dj.shop.vo.ProductVO">
+		<selectKey keyProperty="productNum" resultType="int"
+			order="BEFORE">
+			SELECT NVL(MAX(product_num),0)+1 FROM product
 		</selectKey>
 		INSERT INTO PRODUCT
 		VALUES(#{productNum},
@@ -18,22 +20,30 @@
 		#{proCnt},
 		'N')
 	</insert>
-	
-	<select id="getAllSangpums" resultType="com.dj.shop.vo.ProductVO">
-		SELECT * 
-		FROM PRODUCT p JOIN category a
-		WHERE a.category_num = #{categoryNum};
+
+	<select id="getAllSangpums"
+		resultType="com.dj.shop.vo.ProductVO">
+		SELECT b.*
+		FROM (
+		SELECT @ROWNUM := @ROWNUM + 1 AS rn, p.*
+		FROM PRODUCT p
+		JOIN category c ON p.category_num = c.category_num
+		CROSS JOIN (SELECT @ROWNUM := 0) r
+		WHERE c.category_num = #{categoryNum}
+		) b
+		WHERE b.rn BETWEEN #{first} AND #{last}
 	</select>
-	
+
 	<select id="getData" resultType="com.dj.shop.vo.ProductVO">
-		SELECT * 
+		SELECT *
 		FROM PRODUCT
 		WHERE product_num =#{productNum}
 	</select>
-	
-	<select id="count" resultType="com.dj.shop.vo.ProductVO">
+
+	<select id="count" resultType="int">
 		SELECT COUNT(*)
-		FROM PRODUCT p JOIN category a
+		FROM PRODUCT p JOIN
+		category a
 		WHERE a.category_num = #{categoryNum};
 	</select>
 </mapper>
