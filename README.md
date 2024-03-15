@@ -9,11 +9,11 @@
 3.회원가입 <br/>
 &nbsp;&nbsp;  **이메일인증** <br/>
 4.주문 <br/>
-&nbsp;&nbsp;  장바구니 <br/>
-&nbsp;&nbsp;  상품 등록 <br/>
-&nbsp;&nbsp;  상품 목록  <br/>
-&nbsp;&nbsp;  상품 검색<br/>
+&nbsp;&nbsp;  장바구니  <br/>
+&nbsp;&nbsp;  **상품 등록** <br/>
+&nbsp;&nbsp;  **상품 목록** <br/>
+&nbsp;&nbsp;  상품 검색 <br/>
 &nbsp;&nbsp;  상품 상세 <br/>
 &nbsp;&nbsp;  상품 결제 <br/> <br/>
 5.게시판 <br/>
- &nbsp;&nbsp;  QNA <br/>
+ &nbsp;&nbsp;  review <br/>
