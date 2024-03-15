@@ -26,7 +26,7 @@ GIF Images
 
 | jQuery |  SringBoot |   JAVA    |   maridDB  |   maven  |  mybatis |
 | :----- | :--------: |  :----:   | :--------: | :------: | :------: | 
-|  ![js] |  ![Spring] |  ![java]  | ![maridDB] | ![maven] | ![maven] |
+|  js    |  Spring    |  java     | maridDB    | maven    | maven    |
 
 <br>
 
