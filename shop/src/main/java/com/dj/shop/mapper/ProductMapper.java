@@ -13,6 +13,6 @@ public interface ProductMapper {
 	public ProductVO getData(int num);
 	public int updateMarket(ProductVO vo);
 	public int deleteMarket(String num);
-	
+	public List<ProductVO> categoryList(ProductVO vo);
 	public String saveImage(MultipartFile file, String saveFolder);
 }

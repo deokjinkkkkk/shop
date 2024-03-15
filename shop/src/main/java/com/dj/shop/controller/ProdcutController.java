@@ -31,53 +31,32 @@ public class ProdcutController {
 		return "pages/product";
 	}
 	
-	@GetMapping("/table")
-	public String tableList(@ModelAttribute ProductVO vo, Model model,Pagination page) {
-		vo.setCategoryNum(2);
-		List<ProductVO> tableList = productservice.getAllSangpums(vo);
-		model.addAttribute("tableList",tableList);
-	    return "pages/table";
-	}
-	@GetMapping("/bed")
-	public String bedList(ProductVO vo, Model model, Pagination page) {
-	    vo.setCategoryNum(1);
+	@GetMapping("/list")
+	public String productList(ProductVO vo, Model model, 
+			@RequestParam(value = "page",required = false) Integer page
+			,@RequestParam(value = "category",required = false) int category
+			) {
+		vo.setCategoryNum(category);
 	    Pagination pagination = new Pagination();
+	    if(page != null) {
+	    pagination.setPage(page);
+	    }
 	    pagination.setPageSize(5); //한 페이지에 보여질 페이지 갯수	
-	    pagination.setPageUnit(5);//한 페이지에 출력할 레코드 건수
-			
-		
-		vo.setFirst(pagination.getFirst());
-		vo.setLast(pagination.getLast());
+	    pagination.setPageUnit(9);//한 페이지에 출력할 레코드 건수
 	    
 	    int totalCount = productservice.count(vo);
-	    page.setTotalRecord(totalCount);
-	    List<ProductVO> tableList = productservice.getAllSangpums(vo);
+	    pagination.setTotalRecord(totalCount);
+		vo.setFirst(pagination.getFirst());
+		vo.setLast(pagination.getLast());
+		
+		List<ProductVO> tableList = productservice.getAllSangpums(vo);
+	   
+		List<ProductVO> categories = productservice.categoryList(vo);
+	    
 	    model.addAttribute("pagination", pagination);
 	    model.addAttribute("tableList", tableList);
+	    model.addAttribute("categories", categories);
 	    
-	    return "pages/table";
-	}
-
-	@GetMapping("/chair")
-	public String chairList(@ModelAttribute ProductVO vo, Model model, Pagination page) {
-		vo.setCategoryNum(3);
-		List<ProductVO> tableList = productservice.getAllSangpums(vo);
-		model.addAttribute("tableList",tableList);
-	    return "pages/table";
-	}
-	@GetMapping("/diningtable")
-	public String diningtableList(@ModelAttribute ProductVO vo, Model model, Pagination page) {
-		vo.setCategoryNum(4);
-		List<ProductVO> tableList = productservice.getAllSangpums(vo);
-		model.addAttribute("tableList",tableList);
-	    return "pages/table";
-	}
-	@GetMapping("/closet")
-	public String closetList(@ModelAttribute ProductVO vo, Model model, Pagination page) {
-		vo.setCategoryNum(5);
-		List<ProductVO> tableList = productservice.getAllSangpums(vo);
-
-		model.addAttribute("tableList",tableList);
 	    return "pages/table";
 	}
 	
@@ -107,6 +86,9 @@ public class ProdcutController {
 
 	    return "redirect:/";
 	}
-	
-
+		@PostMapping("/updatePro")
+		public String updateProduct(ProductVO vo) {
+			
+			return saveimg;			
+	}
 }

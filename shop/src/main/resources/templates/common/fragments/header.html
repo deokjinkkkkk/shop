@@ -138,12 +138,12 @@
                 가구    
               </a>
               <ul class="dropdown-menu">
-                <li><a href="/product/bed">침대</a></li>
-                <li><a href="/product/table">책상</a></li>
-                <li><a href="/product/chair">의자</a></li>
-                <li><a href="/product/diningtable">식탁</a></li>
-                <li><a href="/product/closet">옷장</a></li>
-              </ul>
+			    <li><a th:href="@{/product/list(category=1)}">침대</a></li>
+			    <li><a th:href="@{/product/list(category=2)}">책상</a></li>
+			    <li><a th:href="@{/product/list(category=3)}">의자</a></li>
+			    <li><a th:href="@{/product/list(category=4)}">식탁</a></li>
+			    <li><a th:href="@{/product/list(category=5)}">옷장</a></li>
+			</ul>
             </li>
             
             <li class="dropdown dropdown100 nav-catalogue">

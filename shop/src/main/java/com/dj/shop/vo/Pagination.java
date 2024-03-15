@@ -4,10 +4,10 @@ import lombok.Data;
 @Data
 public class Pagination {
 
-	int pageUnit ; 		//한페이지 출력할 레코드 건수
-	int pageSize ; 		//페이지번호 수 (5) 1~ 5까지
+	int pageUnit=10 ; 		//한페이지 출력할 레코드 건수
+	int pageSize=10 ; 		//페이지번호 수 (5) 1~ 5까지
 	int lastPage;     		//마지막 페이지번호
-	int totalRecord ;		//전체 레코드건수
+	int totalRecord = 126;		//전체 레코드건수
 	Integer page = 1;		//현재 페이지
 	int startPage;			//페이지그룹내에서 시작페이지번호
 	int endPage;			//페이지그룹내에서 마지막페이지번호
@@ -71,7 +71,7 @@ public class Pagination {
 	}
 
 	public int getStartPage() {
-	    startPage = (page - 1) / pageUnit * pageUnit + 1;
+	    startPage = (page - 1) / pageSize * pageSize + 1;
 	    return startPage;
 	}
 
@@ -80,7 +80,7 @@ public class Pagination {
 	}
 
 	public int getEndPage() {
-	    endPage = (page - 1) / pageUnit * pageUnit + pageUnit;
+	    endPage = (page - 1) / pageSize * pageSize + pageSize;
 	    if (endPage > getLastPage())
 	        endPage = getLastPage();
 	    return endPage;

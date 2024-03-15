@@ -44,6 +44,12 @@
 		SELECT COUNT(*)
 		FROM PRODUCT p JOIN
 		category a
-		WHERE a.category_num = #{categoryNum};
+		ON p.category_num = a.category_num
+		WHERE p.category_num = #{categoryNum};
+	</select>
+	
+	<select id="categoryList" resultType="com.dj.shop.vo.ProductVO">
+	SELECT *,(category_num= #{categoryNum}) as selected
+		FROM category
 	</select>
 </mapper>

@@ -72,4 +72,10 @@ public class ProductServiceImpl implements ProductService{
 		
 	}
 
+	@Override
+	public List<ProductVO> categoryList(ProductVO vo) {
+		
+		return product.categoryList(vo);
+	}
+
 }
