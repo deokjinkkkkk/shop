@@ -34,7 +34,7 @@ GIF Images
 
 ### 상품CRUD !CR 구현 + 페이징처리 + 이미지업로드
 
-### SECURITY 회원 로그인/회원가입 !-구현 + 이메일인증
+### SECURITY 회원 로그인/회원가입 !-구현 + 이메일인증 + 유효성 검사
 
 ### 리뷰게시판CRUD ! 진행중
 
@@ -43,13 +43,13 @@ GIF Images
 ### 위시리스트 !진행중
 
 <br>
-##개발 환경
-1. JAVA 11
-2. SpringBoot 2.6.3
-3. MariaDB
-4. thymeleaf
-5. mybatis
-# DJ SHOP
+### 개발 환경
+1. JAVA 11 <br/>
+2. SpringBoot 2.6.3 <br/>
+3. MariaDB <br/>
+4. thymeleaf <br/>
+5. mybatis <br/>
+6. jquery <br/>
 ## 배운 점 & 아쉬운 점
 <br/>
 <p align="justify">
