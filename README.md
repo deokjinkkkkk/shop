@@ -1,26 +1,65 @@
 # Spring Boot Thymeleaf를 사용한 쇼핑몰
-**DB 설계 (작업중)**
-![image](https://github.com/deokjinkkkkk/shop/assets/116549186/9748b97b-c3e1-4a02-89f5-d72befb64154)
-**구현 기능** <br/> <br/>
-1.위시리스트<br/> <br/>
-2.로그인 <br/>
-&nbsp;&nbsp;   **security를 사용하여 인증,권한에 따른 접근시스템**<br/>
-&nbsp;&nbsp;  1.소셜로그인<br/> <br/>
-3.회원가입 <br/>
-&nbsp;&nbsp;  1.**이메일인증** <br/>
-4.주문 <br/>
-&nbsp;&nbsp;  1.장바구니  <br/>
-&nbsp;&nbsp;  2.**상품 등록** <br/>
-&nbsp;&nbsp;  3.**상품 목록** <br/>
-&nbsp;&nbsp;  4.상품 검색 <br/>
-&nbsp;&nbsp;  5.상품 상세 <br/>
-&nbsp;&nbsp;  6.상품 결제 <br/> <br/>
-5.게시판 <br/>
- &nbsp;&nbsp;  1.리뷰게시판 <br/>
- 
-**개발 환경**<br/>
+
+
+
+<p align="center">
+  <br>
+  <img src="./images/common/logo-sample.jpeg">
+  <br>
+</p>
+
+목차
+
+## 프로젝트 소개
+
+<p align="justify">
+ 침대 및 각종 가구판매 사이트 
+</p>
+
+<p align="center">
+GIF Images
+</p>
+
+<br>
+
+## 기술 스택
+
+| jQuery |  SringBoot |   JAVA    |   maridDB  |   maven  |  mybatis |
+| :----- | :--------: |  :----:   | :--------: | :------: | :------: | 
+|  ![js] |  ![Spring] |  ![java]  | ![maridDB] | ![maven] | ![maven] |
+
+<br>
+
+## 구현 기능
+
+### 상품CRUD !CR 구현 + 페이징처리 + 이미지업로드
+
+### SECURITY 회원 로그인/회원가입 !-구현 + 이메일인증
+
+### 리뷰게시판CRUD ! 진행중
+
+### 결제 !진행중
+
+### 위시리스트 !진행중
+
+<br>
+##개발 환경
 1. JAVA 11
 2. SpringBoot 2.6.3
 3. MariaDB
 4. thymeleaf
 5. mybatis
+# DJ SHOP
+## 배운 점 & 아쉬운 점
+<br/>
+<p align="justify">
+
+</p>
+
+<br>
+
+## 라이센스
+
+MIT &copy; [NoHack](mailto:lbjp114@gmail.com)
+
+<!-- Stack Icon Refernces -->
