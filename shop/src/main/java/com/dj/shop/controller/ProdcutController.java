@@ -36,7 +36,9 @@ public class ProdcutController {
 			@RequestParam(value = "page",required = false) Integer page
 			,@RequestParam(value = "category",required = false) int category
 			) {
+		
 		vo.setCategoryNum(category);
+		
 	    Pagination pagination = new Pagination();
 	    if(page != null) {
 	    pagination.setPage(page);
@@ -46,6 +48,7 @@ public class ProdcutController {
 	    
 	    int totalCount = productservice.count(vo);
 	    pagination.setTotalRecord(totalCount);
+	    
 		vo.setFirst(pagination.getFirst());
 		vo.setLast(pagination.getLast());
 		
@@ -86,9 +89,15 @@ public class ProdcutController {
 
 	    return "redirect:/";
 	}
-		@PostMapping("/updatePro")
-		public String updateProduct(ProductVO vo) {
+	@PostMapping("/updatePro")
+	public String updateProduct(ProductVO vo) {
 			
-			return saveimg;			
+	return "redirect:/detail";			
+	}
+		
+	@PostMapping("/delPro")
+	public String delProduct(ProductVO vo) {
+			
+	return "redirect:/detail";			
 	}
 }
