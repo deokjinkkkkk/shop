@@ -12,7 +12,7 @@ public interface ProductService {
 	public int insertMarket(ProductVO vo);
 	public ProductVO getData(int num);
 	public int updateMarket(ProductVO vo);
-	public int deleteMarket(String num);
+	public int deleteMarket(ProductVO vo);
 	public List<ProductVO> categoryList(ProductVO vo);
 	public String saveImage(MultipartFile imgFile, String saveFolder);
 }

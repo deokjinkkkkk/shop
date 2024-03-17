@@ -2,6 +2,9 @@ package com.dj.shop.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -48,8 +51,33 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public int deleteMarket(String num) {
-		return product.deleteMarket(num);
+	public int deleteMarket(ProductVO vo) {
+		ProductVO pro = product.getData(vo.getProductNum());
+		
+		if(pro != null) {
+			List<Path> pathList = new ArrayList();
+			Path path1 ;
+			Path path2 ;
+			Path path3 ;
+			if(pro.getProImg1() != null) {
+				path1 = Paths.get(saveimg, pro.getProImg1());
+				 System.out.println(path1 +"=========");
+				path1.toFile().delete();
+			}
+			if(pro.getProImg2() != null) {
+				path2 = Paths.get(saveimg, pro.getProImg2());
+				 System.out.println(path2 +"=========");
+				path2.toFile().delete();
+			}
+			if(pro.getProImg3() != null) {
+				 path3 = Paths.get(saveimg, pro.getProImg3());
+				 System.out.println(path3 +"=========");
+				 path3.toFile().delete();
+			}
+				
+		}
+		
+		return product.deleteMarket(vo);
 				
 	}
 

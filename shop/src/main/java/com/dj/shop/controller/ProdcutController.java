@@ -83,21 +83,40 @@ public class ProdcutController {
 		    vo.setProImg2(fileName2);
 		    vo.setProImg3(fileName3);
 
-		    productservice.insertMarket(vo);
-		    
+		    productservice.insertMarket(vo);   
 		}
 
 	    return "redirect:/";
 	}
-	@PostMapping("/updatePro")
-	public String updateProduct(ProductVO vo) {
-			
-	return "redirect:/detail";			
+	@PostMapping("/productUpdate")
+	public String updateProduct(ProductVO vo,
+			@RequestParam("proImage1") MultipartFile proImage1,
+            @RequestParam("proImage2") MultipartFile proImage2,
+            @RequestParam("proImage3") MultipartFile proImage3) {
+		if(proImage1 != null) {
+			String fileName1 = productservice.saveImage(proImage1, saveimg);
+		}
+		if(proImage2 != null) {
+			String fileName2 = productservice.saveImage(proImage2, saveimg);
+		}
+		if(proImage3 != null) {
+			String fileName3 = productservice.saveImage(proImage3, saveimg);  
+		}
+		productservice.updateMarket(vo); 
+	return "redirect:/";			
 	}
-		
-	@PostMapping("/delPro")
-	public String delProduct(ProductVO vo) {
-			
-	return "redirect:/detail";			
+	
+	@GetMapping("/updateForm")
+	public String updateProductForm(ProductVO vo,Model model,
+			@RequestParam("productNum") int productId) {
+		ProductVO product =	productservice.getData(productId);
+		model.addAttribute("pro", product);
+	return "pages/updateProduct";			
+	}
+	
+	@PostMapping("/productDelete")
+	public String delProduct(ProductVO vo ) {
+		productservice.deleteMarket(vo);
+	return "redirect:/";			
 	}
 }

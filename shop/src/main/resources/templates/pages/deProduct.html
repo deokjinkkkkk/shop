@@ -61,65 +61,51 @@
               <div id="slider-range"></div>
             </div>
 
-            <div class="sidebar-products clearfix">
-              <h2>Bestsellers</h2>
-              <div class="item">
-                <a href="shop-item.html"><img src="assets/pages/img/products/k1.jpg" alt="Some Shoes in Animal with Cut Out"></a>
-                <h3><a href="shop-item.html">Some Shoes in Animal with Cut Out</a></h3>
-                <div class="price">$31.00</div>
-              </div>
-              <div class="item">
-                <a href="shop-item.html"><img src="assets/pages/img/products/k4.jpg" alt="Some Shoes in Animal with Cut Out"></a>
-                <h3><a href="shop-item.html">Some Shoes in Animal with Cut Out</a></h3>
-                <div class="price">$23.00</div>
-              </div>
-              <div class="item">
-                <a href="shop-item.html"><img src="assets/pages/img/products/k3.jpg" alt="Some Shoes in Animal with Cut Out"></a>
-                <h3><a href="shop-item.html">Some Shoes in Animal with Cut Out</a></h3>
-                <div class="price">$86.00</div>
-              </div>
-            </div>
           </div>
           <!-- END SIDEBAR -->
            <!-- BEGIN CONTENT -->
           <div class="col-md-9 col-sm-7">
             <div class="product-page">
-              <div class="row" th:each="pr : ${pro}">
-                <div class="col-md-6 col-sm-6">
-                  <div class="product-main-image">
-                    <img th:src="'/image/'+${pr.proImg1}" th:alt="${pr.proName}" class="img-responsive">
-                  </div>
-                  <div class="product-other-images">
-                    <a href="'/image/'+${pr.proImg2}" class="fancybox-button" rel="photos-lib"><img alt="Berry Lace Dress" th:src="'/image/'+${pr.proImg2}"></a>
-                    <a href="'/image/'+${pr.proImg3}" class="fancybox-button" rel="photos-lib"><img alt="Berry Lace Dress" th:src="'/image/'+${pr.proImg3}"></a>
-                  </div>
-                </div>
-                <div class="col-md-6 col-sm-6">
-                  <h1 th:text="${pr.proName}">Cool green dress with red bell</h1>
-                  <div class="price-availability-block clearfix">
-                    <div class="price">
-                      <strong th:text="${pr.proPrice}"><span>원</span></strong>
-                      <em><span th:text="${pr.proPrice}">62.00</span>원</em>
-                    </div>
-                    <div class="availability">
-                      Availability: <strong>In Stock</strong>
-                    </div>
-                  </div>
-                  <div class="description">
-                    <p th:text=${pr.proContent}></p>
-                  </div>
-                 
-                  <div class="product-page-cart">
-                    <div class="product-quantity">
-                        <input id="product-quantity" name="proCnt" type="text" value="1" readonly class="form-control">
-                    </div>
-                    <button class="btn btn-primary" type="submit">장바구니 담기</button>
-                    <button class="btn btn-primary" type="button">상품수정</button>
-                    <button class="btn btn-primary" type="button">상품삭제</button>
-                  </div> 
-                  </div>
-                </div>
-
+            	<form method="post" id="cartInsert" action="/product/cartInsert">
+	              <div class="row" th:each="pr : ${pro}">
+	                <div class="col-md-6 col-sm-6">
+	                  <div class="product-main-image">
+	                    <img th:src="'/image/'+${pr.proImg1}" th:alt="${pr.proName}" class="img-responsive">
+	                  </div>
+	                  <div class="product-other-images">
+	                    <a href="'/image/'+${pr.proImg2}" class="fancybox-button" rel="photos-lib"><img alt="Berry Lace Dress" th:src="'/image/'+${pr.proImg2}"></a>
+	                    <a href="'/image/'+${pr.proImg3}" class="fancybox-button" rel="photos-lib"><img alt="Berry Lace Dress" th:src="'/image/'+${pr.proImg3}"></a>
+	                  </div>
+	                </div>
+	                <div class="col-md-6 col-sm-6">
+	                  <h1 th:text="${pr.proName}">Cool green dress with red bell</h1>
+	                  <div class="price-availability-block clearfix">
+	                    <div class="price">
+	                      <strong th:text="${pr.proPrice}"><span>원</span></strong>
+	                      <em><span th:text="${pr.proPrice}">62.00</span>원</em>
+	                    </div>
+	                    <div class="availability">
+	                      Availability: <strong>In Stock</strong>
+	                    </div>
+	                  </div>
+	                  <div class="description">
+	                    <p th:text=${pr.proContent}></p>
+	                  </div>
+	                 
+	                  <div class="product-page-cart">
+	                    <div class="product-quantity">
+	                    	
+	                        <input id="product-quantity" name="proCnt" type="text" value="1" readonly class="form-control">
+	                    </div>
+	                    
+	                    <input type="hidden" th:value="${pr.productNum}" name="productNum">
+	                    <button class="btn btn-primary" type="submit">장바구니 담기</button>
+	                    <button class="btn btn-primary" th:if="${#strings.equals(session.roles,'[ROLE_ADMIN]')}" type="button" id="updateBtn">상품수정</button>
+	                    <button class="btn btn-primary" th:if="${#strings.equals(session.roles,'[ROLE_ADMIN]')}" type="button" id="deleteBtn">상품삭제</button>
+	                  </div> 
+	                  </div>
+	                </div>
+				</form>
                 <div class="product-page-content">
                   <ul id="myTab" class="nav nav-tabs">                          
                     <li class="active"><a href="#Reviews" data-toggle="tab">Reviews (2)</a></li>
@@ -182,6 +168,14 @@
       </div>
    </div>
       <script>
-      	
+      	$("#updateBtn").click(function(){
+      		var productNum = $("input[name=productNum]").val()
+      		location.href = "/product/updateForm?productNum=" + productNum
+      	})
+      	$("#deleteBtn").click(function(){
+      		
+			$("#cartInsert").attr("action", "/product/productDelete").submit();
+      		
+      	})
       </script>
 </html>

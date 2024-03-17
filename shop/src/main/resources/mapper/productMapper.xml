@@ -52,4 +52,22 @@
 	SELECT *,(category_num= #{categoryNum}) as selected
 		FROM category
 	</select>
+	<update id="updateMarket" parameterType="com.dj.shop.vo.ProductVO">
+	update product 
+	SET  category_num = #{categoryNum},
+		pro_name = #{proName}
+		<if test="proImg1 != null">,pro_img1 = #{proImg1}</if>
+		<if test="proImg2 != null">,pro_img2 = #{proImg2}</if>
+		<if test="proImg3 != null">,pro_img3 = #{proImg3}</if>,
+		pro_content = #{proContent},
+		pro_price = #{proPrice},
+		pro_date = sysdate(),
+		pro_cnt = #{proCnt}
+	where product_num =#{productNum}
+	</update>
+	<delete id="deleteMarket">
+	DELETE 
+	FROM PRODUCT
+	WHERE product_num =#{productNum}
+	</delete>
 </mapper>
