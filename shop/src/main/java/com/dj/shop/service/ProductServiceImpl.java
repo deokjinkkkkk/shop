@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.dj.shop.mapper.ProductMapper;
 import com.dj.shop.vo.ProductVO;
+
 @Service
 public class ProductServiceImpl implements ProductService{
 	@Value("${saveimg}")
@@ -55,23 +56,19 @@ public class ProductServiceImpl implements ProductService{
 		ProductVO pro = product.getData(vo.getProductNum());
 		
 		if(pro != null) {
-			List<Path> pathList = new ArrayList();
 			Path path1 ;
 			Path path2 ;
 			Path path3 ;
 			if(pro.getProImg1() != null) {
 				path1 = Paths.get(saveimg, pro.getProImg1());
-				 System.out.println(path1 +"=========");
 				path1.toFile().delete();
 			}
 			if(pro.getProImg2() != null) {
 				path2 = Paths.get(saveimg, pro.getProImg2());
-				 System.out.println(path2 +"=========");
 				path2.toFile().delete();
 			}
 			if(pro.getProImg3() != null) {
 				 path3 = Paths.get(saveimg, pro.getProImg3());
-				 System.out.println(path3 +"=========");
 				 path3.toFile().delete();
 			}
 				
@@ -91,7 +88,6 @@ public class ProductServiceImpl implements ProductService{
                 // 파일을 서버에 업로드
                 file.transferTo(uploadFile);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
            

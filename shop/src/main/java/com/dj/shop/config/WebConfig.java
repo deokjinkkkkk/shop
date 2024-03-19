@@ -7,9 +7,12 @@ import java.nio.charset.StandardCharsets;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.resource.PathResourceResolver;
+
+import com.dj.shop.interceptor.CartInterceptor;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
@@ -36,4 +39,12 @@ public class WebConfig implements WebMvcConfigurer {
                     }
                 });
     }
+
+    // @Override
+    // public void addInterceptors(InterceptorRegistry registry) {
+    //     registry.addInterceptor(new CartInterceptor())
+    //     .addPathPatterns("/**")
+    //     .excludePathPatterns("/static/**");
+    //     WebMvcConfigurer.super.addInterceptors(registry);
+    // }
 }
