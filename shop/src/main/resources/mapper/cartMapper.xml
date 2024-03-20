@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dj.shop.mapper.CartMapper">
+<select id="checkCart" resultType="com.dj.shop.vo.CartVO" parameterType="com.dj.shop.vo.CartVO">
+	select * from cart
+	where user_number = #{userNumber} AND product_num =#{productNum}
+</select>
+
+<insert id="addCart">
+	insert into cart (user_number,product_num,cart_cnt)
+	values(#{userNumber},#{productNum},#{cartCnt})
+</insert>
+</mapper>

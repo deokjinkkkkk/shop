@@ -14,7 +14,23 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public int addCart(CartVO vo) {
+    	
+       if(cart.checkCart(vo) != null) {
+    	   return 2;
+       }
        
-        return cart.addCart(vo);
+        try {
+			return cart.addCart(vo);
+		} catch (Exception e) {
+			
+			return 0;
+		}
+		
     }
+
+	@Override
+	public CartVO checkCart(CartVO vo) {
+		
+		return cart.checkCart(vo);
+	}
 }

@@ -36,5 +36,10 @@ class ShopApplicationTests {
 		}
 		
 	}
+	
+	@Test
+	public void cartCheck() {
+		
+	}
 
 }
