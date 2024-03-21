@@ -1,5 +1,7 @@
 package com.dj.shop.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,5 +34,23 @@ public class CartServiceImpl implements CartService {
 	public CartVO checkCart(CartVO vo) {
 		
 		return cart.checkCart(vo);
+	}
+
+	@Override
+	public List<CartVO> cartList(String userNumber) {
+		
+		return cart.cartList(userNumber);
+	}
+
+	@Override
+	public int cartDelete(int cartNum) {
+		
+		return 0;
+	}
+
+	@Override
+	public int cartUpdate(CartVO vo) {
+		
+		return 0;
 	}
 }

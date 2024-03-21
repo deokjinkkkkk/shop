@@ -102,7 +102,7 @@ public class ProdcutController {
 			String fileName3 = productservice.saveImage(proImage3, saveimg);  
 		}
 		productservice.updateMarket(vo); 
-	return "redirect:/";			
+		return "redirect:/";			
 	}
 	
 	@GetMapping("/updateForm")
@@ -110,12 +110,12 @@ public class ProdcutController {
 			@RequestParam("productNum") int productId) {
 		ProductVO product =	productservice.getData(productId);
 		model.addAttribute("pro", product);
-	return "pages/updateProduct";			
+		return "pages/updateProduct";			
 	}
 	
 	@PostMapping("/productDelete")
 	public String delProduct(ProductVO vo ) {
 		productservice.deleteMarket(vo);
-	return "redirect:/";			
+		return "redirect:/";			
 	}
 }

@@ -1,10 +1,12 @@
 package com.dj.shop.controller;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -34,6 +36,20 @@ public class CartController {
 		vo.setUserNumber(uvo.getUserNumber());
 		int result = cart.addCart(vo);
 		return result ;
+		
+	}
+	@GetMapping("/list/{userNumber}")
+	public String cartList(@PathVariable("userNumber")String userNumber,Model model) {
+		model.addAttribute("cartList",cart.cartList(userNumber));
+		return "/list" ;
+		
+	}
+	
+	@GetMapping("/headlist/{userNumber}")
+	@ResponseBody
+	public String headerCartList(CartVO vo,@PathVariable("userNumber")String userNumber,Model model) {
+		model.addAttribute("cartList",cart.cartList(userNumber));
+		return "success" ;
 		
 	}
 }

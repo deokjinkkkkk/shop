@@ -52,6 +52,7 @@
 	SELECT *,(category_num= #{categoryNum}) as selected
 		FROM category
 	</select>
+	
 	<update id="updateMarket" parameterType="com.dj.shop.vo.ProductVO">
 	update product 
 	SET  category_num = #{categoryNum},
@@ -65,6 +66,7 @@
 		pro_cnt = #{proCnt}
 	where product_num =#{productNum}
 	</update>
+	
 	<delete id="deleteMarket">
 	DELETE 
 	FROM PRODUCT

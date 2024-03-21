@@ -10,8 +10,9 @@ public class CartVO {
     private int cartCnt;
     
     /*join해서 가져올 데이터 */
-    //상품명
-    //상품가격
+    private String productName;//상품명
+    private int proPrice;//상품가격
     
-    //가격
+    private String proImg1; //상품이미지 1
+    private int price ;//가격
 }
