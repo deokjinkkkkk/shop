@@ -52,6 +52,7 @@
 <!-- Head END -->
 <!-- Body BEGIN -->
 <body class="ecommerce">
+<input type="hidden" th:value="${session.email}" id="userEmail">
         <!-- BEGIN STYLE CUSTOMIZER -->
     <div class="color-panel hidden-sm">
       <div class="color-mode-icons icon-color"></div>
@@ -102,25 +103,14 @@
 
         <!-- BEGIN CART -->
         <div class="top-cart-block">
-          <div class="top-cart-info">
-            <a href="javascript:void(0);" class="top-cart-info-count">3 items</a>
-            <a href="javascript:void(0);" class="top-cart-info-value">$1260</a>
-          </div>
           <i class="fa fa-shopping-cart"></i>
                         
           <div class="top-cart-content-wrapper">
             <div class="top-cart-content">
-              <ul class="scroller" style="height: 250px;">
-                <li>
-                  <a href="shop-item.html"><img src="/assets/pages/img/cart-img.jpg" alt="Rolex Classic Watch" width="37" height="34"></a>
-                  <span class="cart-content-count">x 1</span>
-                  <strong><a href="shop-item.html">Rolex Classic Watch</a></strong>
-                  <em>$1230</em>
-                  <a href="javascript:void(0);" class="del-goods">&nbsp;</a>
-                </li>       
-              </ul>
+            <ul class="scroller" style="height: 250px;">
+            </ul>
               <div class="text-right">
-                <a href="/cart/list" class="btn btn-default">장바구니</a>
+                <a th:href="'/cart/cartlist?email='+${session.email}" class="btn btn-default">장바구니</a>
                 <a href="shop-checkout.html" class="btn btn-primary">Checkout</a>
               </div>
             </div>
@@ -158,9 +148,9 @@
                           <div class="pi-img-wrapper">
                             <a href="shop-item.html"><img th:src="'/image/'+${product.proImg1}" class="img-responsive" th:alt="${product.proName}"></a>
                           </div>
-                          <h3><a href="shop-item.html" th:text="${product.proName}">Berry Lace Dress</a></h3>
-                          <div class="pi-price" th:text="${product.proPrice}">$29.00</div>
-                          <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
+                          <h3><a href="shop-item.html" th:text="${product.proName}"</a></h3>
+                          <div class="pi-price" th:text="${product.proPrice}"></div>
+                          <a href="javascript:;" class="btn btn-default add2cart"></a>
                         </div>
                       </div>
                     </div>
@@ -232,15 +222,18 @@
             Layout.initTouchspin();
             Layout.initTwitter();
         });
-        let user =$("#userNumber").val();
+        
         function cartList(){
+        	let user =$("#userEmail").val();
+        	console.log(user)
         	$.ajax({
-        		url:'cart/list',
+        		url:'/cart/headlist',
         		type:'GET',
-        		data:{ userNumber : user},
+        		data:{ email : user},
         		success: function(data){
+        			console.log(data)
+        			headCartList(data)
         			
-        			$(".top-cart-content").html(data);
         		}
         	})
         }
@@ -248,16 +241,16 @@
         function headCartList(products){
         	var cartListHTML = '';
         	$.each(products,function(index,product){
-        		cartListHTML +='<ul class="scroller" style="height: 250px;">';
+        		console.log(product)
         		cartListHTML +='<li>';
-        		cartListHTML +='<a href="shop-item.html"><img src="/assets/pages/img/cart-img.jpg" alt="Rolex Classic Watch" width="37" height="34"></a>';
-        		cartListHTML +='<span class="cart-content-count">x 1</span>'
-        		cartListHTML +='<strong><a href="shop-item.html">'+product.proName+'</a></strong>'
-        		cartListHTML +='<em>$1230</em>'
+        		cartListHTML +='<a href="/product/detail?proNum='+product.productNum+'"><img src="/image/'+product.proImg1+'" alt="Rolex Classic Watch" width="37" height="34"></a>';
+        		cartListHTML +='<span class="cart-content-count">x '+product.cartCnt+'</span>'
+        		cartListHTML +='<strong><a href="/product/detail?proNum='+product.productNum+'">'+product.productName+'</a></strong>'
+        		cartListHTML +='<em>'+product.proPrice+'</em>'
         		cartListHTML +='<a href="javascript:void(0);" class="del-goods">&nbsp;</a>'
-        		cartListHTML +='</li>'
-        		cartListHTML +='</ul>'
+        		cartListHTML +='</li>'	
         	})
+        	$(".scroller").html(cartListHTML);
         }
         
         $(document).ready(function(){

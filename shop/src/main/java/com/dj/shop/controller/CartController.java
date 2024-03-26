@@ -1,5 +1,7 @@
 package com.dj.shop.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dj.shop.service.CartService;
@@ -38,18 +41,41 @@ public class CartController {
 		return result ;
 		
 	}
-	@GetMapping("/list/{userNumber}")
-	public String cartList(@PathVariable("userNumber")String userNumber,Model model) {
-		model.addAttribute("cartList",cart.cartList(userNumber));
-		return "/list" ;
+	@GetMapping("/headlist")
+	@ResponseBody
+	public List<CartVO> headcartList(@RequestParam("email")String email,
+									UserVO vo) {
+		vo = user.userSelect(email);
+		List<CartVO> result = cart.cartList(vo.getUserNumber());
+		
+		return result;
 		
 	}
 	
-	@GetMapping("/headlist/{userNumber}")
-	@ResponseBody
-	public String headerCartList(CartVO vo,@PathVariable("userNumber")String userNumber,Model model) {
-		model.addAttribute("cartList",cart.cartList(userNumber));
-		return "success" ;
+	@GetMapping("/cartlist")
+	public String CartList(CartVO vo,@RequestParam("email")String email,
+							Model model,UserVO uvo) {
+		uvo.setEmail(email);
+		uvo = user.userSelect(email);
 		
+		model.addAttribute("cartList",cart.cartList(uvo.getUserNumber()));
+		
+		return "pages/cartlist" ;	
+	}
+	@PostMapping("cartDelete")
+	public int cartListDelete(@RequestParam("email")String email,
+				UserVO uvo ,CartVO vo) {
+		uvo = user.userSelect(email);
+		int result = cart.cartDelete(vo.getCartNum());
+		return result;
+	
+	}
+	@PostMapping("cartUpdate")
+	public int cartListUpdate(@RequestParam("email")String email,
+				UserVO uvo ,CartVO vo) {
+		uvo = user.userSelect(email);
+		int result = cart.cartUpdate(vo);
+		return result;
+	
 	}
 }

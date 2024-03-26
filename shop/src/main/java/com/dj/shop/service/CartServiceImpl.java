@@ -37,7 +37,7 @@ public class CartServiceImpl implements CartService {
 	}
 
 	@Override
-	public List<CartVO> cartList(String userNumber) {
+	public List<CartVO> cartList(int userNumber) {
 		
 		return cart.cartList(userNumber);
 	}
