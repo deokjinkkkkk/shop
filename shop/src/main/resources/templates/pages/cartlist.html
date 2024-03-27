@@ -72,6 +72,18 @@
       </div>
     </div>
 <script>
-
+$(function () {
+	var modify = $(".product-quantity")
+	modify.change(function() {
+		$.ajax({
+			url:'/cart/cartUpdate',
+			type:'POST',
+			data:{},
+			success:function(){
+				
+			}
+		})
+	})
+});
 </script>
 </html>
