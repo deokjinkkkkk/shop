@@ -16,7 +16,7 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public int addCart(CartVO vo) {
-    	
+    	System.out.println(vo.getProductNum());
        if(cart.checkCart(vo) != null) {
     	   return 2;
        }
@@ -45,12 +45,12 @@ public class CartServiceImpl implements CartService {
 	@Override
 	public int cartDelete(int cartNum) {
 		
-		return 0;
+		return cart.cartDelete(cartNum);
 	}
 
 	@Override
 	public int cartUpdate(CartVO vo) {
 		
-		return 0;
+		return cart.cartUpdate(vo);
 	}
 }

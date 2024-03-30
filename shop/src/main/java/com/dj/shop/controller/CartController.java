@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -44,7 +45,7 @@ public class CartController {
 	@GetMapping("/headlist")
 	@ResponseBody
 	public List<CartVO> headcartList(@RequestParam("email")String email,
-									UserVO vo) {
+									UserVO vo, CartVO cvo) {
 		vo = user.userSelect(email);
 		List<CartVO> result = cart.cartList(vo.getUserNumber());
 		
@@ -59,7 +60,6 @@ public class CartController {
 		uvo = user.userSelect(email);
 		
 		model.addAttribute("cartList",cart.cartList(uvo.getUserNumber()));
-		
 		return "pages/cartlist" ;	
 	}
 	@PostMapping("cartDelete")
@@ -71,11 +71,11 @@ public class CartController {
 	
 	}
 	@PostMapping("cartUpdate")
-	public int cartListUpdate(@RequestParam("email")String email,
-				UserVO uvo ,CartVO vo) {
-		uvo = user.userSelect(email);
-		int result = cart.cartUpdate(vo);
-		return result;
+	public String cartListUpdate(UserVO uvo , CartVO vo,HttpServletRequest request) {
+		String email = (String) request.getSession().getAttribute("email");
+		System.out.println(vo.getCartCnt() + " " + vo.getCartNum());
+		cart.cartUpdate(vo);
+		return "redirect:/cart/cartlist?email=" + email;
 	
 	}
 }

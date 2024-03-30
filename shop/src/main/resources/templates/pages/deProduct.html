@@ -98,7 +98,7 @@
 	                        <input id="product-quantity" name="proCnt" type="text" value="1" readonly class="form-control">
 	                    </div>
 	                    
-	                    <input type="hidden" th:value="${pr.productNum}" name="productNum">
+	                    <input type="hidden" th:value="${pr.productNum}" name="productNum" id="productNum">
 	                    <button class="btn btn-primary" id="cartBtn" type="button">장바구니 담기</button>
 	                    <button class="btn btn-primary" th:if="${#strings.equals(session.roles,'[ROLE_ADMIN]')}" type="button" id="updateBtn">상품수정</button>
 	                    <button class="btn btn-primary" th:if="${#strings.equals(session.roles,'[ROLE_ADMIN]')}" type="button" id="deleteBtn">상품삭제</button>

@@ -41,7 +41,12 @@
                     </td>
                     <td class="goods-page-quantity">
                       <div class="product-quantity">
-                          <input id="product-quantity" type="text" th:value="${cart.cartCnt}" readonly class="form-control input-sm">
+                         <input id="proCnt" type="text" th:value="${cart.cartCnt}" readonly class="form-control input-sm">
+                          <form action="/cart/cartUpdate" method="post" id="cartUpdate">
+                           	<input type="hidden" name="cartNum" th:value="${cart.cartNum}">
+                          	<input id="proCnt" name="cartCnt" type="hidden" th:value="${cart.cartCnt}" readonly> 
+                          </form>
+                        <a class="quantity_modify_btn" th:attr="data-id=${cart.cartNum}">변경</a>
                       </div>
                     </td>
                     <td class="goods-page-price">
@@ -51,6 +56,7 @@
                       <a class="del-goods" href="javascript:;">&nbsp;</a>
                     </td>
                   </tr>
+                  
                 </table>
                 </div>
 
@@ -63,6 +69,7 @@
                   </ul>
                 </div>
               </div>
+              <input id="email" th:value="${session.email}" type="hidden">
               <button class="btn btn-default" type="submit">Continue shopping <i class="fa fa-shopping-cart"></i></button>
               <button class="btn btn-primary" type="submit">Checkout <i class="fa fa-check"></i></button>
             </div>
@@ -72,18 +79,11 @@
       </div>
     </div>
 <script>
-$(function () {
-	var modify = $(".product-quantity")
-	modify.change(function() {
-		$.ajax({
-			url:'/cart/cartUpdate',
-			type:'POST',
-			data:{},
-			success:function(){
-				
-			}
-		})
-	})
-});
+$(".quantity_modify_btn").on("click",function(){
+	var cartId = $(this).data("id")
+	var count = $(this).parent("td").find("input").val();
+	$("#cartUpdate").submit()
+})
+
 </script>
 </html>

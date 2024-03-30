@@ -12,20 +12,20 @@
 	</insert>
 	
 	<select id="cartList" resultType="com.dj.shop.vo.CartVO">
-		select cart_num ,p.pro_name AS product_name,p.product_num,p.pro_img1 ,c.cart_cnt, p.pro_price * c.cart_cnt AS pro_price
+		select @ROWNUM := @ROWNUM + 1 AS rn ,cart_num ,p.pro_name AS product_name,p.product_num,p.pro_img1 ,c.cart_cnt, p.pro_price * c.cart_cnt AS pro_price
 		from cart c INNER JOIN product p
 		on p.product_num = c.product_num
-		where user_number = #{userNumber}
+		where user_number = #{userNumber} AND (@ROWNUM:=0)=0
 	</select>
 	
-	<update id="cartUpdate">
+	<update id="cartUpdate" parameterType="com.dj.shop.vo.CartVO">
 		update cart
-		SET cart_cnt = ${cartCnt}
-		WHERE cart_num = ${cartNum}
+		SET cart_cnt = #{cartCnt}
+		WHERE cart_num = #{cartNum}
 	</update>	
 	<delete id="cartDelete">
 	DELETE 
 	FROM cart
-	where cart_num = ${cartNum}
+	where cart_num = #{cartNum}
 	</delete>
 </mapper>
