@@ -30,7 +30,8 @@ public class CartController {
 	
 	@PostMapping("/add")
 	@ResponseBody
-	public int cartInsert(CartVO vo,UserVO uvo, HttpServletRequest request) {
+	public int cartInsert(@RequestParam("cnt") int cnt,
+			CartVO vo,UserVO uvo, HttpServletRequest request) {
 		String email = (String) request.getSession().getAttribute("email");
 		uvo = user.userSelect(email);
 		
@@ -38,6 +39,7 @@ public class CartController {
 			return 3;
 		}
 		vo.setUserNumber(uvo.getUserNumber());
+		vo.setCartCnt(cnt);
 		int result = cart.addCart(vo);
 		return result ;
 		
@@ -63,17 +65,23 @@ public class CartController {
 		return "pages/cartlist" ;	
 	}
 	@PostMapping("cartDelete")
-	public int cartListDelete(@RequestParam("email")String email,
-				UserVO uvo ,CartVO vo) {
-		uvo = user.userSelect(email);
-		int result = cart.cartDelete(vo.getCartNum());
-		return result;
-	
-	}
-	@PostMapping("cartUpdate")
-	public String cartListUpdate(UserVO uvo , CartVO vo,HttpServletRequest request) {
+	public String cartListDelete(CartVO vo,HttpServletRequest request) {
 		String email = (String) request.getSession().getAttribute("email");
-		System.out.println(vo.getCartCnt() + " " + vo.getCartNum());
+		cart.cartDelete(vo.getCartNum());
+		return "redirect:/cart/cartlist?email=" + email;	
+	}
+	
+	@PostMapping("cartDeleteAjax")
+	@ResponseBody
+	public int cartListDeleteAjax(@RequestParam("cartNum") int cartNum) {
+		
+		int result =cart.cartDelete(cartNum);
+		return result;	
+	}
+	
+	@PostMapping("cartUpdate")
+	public String cartListUpdate(CartVO vo,HttpServletRequest request) {
+		String email = (String) request.getSession().getAttribute("email");
 		cart.cartUpdate(vo);
 		return "redirect:/cart/cartlist?email=" + email;
 	

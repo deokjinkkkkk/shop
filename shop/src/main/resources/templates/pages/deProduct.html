@@ -95,7 +95,7 @@
 	                  <div class="product-page-cart">
 	                    <div class="product-quantity">
 	                    	
-	                        <input id="product-quantity" name="proCnt" type="text" value="1" readonly class="form-control">
+	                        <input id="cnt" name="proCnt" type="text" value="1" readonly class="form-control">
 	                    </div>
 	                    
 	                    <input type="hidden" th:value="${pr.productNum}" name="productNum" id="productNum">
@@ -179,13 +179,14 @@
       		
       	})
       	$("#cartBtn").click(function(e){
-      		var cnt = $("#product-quantity").val();
+      		var cnt = $("#cnt").val();
+      		console.log(cnt)
           	var productNumber = $("#productNum").val();
       		$.ajax({
       			url : '/cart/add',
       			type: 'POST',
       			data : {
-      				cartNum : cnt,
+      				cnt : cnt,
       				productNum : productNumber
       			},
       			success : function(result){

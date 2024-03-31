@@ -43,8 +43,8 @@
                       <div class="product-quantity">
                          <input id="proCnt" type="text" th:value="${cart.cartCnt}" readonly class="form-control input-sm">
                           <form action="/cart/cartUpdate" method="post" id="cartUpdate">
-                           	<input type="hidden" name="cartNum" th:value="${cart.cartNum}">
-                          	<input id="proCnt" name="cartCnt" type="hidden" th:value="${cart.cartCnt}" readonly> 
+                           	<input id="cartNum" type="hidden" name="cartNum" th:value="${cart.cartNum}">
+                          	<input id="cartCnt" name="cartCnt" type="hidden" th:value="${cart.cartCnt}" readonly> 
                           </form>
                         <a class="quantity_modify_btn" th:attr="data-id=${cart.cartNum}">변경</a>
                       </div>
@@ -53,13 +53,15 @@
                       <strong th:text="${cart.proPrice}"><span>원</span></strong>
                     </td>
                     <td class="del-goods-col">
-                      <a class="del-goods" href="javascript:;">&nbsp;</a>
+                      <a class="del-goods" th:attr="data-id=${cart.cartNum}">&nbsp;</a>
                     </td>
                   </tr>
                   
                 </table>
                 </div>
-
+				<form action="/cart/cartDelete" method="post" id="cartDelete">
+                  <input id="delCartNum" type="hidden" name="cartNum">
+                </form>
                 <div class="shopping-total">
                   <ul>
                     <li class="shopping-total-price">
@@ -81,9 +83,18 @@
 <script>
 $(".quantity_modify_btn").on("click",function(){
 	var cartId = $(this).data("id")
-	var count = $(this).parent("td").find("input").val();
+	var count = $(this).prev().prev().children('input').val()
+	console.log(count)
+	console.log(cartId)
+	$("#cartNum").val(cartId)
+	$("#cartCnt").val(count)
 	$("#cartUpdate").submit()
 })
-
+$(".del-goods").on("click",function(e){
+	e.preventDefault()
+	var cartId = $(this).data("id")
+	$('#delCartNum').val(cartId)
+	$('#cartDelete').submit()
+})
 </script>
 </html>

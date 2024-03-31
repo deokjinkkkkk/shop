@@ -53,23 +53,6 @@
 <!-- Body BEGIN -->
 <body class="ecommerce">
 <input type="hidden" th:value="${session.email}" id="userEmail">
-        <!-- BEGIN STYLE CUSTOMIZER -->
-    <div class="color-panel hidden-sm">
-      <div class="color-mode-icons icon-color"></div>
-      <div class="color-mode-icons icon-color-close"></div>
-      <div class="color-mode">
-        <p>THEME COLOR</p>
-        <ul class="inline">
-          <li class="color-red current color-default" data-style="red"></li>
-          <li class="color-blue" data-style="blue"></li>
-          <li class="color-green" data-style="green"></li>
-          <li class="color-orange" data-style="orange"></li>
-          <li class="color-gray" data-style="gray"></li>
-          <li class="color-turquoise" data-style="turquoise"></li>
-        </ul>
-      </div>
-    </div>
-    <!-- END BEGIN STYLE CUSTOMIZER --> 
 
     <!-- BEGIN TOP BAR -->
     <div class="pre-header">
@@ -136,9 +119,6 @@
             </li>
             
             <li class="dropdown dropdown100 nav-catalogue">
-              <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
-                새로 들어온 상품    
-              </a>
               <ul class="dropdown-menu">
                 <li>
                   <div class="header-navigation-content">
@@ -225,13 +205,11 @@
         
         function cartList(){
         	let user =$("#userEmail").val();
-        	console.log(user)
         	$.ajax({
         		url:'/cart/headlist',
         		type:'GET',
         		data:{ email : user},
         		success: function(data){
-        			console.log(data)
         			headCartList(data)
         			
         		}
@@ -241,17 +219,35 @@
         function headCartList(products){
         	var cartListHTML = '';
         	$.each(products,function(index,product){
-        		console.log(product)
         		cartListHTML +='<li>';
         		cartListHTML +='<a href="/product/detail?proNum='+product.productNum+'"><img src="/image/'+product.proImg1+'" alt="Rolex Classic Watch" width="37" height="34"></a>';
         		cartListHTML +='<span class="cart-content-count">x '+product.cartCnt+'</span>'
         		cartListHTML +='<strong><a href="/product/detail?proNum='+product.productNum+'">'+product.productName+'</a></strong>'
         		cartListHTML +='<em>'+product.proPrice+'</em>'
-        		cartListHTML +='<a href="javascript:void(0);" class="del-goods">&nbsp;</a>'
+        		cartListHTML +='<a class="del-goods" data-id="'+product.cartNum+'">&nbsp;</a>'
         		cartListHTML +='</li>'	
         	})
         	$(".scroller").html(cartListHTML);
         }
+        $(document).on("click", ".del-goods", function(e) {
+            e.preventDefault();
+            var num = $(this).data("id");
+            $.ajax({
+                url: '/cart/cartDeleteAjax',
+                type: 'POST',
+                data: { cartNum: num },
+                success: function(data) {
+                    console.log(data);
+                    if (data == 1) {
+                        $(this).closest('li').remove();
+                        cartList();
+                    } else {
+                        alert("삭제 실패 하였습니다.");
+                    }
+                }
+            });
+        });
+        	
         
         $(document).ready(function(){
         	cartList();

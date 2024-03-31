@@ -25,14 +25,7 @@ public class UserController {
 	@Autowired
 	EmailService emailService;
 	
-	@GetMapping("/myAddress")
-	public String myAddress(UserVO vo, HttpServletRequest request,Model model) {
-		String id = (String) request.getSession().getAttribute("id");
-		vo.setEmail(id);
-		userservice.userSelect(id);
-		model.addAttribute("userList", vo);
-		return "pages/myAddress";
-	}
+
 	
 	@PostMapping("/iaddress")
 	public String iaddress(UserVO vo, HttpServletRequest request,Model model) {
