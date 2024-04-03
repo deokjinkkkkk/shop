@@ -113,6 +113,12 @@ public class ProdcutController {
 		return "pages/updateProduct";			
 	}
 	
+	@GetMapping("/search")
+	public String searchForm() {
+		
+		return "pages/search";			
+	}
+	
 	@PostMapping("/productDelete")
 	public String delProduct(ProductVO vo ) {
 		productservice.deleteMarket(vo);

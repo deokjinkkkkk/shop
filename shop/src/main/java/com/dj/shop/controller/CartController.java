@@ -8,9 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -64,14 +62,14 @@ public class CartController {
 		model.addAttribute("cartList",cart.cartList(uvo.getUserNumber()));
 		return "pages/cartlist" ;	
 	}
-	@PostMapping("cartDelete")
+	@PostMapping("/cartDelete")
 	public String cartListDelete(CartVO vo,HttpServletRequest request) {
 		String email = (String) request.getSession().getAttribute("email");
 		cart.cartDelete(vo.getCartNum());
 		return "redirect:/cart/cartlist?email=" + email;	
 	}
 	
-	@PostMapping("cartDeleteAjax")
+	@PostMapping("/cartDeleteAjax")
 	@ResponseBody
 	public int cartListDeleteAjax(@RequestParam("cartNum") int cartNum) {
 		
@@ -79,7 +77,7 @@ public class CartController {
 		return result;	
 	}
 	
-	@PostMapping("cartUpdate")
+	@PostMapping("/cartUpdate")
 	public String cartListUpdate(CartVO vo,HttpServletRequest request) {
 		String email = (String) request.getSession().getAttribute("email");
 		cart.cartUpdate(vo);

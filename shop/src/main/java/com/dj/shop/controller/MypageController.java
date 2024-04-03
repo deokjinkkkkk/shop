@@ -30,4 +30,10 @@ public class MypageController {
 		model.addAttribute("userList", vo);
 		return "pages/myAddress";
 	}
+	
+	@GetMapping("/wishlist")
+	public String wishlist() {
+		
+		return "pages/wishlist";
+	}
 }
