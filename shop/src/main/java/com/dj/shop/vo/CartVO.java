@@ -17,4 +17,7 @@ public class CartVO {
     private int price ;//가격
     
     private int rn; //rownum 사용
+    
+    //상품 총가격
+    
 }

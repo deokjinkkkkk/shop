@@ -21,7 +21,9 @@ public class ProductVO{
 	Integer first;  //페이징 
 	Integer last;
 	
-	//카테고리네임
+	//카테고리
 	private String categoryName;
 	private int selected;
+	
+	//상품 카트 
 }

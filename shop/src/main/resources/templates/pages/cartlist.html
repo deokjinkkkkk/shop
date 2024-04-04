@@ -50,7 +50,7 @@
                       </div>
                     </td>
                     <td class="goods-page-price">
-                      <strong th:text="${cart.proPrice}"><span>원</span></strong>
+                      <strong th:text="${cart.proPrice}" id="total"><span>원</span></strong>
                     </td>
                     <td class="del-goods-col">
                       <a class="del-goods" th:attr="data-id=${cart.cartNum}">&nbsp;</a>
@@ -66,14 +66,19 @@
                   <ul>
                     <li class="shopping-total-price">
                       <em>Total</em>
-                      <strong class="price"><span>$</span>50.00</strong>
+                      <strong class="price"><span>원</span></strong>
                     </li>
                   </ul>
                 </div>
               </div>
               <input id="email" th:value="${session.email}" type="hidden">
+          	<form th:action="/order/${session.email}" method="get" class="order_form">
+				<input type="hidden" name="orders[0].bookId" value="${goodsInfo.bookId}">
+				<input type="hidden" name="orders[0].bookCount" value="">
+			</form>
+			<button type="button" class="btn_chk"></button>
               <button class="btn btn-default" type="submit">Continue shopping <i class="fa fa-shopping-cart"></i></button>
-              <button class="btn btn-primary" type="submit">Checkout <i class="fa fa-check"></i></button>
+              <button class="btn btn-primary" id="checkoutBtn" type="submit">Checkout <i class="fa fa-check"></i></button>
             </div>
           </div>
           <!-- END CONTENT -->
@@ -81,6 +86,13 @@
       </div>
     </div>
 <script>
+	$(document).ready(function(){
+		for(var i = 0; i <total.lenth(); i++){
+			
+		}
+		total
+  		$(".price").text()
+  	})
 $(".quantity_modify_btn").on("click",function(){
 	var cartId = $(this).data("id")
 	var count = $(this).prev().prev().children('input').val()
@@ -94,7 +106,12 @@ $(".del-goods").on("click",function(e){
 	e.preventDefault()
 	var cartId = $(this).data("id")
 	$('#delCartNum').val(cartId)
-	$('#cartDelete').submit()
-})
+	$('#cartDelete').submit()	
+})  
+
+   	$(".checkoutBtn").on("click",function(){
+   		
+   	})
+
 </script>
 </html>

@@ -94,12 +94,11 @@
 	                 
 	                  <div class="product-page-cart">
 	                    <div class="product-quantity">
-	                    	
 	                        <input id="cnt" name="proCnt" type="text" value="1" readonly class="form-control">
-	                    </div>
-	                    
+	                    </div>            
 	                    <input type="hidden" th:value="${pr.productNum}" name="productNum" id="productNum">
 	                    <button class="btn btn-primary" id="cartBtn" type="button">장바구니 담기</button>
+	                    <button class="btn btn-primary" id="orderBtn" type="button">주문하기</button>
 	                    <button class="btn btn-primary" th:if="${#strings.equals(session.roles,'[ROLE_ADMIN]')}" type="button" id="updateBtn">상품수정</button>
 	                    <button class="btn btn-primary" th:if="${#strings.equals(session.roles,'[ROLE_ADMIN]')}" type="button" id="deleteBtn">상품삭제</button>
 	                  </div> 
@@ -157,7 +156,11 @@
                     </div>
                   </div>
                 </div>
-
+					<!-- 주문 form -->
+			<form th:action="'/product/order/'+${session.email}" method="get" id="orderForm">
+				<input type="hidden" name="orders[0].productNum" th:value="${pro.productNum}">
+				<input type="hidden" name="orders[0].orderCnt" value="">
+			</form>
                 <div class="sticker sticker-sale"></div>
               </div>
             </div>
@@ -168,7 +171,11 @@
       </div>
    </div>
       <script>
-      	
+		$("#orderBtn").click("on",function(){
+			var proCount = $("#cnt").val()
+			$("#orderForm").find("input[name= 'orders[0].orderCnt']").val(proCount)
+			$("#orderForm").submit();
+		})
       	$("#updateBtn").click(function(){
       		var productNum = $("input[name=productNum]").val()
       		location.href = "/product/updateForm?productNum=" + productNum

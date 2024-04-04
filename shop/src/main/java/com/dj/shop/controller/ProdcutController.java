@@ -7,12 +7,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.dj.shop.service.ProductService;
+import com.dj.shop.vo.OrderPageVO;
 import com.dj.shop.vo.Pagination;
 import com.dj.shop.vo.ProductVO;
 
@@ -123,5 +125,12 @@ public class ProdcutController {
 	public String delProduct(ProductVO vo ) {
 		productservice.deleteMarket(vo);
 		return "redirect:/";			
+	}
+	
+	@GetMapping("/order/{email}")
+	public void orderPageForm(@PathVariable("email") String email,
+			OrderPageVO ovo) {
+		System.out.println("email : " + email);
+		System.out.println("orders :" + ovo.getOrders() );
 	}
 }
