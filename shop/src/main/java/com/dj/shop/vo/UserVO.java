@@ -18,7 +18,7 @@ public class UserVO implements UserDetails {
 	private String userPwd;
 	private String tel;
 	private String gender;
-	private String limit;
+	private String suspen;
 	private String signout;
 	private String roles;
 	@Override

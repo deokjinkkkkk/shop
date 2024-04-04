@@ -7,4 +7,6 @@ public interface UserService {
 	public int saveUser(UserVO vo); //회원가입
 	public boolean idCheck(String id); //아이디 중복체크
 	public boolean emailChk(String email);
+	
+	public UserVO getUserInfo(String email);
 }

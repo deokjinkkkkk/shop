@@ -157,7 +157,7 @@
                   </div>
                 </div>
 					<!-- 주문 form -->
-			<form th:action="'/product/order/'+${session.email}" method="get" id="orderForm">
+			<form th:action="'/order/'+${session.email}" method="get" id="orderForm">
 				<input type="hidden" name="orders[0].productNum" th:value="${pro.productNum}">
 				<input type="hidden" name="orders[0].orderCnt" value="">
 			</form>

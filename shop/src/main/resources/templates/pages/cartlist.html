@@ -24,7 +24,7 @@
             <div class="goods-page">
               <div class="goods-data clearfix">
                 <div class="table-wrapper-responsive">
-                <table summary="Shopping cart">
+                <table summary="Shopping cart" >
                   <tr>
                     <th class="goods-page-image">이미지</th>
                     <th class="goods-page-description">상품명</th>
@@ -32,7 +32,7 @@
                     <th class="goods-page-total" colspan="2">합계 금액</th>
                     <th >삭제</th>
                   </tr>
-                  <tr th:each="cart : ${cartList}" id="">
+                  <tr th:each="cart : ${cartList}" class="cart_info">
                     <td class="goods-page-image">
                       <a th:href="'/product/detail?productNum='+${cart.productNum}"><img th:src="'/image/'+${cart.proImg1}" alt="Berry Lace Dress"></a>
                     </td>
@@ -41,11 +41,7 @@
                     </td>
                     <td class="goods-page-quantity">
                       <div class="product-quantity">
-                         <input id="proCnt" type="text" th:value="${cart.cartCnt}" readonly class="form-control input-sm">
-                          <form action="/cart/cartUpdate" method="post" id="cartUpdate">
-                           	<input id="cartNum" type="hidden" name="cartNum" th:value="${cart.cartNum}">
-                          	<input id="cartCnt" name="cartCnt" type="hidden" th:value="${cart.cartCnt}" readonly> 
-                          </form>
+                         <input type="text" th:value="${cart.cartCnt}" readonly class="form-control input-sm">
                         <a class="quantity_modify_btn" th:attr="data-id=${cart.cartNum}">변경</a>
                       </div>
                     </td>
@@ -55,13 +51,28 @@
                     <td class="del-goods-col">
                       <a class="del-goods" th:attr="data-id=${cart.cartNum}">&nbsp;</a>
                     </td>
+                    <input type="hidden" id="productNum" th:value="${cart.productNum}">
+                    
+                    <!-- 수량 조정 form 태그 -->
+                    <form action="/cart/cartUpdate" method="post" id="cartUpdate">
+                         <input id="cartNum" type="hidden" name="cartNum" th:value="${cart.cartNum}">
+                         <input id="cartCnt" name="cartCnt" type="hidden" th:value="${cart.cartCnt}"> 
+                    </form>
+                    
+                    <!-- 삭제 form 태그 -->
+                    <form action="/cart/cartDelete" method="post" id="cartDelete">
+                 		 <input id="delCartNum" type="hidden" name="cartNum">
+                	</form>
+                	
+                	<!-- 주문 form 태그 -->
+               		<form th:action="'/order/'+${session.email}" method="get" class="order_form">
+				
+					</form>
                   </tr>
                   
                 </table>
                 </div>
-				<form action="/cart/cartDelete" method="post" id="cartDelete">
-                  <input id="delCartNum" type="hidden" name="cartNum">
-                </form>
+
                 <div class="shopping-total">
                   <ul>
                     <li class="shopping-total-price">
@@ -72,13 +83,10 @@
                 </div>
               </div>
               <input id="email" th:value="${session.email}" type="hidden">
-          	<form th:action="/order/${session.email}" method="get" class="order_form">
-				<input type="hidden" name="orders[0].bookId" value="${goodsInfo.bookId}">
-				<input type="hidden" name="orders[0].bookCount" value="">
-			</form>
-			<button type="button" class="btn_chk"></button>
+ 
+			
               <button class="btn btn-default" type="submit">Continue shopping <i class="fa fa-shopping-cart"></i></button>
-              <button class="btn btn-primary" id="checkoutBtn" type="submit">Checkout <i class="fa fa-check"></i></button>
+              <button class="btn btn-primary" id="checkoutBtn" type="button">Checkout <i class="fa fa-check"></i></button>
             </div>
           </div>
           <!-- END CONTENT -->
@@ -86,32 +94,61 @@
       </div>
     </div>
 <script>
-	$(document).ready(function(){
-		for(var i = 0; i <total.lenth(); i++){
-			
-		}
-		total
-  		$(".price").text()
-  	})
+$(document).ready(function(){
+	var totalprice = 0;
+		$("strong#total").each(function() {
+			var text = $(this).text().trim()
+			var numericValue = parseFloat(text)
+			if(!isNaN(numericValue)){
+				totalprice += numericValue
+			}
+		    
+		});
+
+	console.log()
+
+	$('.price').text(totalprice +"원");
+})
+	/*수량 조정*/
 $(".quantity_modify_btn").on("click",function(){
 	var cartId = $(this).data("id")
-	var count = $(this).prev().prev().children('input').val()
+	var count = $(this).prev().children('input').val()
 	console.log(count)
 	console.log(cartId)
 	$("#cartNum").val(cartId)
 	$("#cartCnt").val(count)
 	$("#cartUpdate").submit()
 })
+
+/*상품 삭제 */
 $(".del-goods").on("click",function(e){
 	e.preventDefault()
 	var cartId = $(this).data("id")
 	$('#delCartNum').val(cartId)
 	$('#cartDelete').submit()	
 })  
-
-   	$(".checkoutBtn").on("click",function(){
-   		
+/*주문 페이지 이동 */
+   	$("#checkoutBtn").on("click",function(){
+   		let contents ='';
+   		let orderNum = 0;
+   		$(".cart_info").each(function(index,element){
+   			let productNum = $(element).find("#productNum").val();
+   			let cartCnt =$(element).find("#cartCnt").val();
+   			
+   			let productNum_input = "<input name='orders[" + orderNum + "].productNum' type='hidden' value='"+productNum+"'>"
+   			let cartCnt_input = "<input name='orders[" + orderNum + "].proCnt' type='hidden' value='"+cartCnt+"'>"
+   			
+   			contents += productNum_input;
+   			contents += cartCnt_input;
+   			
+   			orderNum += 1;
+   		})
+   		console.log(contents)
+   		$(".order_form").html(contents)
+   		$(".order_form").submit()
+   	   	
    	})
+   	
 
 </script>
 </html>

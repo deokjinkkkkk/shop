@@ -127,10 +127,5 @@ public class ProdcutController {
 		return "redirect:/";			
 	}
 	
-	@GetMapping("/order/{email}")
-	public void orderPageForm(@PathVariable("email") String email,
-			OrderPageVO ovo) {
-		System.out.println("email : " + email);
-		System.out.println("orders :" + ovo.getOrders() );
-	}
+
 }

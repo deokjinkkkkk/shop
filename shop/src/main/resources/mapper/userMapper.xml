@@ -26,4 +26,10 @@
 		FROM USERS WHERE email = #{email}
 	</select>
 	
+	<select id="getUserInfo" resultType="com.dj.shop.vo.UserVO">
+		Select *
+		From users
+		where email = #{email}
+	</select>
+	
 </mapper>

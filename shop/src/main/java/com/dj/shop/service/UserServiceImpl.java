@@ -36,4 +36,10 @@ public class UserServiceImpl implements UserService{
 		return user.emailChk(email);
 	}
 
+	@Override
+	public UserVO getUserInfo(String email) {
+		// TODO Auto-generated method stub
+		return user.getUserInfo(email);
+	}
+
 }

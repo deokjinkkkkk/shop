@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dj.shop.mapper.OrderMapper">
+	<select id="getProductInfo" resultType="com.dj.shop.vo.OrderVO">
+		select product_num,pro_name,pro_price
+		from product
+		where product_num =#{productNum}
+	</select>
+
+</mapper>

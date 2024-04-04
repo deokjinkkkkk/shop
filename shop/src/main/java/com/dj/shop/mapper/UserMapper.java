@@ -8,5 +8,7 @@ public interface UserMapper {
 	int saveUser(UserVO vo); //회원가입
 	boolean idCheck(String id); //아이디 중복체크
 	boolean emailChk(String email); //이메일 확인
+	
+	UserVO getUserInfo(String email);
 			
 }
