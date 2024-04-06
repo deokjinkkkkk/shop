@@ -47,15 +47,11 @@
           
           <div class="col-md-9 col-sm-7" >
           <div class="create">
-             <form action="/user/iaddress" method="post" enctype="multipart/form-data">
-             	<div class="form-group">
-                    <label for="proName">배송지명</label>
-                    <input type="text" name="addName" class="form-control" required>
-                </div>
-                
+             <form action="/myPage/address/create" method="post" id="createAddressForm">
+            
                 <div class="form-group">
-                    <label for="proName">수령인</label>
-                    <input type="text" name="proName" class="form-control" required>
+                    <label for="addName">수령인</label>
+                    <input type="text" name="addName" class="form-control" required>
                 </div>
                 
 				<div class="form-group" >
@@ -69,23 +65,42 @@
 					<option value="018">018</option>	
 					<option value="019">019</option>	
 				</select>
-                    <input type="text" name="tel2" class="col-md-3 form-control" th:style="${'width: 33%'}" required>
-                    <input type="text" name="tel3" class="col-md-3 form-control" th:style="${'width: 33%'}" required>
+                    <input type="text" name="tel2" id="tel2"	class="col-md-3 form-control" th:style="${'width: 33%'}" required>
+                    <input type="text" name="tel3" id="tel3"	class="col-md-3 form-control" th:style="${'width: 33%'}" required>
+                    <input type="hidden" name="addTel" id="addTel" value="">
                 </div>
                 
                 <div class="form-group">
-                    <label for="proName">요청사항</label>
-                    <textarea class="form-control" rows="5" ></textarea>
+                    <label for="addReq">요청사항</label>
+                    <textarea class="form-control" rows="5" name="addReq"></textarea>
                 </div>          
                 <div class="form-group">
-                    <label for="proContent">배송지</label><br>
+                    <label for="Address">배송지</label><br>
                     <button type="button" class="btn btn-primary" id="zipSearch">우편번호찾기</button>
-                    <input type="text" id="addZip" name="addZip" class="form-control" placeholder="우편번호" disabled>                    
-                    <input type="text" id="addAddr" name="addAddr" class="form-control" placeholder="주소" required disabled>
+                    <input type="text" id="addZip" name="addZip" class="form-control" placeholder="우편번호" readonly>                    
+                    <input type="text" id="addAddr" name="addAddr" class="form-control" placeholder="주소"  readonly>
                     <input type="text" id="addAddr2" name="addAddr2" class="form-control" placeholder="상세주소" required>
                 </div>
             </form>
-            <button type="submit" class="btn btn-primary">주소지 등록</button>
+            <button type="button" class="btn btn-primary" id="createAddress">주소지 등록</button>
+            </div>
+            
+            <div class="list">
+             <div class="content-page" th:each="add : ${addressInfo}">
+              <h3>수령인 정보</h3>
+              <ul>
+                <li><span th:text="${add.addName}"></span></li>
+                <li><span th:text="${add.addTel}"></span></li>
+                <li><span th:text="${add.addReq}"></span></li>
+              </ul>
+              <hr>
+              <h3>배송지 정보</h3>
+              <ul>
+				<li><span th:text="${add.addZip}"></span></li>
+                <li><span th:text="${add.addAddr}"></span></li>
+                <li><span th:text="${add.addAddr2}"></span></li>
+              </ul>
+             </div>
             </div>
           	<button type="button" class="btn btn-primary" id="addressCreate" onclick="showAddress('2')">주소지 생성</button>
          	<button type="button" class="btn btn-primary" id="addressList" onclick="showAddress('1')">주소지 목록</button>
@@ -100,24 +115,37 @@
     </div>
     <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script>
+    $(document).ready(function(){
+    	$(".create").css('display', 'none');
+    	$("#addressList").css('display', 'none');
+    })
     function showAddress(page){
     	//주소지 등록 페이지 보이기
     	if(page == 1){
     		$(".create").css('display', 'none');
+    		$(".list").css('display', 'block');
     		$("#addressList").css('display', 'none')
     		$("#addressCreate").css('display', 'block');
     	}else{
     		$(".create").css('display', 'block');
+    		$(".list").css('display', 'none');
     		$("#addressCreate").css('display', 'none');
-    		$("#addressList").css('display', 'block')
+    		$("#addressList").css('display', 'block');
     		
     	}
     	
-    	//주소지 목록 페이지 보이기
-    	
+    	//주소지 목록 페이지 보이기 	
     }
+    $("#createAddress").on('click',function(){
+    	var tel1 = 	$("#tel1").val();
+    	var tel2 =	$("#tel2").val();
+    	var tel3 =	$("#tel3").val();
+    	var realtel =tel1  + tel2 + tel3;
+    	$("addTel").val(realtel);
+    	createAddressForm.submit();
+    })
     $("#zipSearch").on('click',function(){
-    	zipAddressSearch()
+    	zipAddressSearch();
     })
     //우편번호 api 
     function zipAddressSearch(){

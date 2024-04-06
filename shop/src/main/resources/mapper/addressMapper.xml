@@ -1,3 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="mapper.addressMapper"></mapper>
+<mapper namespace="com.dj.shop.mapper.AddressMapper">
+	<select id="getAddressInfo" resultType="com.dj.shop.vo.AddressVO">
+	Select *
+	From address
+	Where user_number = #{userNumber}
+	</select>
+	
+	<insert id="createAddress">
+	insert into address(user_number,add_name,add_zip,add_addr,add_addr2,add_tel,add_req)
+	values(#{userNumber},#{addName},#{addZip},#{addAddr},#{addAddr2},#{addTel},#{addReq})
+	</insert>
+	
+	<update id="updateAddress" >
+	
+	</update>
+	
+	<delete id="deleteAddress">
+	
+	</delete>
+</mapper>
