@@ -142,7 +142,9 @@ $(".del-goods").on("click",function(e){
    			
    			orderNum += 1;
    		})
-   		console.log(contents)
+   		if(!contents){
+   			alert("상품이 존재 하지 않습니다.")
+   		}
    		$(".order_form").html(contents)
    		$(".order_form").submit()
    	   	

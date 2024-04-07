@@ -87,7 +87,7 @@
 		            <input type="text" id="addAddr2" name="addAddr2" class="form-control" placeholder="상세주소" required>
 		        </div>
 		    </form>
-		    <button type="submit" class="btn btn-primary" id="createAddress" form="createAddressForm">주소지 등록</button>
+		    <button type="submit" class="btn btn-primary" id="createAddress">주소지 등록</button>
 		    </div>
 		</div>
             
@@ -110,17 +110,19 @@
 			         <li class="list-group-item">상세주소: <span th:text="${add.addAddr2}"></span></li>
 			        </ul>
 			       <button type="button" class="btn btn-primary mt-3" id="addressDelete" th:attr="data-id=${add.addNum}">주소지 삭제</button>
+			       <!--  <button type="submit" class="btn btn-primary" id="addressUpdate" th:attr="data-id=${add.addNum}">주소지 수정</button> -->
 			     </div>
 			    </div>
 			   </div>
 			</div>
            </div>
-          	<button type="button" class="btn btn-primary" id="addressCreate" onclick="showAddress('2')">주소지 생성</button>
+          	<button type="button" class="btn btn-primary" th:if="${addressInfo} == null" id="addressCreate" onclick="showAddress('2')">주소지 생성</button>
          	<button type="button" class="btn btn-primary" id="addressList" onclick="showAddress('1')">주소지 목록</button>
           </div>
           <form action="/myPage/address/delete" method="POST" id="deleteAddressForm">
               <input type="hidden" name="addNum" id="addNum">
           </form>
+          
 
           <!-- END CONTENT -->
           
@@ -135,6 +137,12 @@
     	$("#addressList").css('display', 'none');
     })
     $("#addressDelete").on('click',function(){
+    	var addNum = $(this).data("id")
+    	$("#addNum").val(addNum);
+    	$("#deleteAddressForm").submit();
+    })
+    
+    $("#addressUpdate").on('click',function(){
     	var addNum = $(this).data("id")
     	$("#addNum").val(addNum);
     	$("#deleteAddressForm").submit();
@@ -161,7 +169,7 @@
     	var tel2 =	$("#tel2").val();
     	var tel3 =	$("#tel3").val();
     	var realtel =tel1  + tel2 + tel3;
-    	$("addTel").val(realtel);
+    	$("#addTel").val(realtel);
     	createAddressForm.submit();
     })
     $("#zipSearch").on('click',function(){

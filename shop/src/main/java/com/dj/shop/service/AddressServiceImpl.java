@@ -21,7 +21,7 @@ public class AddressServiceImpl implements AddressService{
 	}
 
 	@Override
-	public List<AddressVO> getAddressInfo(int usernumber) {
+	public AddressVO getAddressInfo(int usernumber) {
 		
 		return address.getAddressInfo(usernumber);
 	}

@@ -43,7 +43,6 @@ public class MypageController {
 		int usernumber = uvo.getUserNumber();
 		
 		avo.setUserNumber(usernumber);
-		System.out.println(avo);
 		addressService.createAddress(avo);
 		return "redirect:/myPage/myAddress";
 	}
