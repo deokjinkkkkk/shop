@@ -48,6 +48,12 @@ public class MypageController {
 		return "redirect:/myPage/myAddress";
 	}
 	
+	@PostMapping("/address/delete")
+	public String deleteCreate(AddressVO avo) {
+
+		addressService.deleteAddress(avo);
+		return "redirect:/myPage/myAddress";
+	}
 	@GetMapping("/wishlist")
 	public String wishlist() {
 		

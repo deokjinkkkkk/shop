@@ -47,65 +47,80 @@
           
           <div class="col-md-9 col-sm-7" >
           <div class="create">
-             <form action="/myPage/address/create" method="post" id="createAddressForm">
-            
-                <div class="form-group">
-                    <label for="addName">수령인</label>
-                    <input type="text" name="addName" class="form-control" required>
-                </div>
-                
-				<div class="form-group" >
-                    <label for="tel" th:style="${'width: 100%'}">연락처</label>
-                <select id="tel1" class="col-md-3 form-control" th:style="${'width: 34%'}">
-					<option value diasbled>선택해 주세요</option>
-					<option value="010">010</option>
-					<option value="011">011</option>
-					<option value="016">016</option>	
-					<option value="017">017</option>	
-					<option value="018">018</option>	
-					<option value="019">019</option>	
-				</select>
-                    <input type="text" name="tel2" id="tel2"	class="col-md-3 form-control" th:style="${'width: 33%'}" required>
-                    <input type="text" name="tel3" id="tel3"	class="col-md-3 form-control" th:style="${'width: 33%'}" required>
-                    <input type="hidden" name="addTel" id="addTel" value="">
-                </div>
-                
-                <div class="form-group">
-                    <label for="addReq">요청사항</label>
-                    <textarea class="form-control" rows="5" name="addReq"></textarea>
-                </div>          
-                <div class="form-group">
-                    <label for="Address">배송지</label><br>
-                    <button type="button" class="btn btn-primary" id="zipSearch">우편번호찾기</button>
-                    <input type="text" id="addZip" name="addZip" class="form-control" placeholder="우편번호" readonly>                    
-                    <input type="text" id="addAddr" name="addAddr" class="form-control" placeholder="주소"  readonly>
-                    <input type="text" id="addAddr2" name="addAddr2" class="form-control" placeholder="상세주소" required>
-                </div>
-            </form>
-            <button type="button" class="btn btn-primary" id="createAddress">주소지 등록</button>
-            </div>
+           <div class="container">
+		    <form action="/myPage/address/create" method="post" id="createAddressForm">
+		     <div class="form-group">
+		      <label for="addName">수령인</label>
+		       <input type="text" name="addName" class="form-control" id="addName" required>
+		     </div>
+		        
+		     <div class="form-group">
+		      <label for="tel">연락처</label>
+		       <div class="input-group">
+		        <select id="tel1" class="form-control col-md-4" aria-label="Telephone prefix">
+		         <option selected disabled>선택해 주세요</option>
+		          <option value="010">010</option>
+		                    <option value="011">011</option>
+		                    <option value="016">016</option>    
+		                    <option value="017">017</option>    
+		                    <option value="018">018</option>    
+		                    <option value="019">019</option>    
+		                </select>
+		                <input type="text" name="tel2" id="tel2" class="form-control col-md-4" required>
+		                <input type="text" name="tel3" id="tel3" class="form-control col-md-4" required>
+		            </div>
+		        </div>
+		        
+		        <div class="form-group">
+		            <label for="addReq">요청사항</label>
+		            <textarea class="form-control" rows="5" name="addReq" id="addReq"></textarea>
+		        </div>          
+		        <div class="form-group">
+		            <label for="Address">배송지</label>
+		            <div class="input-group">
+		                <input type="text" id="addZip" name="addZip" class="form-control" placeholder="우편번호" readonly>
+		                <div class="input-group-append">
+		                    <button type="button" class="btn btn-primary" id="zipSearch">우편번호 찾기</button>
+		                </div>
+		            </div>
+		            <input type="text" id="addAddr" name="addAddr" class="form-control mb-2" placeholder="주소" readonly>                    
+		            <input type="text" id="addAddr2" name="addAddr2" class="form-control" placeholder="상세주소" required>
+		        </div>
+		    </form>
+		    <button type="submit" class="btn btn-primary" id="createAddress" form="createAddressForm">주소지 등록</button>
+		    </div>
+		</div>
             
             <div class="list">
-             <div class="content-page" th:each="add : ${addressInfo}">
-              <h3>수령인 정보</h3>
-              <ul>
-                <li><span th:text="${add.addName}"></span></li>
-                <li><span th:text="${add.addTel}"></span></li>
-                <li><span th:text="${add.addReq}"></span></li>
-              </ul>
-              <hr>
-              <h3>배송지 정보</h3>
-              <ul>
-				<li><span th:text="${add.addZip}"></span></li>
-                <li><span th:text="${add.addAddr}"></span></li>
-                <li><span th:text="${add.addAddr2}"></span></li>
-              </ul>
-             </div>
-            </div>
+             <div class="container">
+			   <div class="content-page" th:each="add : ${addressInfo}">
+			    <div class="card">
+			     <div class="card-body">
+			      <h3 class="card-title">수령인 정보</h3>
+			        <ul class="list-group list-group-flush">
+			          <li class="list-group-item">이름: <span th:text="${add.addName}"></span></li>
+			          <li class="list-group-item">전화번호: <span th:text="${add.addTel}"></span></li>
+			          <li class="list-group-item">요청사항: <span th:text="${add.addReq}"></span></li>
+			        </ul>
+			        <hr>
+			       <h3 class="card-title">배송지 정보</h3>
+			        <ul class="list-group list-group-flush">
+			         <li class="list-group-item">우편번호: <span th:text="${add.addZip}"></span></li>
+			         <li class="list-group-item">주소: <span th:text="${add.addAddr}"></span></li>
+			         <li class="list-group-item">상세주소: <span th:text="${add.addAddr2}"></span></li>
+			        </ul>
+			       <button type="button" class="btn btn-primary mt-3" id="addressDelete" th:attr="data-id=${add.addNum}">주소지 삭제</button>
+			     </div>
+			    </div>
+			   </div>
+			</div>
+           </div>
           	<button type="button" class="btn btn-primary" id="addressCreate" onclick="showAddress('2')">주소지 생성</button>
          	<button type="button" class="btn btn-primary" id="addressList" onclick="showAddress('1')">주소지 목록</button>
           </div>
-          
+          <form action="/myPage/address/delete" method="POST" id="deleteAddressForm">
+              <input type="hidden" name="addNum" id="addNum">
+          </form>
 
           <!-- END CONTENT -->
           
@@ -118,6 +133,11 @@
     $(document).ready(function(){
     	$(".create").css('display', 'none');
     	$("#addressList").css('display', 'none');
+    })
+    $("#addressDelete").on('click',function(){
+    	var addNum = $(this).data("id")
+    	$("#addNum").val(addNum);
+    	$("#deleteAddressForm").submit();
     })
     function showAddress(page){
     	//주소지 등록 페이지 보이기

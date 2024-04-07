@@ -17,6 +17,8 @@
 	</update>
 	
 	<delete id="deleteAddress">
+	Delete FROM address
+	where add_num = #{addNum}
 	
 	</delete>
 </mapper>

@@ -113,8 +113,7 @@ $(document).ready(function(){
 $(".quantity_modify_btn").on("click",function(){
 	var cartId = $(this).data("id")
 	var count = $(this).prev().children('input').val()
-	console.log(count)
-	console.log(cartId)
+	
 	$("#cartNum").val(cartId)
 	$("#cartCnt").val(count)
 	$("#cartUpdate").submit()
