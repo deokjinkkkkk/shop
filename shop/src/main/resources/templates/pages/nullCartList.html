@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layouts/layout}"
+      layout:fragment="Content">
+<head>
+      <!--Common Head-->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="viewport"
+              content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0"/>
+        <title>마이페이지</title>
+ </head>
+ 
+   <div class="main">
+    <div class="container">
+     <!-- BEGIN SIDEBAR & CONTENT -->
+      <div class="row margin-bottom-40">
+       <!-- BEGIN CONTENT -->
+        <div class="col-md-12 col-sm-12">
+         <h1>장바구니</h1>
+          <div class="shopping-cart-page">
+           <div class="shopping-cart-data clearfix">
+            <p>장바구니가 비어있습니다.</p>
+           </div>
+          </div>
+        </div> 
+      </div>
+     </div>
+   </div>
+        
+<script>
+$(document).ready(function(){
+	var totalprice = 0;
+		$("strong#total").each(function() {
+			var text = $(this).text().trim()
+			var numericValue = parseFloat(text)
+			if(!isNaN(numericValue)){
+				totalprice += numericValue
+			}
+		    
+		});
+
+	console.log()
+
+	$('.price').text(totalprice +"원");
+})
+	/*수량 조정*/
+$(".quantity_modify_btn").on("click",function(){
+	var cartId = $(this).data("id")
+	var count = $(this).prev().children('input').val()
+	
+	$("#cartNum").val(cartId)
+	$("#cartCnt").val(count)
+	$("#cartUpdate").submit()
+})
+
+/*상품 삭제 */
+$(".del-goods").on("click",function(e){
+	e.preventDefault()
+	var cartId = $(this).data("id")
+	$('#delCartNum').val(cartId)
+	$('#cartDelete').submit()	
+})  
+/*주문 페이지 이동 */
+   	$("#checkoutBtn").on("click",function(){
+   		let contents ='';
+   		let orderNum = 0;
+   		$(".cart_info").each(function(index,element){
+   			let productNum = $(element).find("#productNum").val();
+   			let cartCnt =$(element).find("#cartCnt").val();
+   			
+   			let productNum_input = "<input name='orders[" + orderNum + "].productNum' type='hidden' value='"+productNum+"'>"
+   			let cartCnt_input = "<input name='orders[" + orderNum + "].proCnt' type='hidden' value='"+cartCnt+"'>"
+   			
+   			contents += productNum_input;
+   			contents += cartCnt_input;
+   			
+   			orderNum += 1;
+   		})
+   		if(!contents){
+   			alert("상품이 존재 하지 않습니다.")
+   		}
+   		$(".order_form").html(contents)
+   		$(".order_form").submit()
+   	   	
+   	})
+   	
+
+</script>
+</html>

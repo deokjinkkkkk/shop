@@ -69,7 +69,7 @@
                         <li th:if="${session.roles != null}"><a href="/myPage/wishlist">My Wishlist</a></li>
                         <li th:if="${session.roles != null}"><a href="shop-checkout.html">Checkout</a></li>
                         <li th:if="${session.roles == null}"><a href="/login">Log In</a></li>
-                        <li th:if="${session.roles != null}"><a href="/logout" >Log out</a></li>
+                        <li th:if="${session.roles != null}"><a href="/logout" >Logout</a></li>
                     </ul>
                 </div>
                 <!-- END TOP BAR MENU -->
@@ -139,11 +139,9 @@
               </ul>
             </li>
             <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
-                마이페이지
-                
-              </a>
-                
+              <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">마이페이지</a>
+           
+               
               <ul class="dropdown-menu">
                 <li><a href="shop-checkout.html">주문현황</a></li>
                 <li><a href="/myPage/myAddress">주소목록</a></li>
@@ -151,10 +149,8 @@
                 <li><a href="/review/list">리뷰게시판</a></li>
               </ul>
             </li>
-            
-            
-            <li><a href="/product/admin">관리자 페이지</a></li>
-
+             <li><a href="/product/admin">관리자 페이지</a></li>
+           
             <!-- BEGIN TOP SEARCH -->
             <li class="menu-search">
               <span class="sep"></span>
@@ -177,7 +173,7 @@
       </div>
     </div>
     <!-- Header END -->
-
+	 <!-- 주문페이지 이동 폼 -->
     <!-- END TOP BAR -->
       <![endif]-->
     <script th:src="@{/assets/plugins/jquery.min.js}" type="text/javascript"></script>

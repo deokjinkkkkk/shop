@@ -31,7 +31,7 @@ public class OrderController {
 			OrderPageVO ovo,Model model,UserVO vo) {
 		vo = userService.getUserInfo(email);
 		int userNumber = vo.getUserNumber();
-		System.out.println(userNumber);
+		
 		model.addAttribute("orderList",orderservice.getProductInfo(ovo.getOrders()));
 		model.addAttribute("userInfo", vo);
 		model.addAttribute("addressInfo",addressService.getAddressInfo(userNumber));

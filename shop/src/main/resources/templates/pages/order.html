@@ -180,33 +180,22 @@
                           <th class="checkout-description">상품명</th>
                           <th class="checkout-quantity">상품수량</th>
                           <th class="checkout-price">상품 가격</th>
-                          <th class="checkout-total">합계 가격</th>
+                          <th class="checkout-price">합계 가격</th>
                         </tr>
-                        <tr>
-                          <td class="checkout-image">
-                            <a href="javascript:;"><img src="assets/pages/img/products/model3.jpg" alt="Berry Lace Dress"></a>
-                          </td>
-                          <td class="checkout-description">
-                            <h3><a href="javascript:;">Cool green dress with red bell</a></h3>
-                            <p><strong>Item 1</strong> - Color: Green; Size: S</p>
-                            <em>More info is here</em>
-                          </td>
-                          <td class="checkout-quantity">1</td>
-                          <td class="checkout-price"><strong><span>$</span>47.00</strong></td>
-                          <td class="checkout-total"><strong><span>$</span>47.00</strong></td>
-                        </tr>
-                        <tr>
-                          <td class="checkout-image">
-                            <a href="javascript:;"><img src="assets/pages/img/products/model4.jpg" alt="Berry Lace Dress"></a>
-                          </td>
-                          <td class="checkout-description">
-                            <h3><a href="javascript:;">Cool green dress with red bell</a></h3>
-                            <p><strong>Item 1</strong> - Color: Green; Size: S</p>
-                            <em>More info is here</em>
-                          </td>
-                          <td class="checkout-quantity">1</td>
-                          <td class="checkout-price"><strong><span>$</span>47.00</strong></td>
-                          <td class="checkout-total"><strong><span>$</span>47.00</strong></td>
+                        <tr th:each="order : ${orderList}">
+                         <td class="goods-page-image">
+                      <a th:href="'/product/detail?productNum='+${order.productNum}"><img th:src="'/image/'+${order.proImg1}"></a>
+                    </td>
+                    <td class="goods-page-description">
+                      <h3><a th:href="'/product/detail?productNum='+${order.productNum}" th:text="${order.proName}"></a></h3>
+                    </td>
+					<td class="checkout-quantity" th:text="${order.proCnt}"></td>
+					<td class="goods-page-price">
+                      <strong th:text="${order.proPrice}" id="total"><span>원</span></strong>
+                    </td>
+                    <td class="goods-page-price">
+                      <strong th:text="${order.proPrice}" id="total"><span>원</span></strong>
+                    </td>
                         </tr>
                       </table>
                       </div>

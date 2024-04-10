@@ -8,9 +8,9 @@ public class OrderVO {
 	private int productNum;
 	private int proCnt;
 	//DB로 꺼내올 값
-	private String name; //상품 이름
+	private String proName; //상품 이름
 	private int proPrice;
 	
-	
+	private String proImg1;
 	
 }

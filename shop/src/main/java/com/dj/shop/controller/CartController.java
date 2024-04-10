@@ -58,8 +58,15 @@ public class CartController {
 							Model model,UserVO uvo) {
 		uvo.setEmail(email);
 		uvo = user.userSelect(email);
-		
-		model.addAttribute("cartList",cart.cartList(uvo.getUserNumber()));
+		if(uvo == null) {
+			return "redirect:/";
+		}
+		List<CartVO> result = cart.cartList(uvo.getUserNumber());
+		System.out.println(result);
+		if(result.isEmpty()) {
+			return "pages/nullCartList";
+		}
+		model.addAttribute("cartList", result);
 		return "pages/cartlist" ;	
 	}
 	@PostMapping("/cartDelete")

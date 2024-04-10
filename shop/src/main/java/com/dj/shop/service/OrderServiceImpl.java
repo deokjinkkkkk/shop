@@ -30,4 +30,25 @@ public class OrderServiceImpl implements OrderService {
 		return result;
 	}
 
+
+	@Override
+	public int insertOrder(OrderVO vo) {
+		// TODO Auto-generated method stub
+		return order.insertOrder(vo);
+	}
+
+
+	@Override
+	public int deleteOrder(int OrderNum) {
+		// TODO Auto-generated method stub
+		return order.deleteOrder(OrderNum);
+	}
+
+
+	@Override
+	public int updateOrder(OrderVO vo) {
+		// TODO Auto-generated method stub
+		return order.updateOrder(vo);
+	}
+
 }
