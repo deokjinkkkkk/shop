@@ -108,27 +108,26 @@
                         <label for="telephone-dd">전화번호 <span class="require">*</span></label>
                         <input type="text" id="telephone-dd" class="form-control" th:value="${addressInfo.addTel}">
                       </div>
-                      
+                     
 
                     </div>
                     <div class="col-md-6 col-sm-6">
                       <div class="form-group">
                         <label for="post-code-dd">우편번호 <span class="require">*</span></label>
-                        <input type="text" id="post-code-dd" class="form-control" th:value="${addressInfo.addZip}">
+                        <input type="text"  class="form-control" id="addZip" th:value="${addressInfo.addZip}">
+		                    <button type="button" class="btn btn-primary" id="zipSearch">우편번호 찾기</button>
                       </div>
                       <div class="form-group">
                         <label for="address1-dd">주소</label>
-                        <input type="text" id="address1-dd" class="form-control" th:value="${addressInfo.addAddr}">
+                        <input type="text"  class="form-control" id="addAddr" th:value="${addressInfo.addAddr}">
                       </div>
                       <div class="form-group">
                         <label for="address2-dd">상세주소</label>
-                        <input type="text" id="address2-dd" class="form-control" th:value="${addressInfo.addAddr2}">
+                        <input type="text"  class="form-control" id="addAddr2" th:value="${addressInfo.addAddr2}">
                       </div>
-
-    
                     </div>
                     <div class="col-md-12">
-                      <button class="btn btn-primary  pull-right" type="submit" id="button-shipping-address" data-toggle="collapse" data-parent="#checkout-page" data-target="#shipping-method-content">Continue</button>
+                      <button class="btn btn-primary  pull-right" type="submit"  id="button-shipping-address" data-toggle="collapse" data-parent="#checkout-page" data-target="#shipping-method-content">Continue</button>
                     </div>
                   </div>
                 </div>
@@ -191,10 +190,10 @@
                     </td>
 					<td class="checkout-quantity" th:text="${order.proCnt}"></td>
 					<td class="goods-page-price">
-                      <strong th:text="${order.proPrice}" id="total"><span>원</span></strong>
+                      <strong th:text="${order.proPrice}" id="price"><span>원</span></strong>
                     </td>
-                    <td class="goods-page-price">
-                      <strong th:text="${order.proPrice}" id="total"><span>원</span></strong>
+                    <td class="goods-page-totalPrice">
+                      <strong id="oneTotalPrice"><span>원</span></strong>
                     </td>
                         </tr>
                       </table>
@@ -202,14 +201,22 @@
                       <div class="checkout-total-block">
                         <ul>
                           <li class="checkout-total-price">
-                            <em>Total</em>
-                            <strong class="price"><span>$</span>56.00</strong>
+                            <em>총 가격</em>
+                            <strong class="totalPrice"><span>원</span></strong>
+                          </li>
+                          <li class="checkout-total-price">
+                            <em>배송비</em>
+                            <strong class="deliveryPrice"><span>원</span></strong>
+                          </li>
+                          <li class="checkout-total-price">
+                            <em>최종가격</em>
+                            <strong class="finalPrice"><span>원</span></strong>
                           </li>
                         </ul>
                       </div>
                       <div class="clearfix"></div>
-                      <button class="btn btn-primary pull-right" type="submit" id="button-confirm">Confirm Order</button>
-                      <button type="button" class="btn btn-default pull-right margin-right-20">Cancel</button>
+                      <button class="btn btn-primary pull-right" type="submit" id="button-confirm">결제 하기</button>
+                      <button type="button" class="btn btn-default pull-right margin-right-20">취소</button>
                     </div>
                   </div>
                 </div>
@@ -224,16 +231,91 @@
       </div>
     </div>
     
-    <div th:text="${orderList}">
-    
-    </div>
-    <div th:text="${userInfo}">
-    
-    </div>
     <div>
     
     </div>
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script type="text/javascript">
-
+    $("#zipSearch").on('click',function(){
+    	zipAddressSearch();
+    })
+    
+    $(document).ready(function(){
+    	setPrice()
+    })
+    function setPrice() {
+    	let totalPrice = 0; //총 가격
+    	let deliveryPrice = 0;// 배송비 
+    	let finalPrice = 0;//최종 가격
+    	$('.goods-page-price').each(function(index,element){
+    		totalPrice += parseInt($(element).find('#oneTotalPrice').text());
+    	});
+    	
+    	if(totalPrice => 30000){
+    		deliveryPrice = 0;
+    	}else if(totalPrice == 0){
+    		deilveryPrice = 0;
+    	}else{
+    		deliveryPrice = 3000;
+    	}
+    	finalPrice = deliveryPrice + totalPrice;
+    	
+    	$('.totalPrice').text(totalPrice)
+    	$('.deliveryPrice').text(deliveryPrice)
+    	$('.finalPrice').text(finalPrice)
+    	
+    	
+    }
+    
+   	/* 우편번호 api */
+    function zipAddressSearch(){
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+            	// 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var addr = ''; // 주소 변수
+                var extraAddr = ''; // 참고항목 변수
+ 
+                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                    addr = data.roadAddress;
+                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                    addr = data.jibunAddress;
+                }
+ 
+                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+                if(data.userSelectedType === 'R'){
+                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                        extraAddr += data.bname;
+                    }
+                    // 건물명이 있고, 공동주택일 경우 추가한다.
+                    if(data.buildingName !== '' && data.apartment === 'Y'){
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                    if(extraAddr !== ''){
+                        extraAddr = ' (' + extraAddr + ')';
+                    }
+                    // 조합된 참고항목을 해당 필드에 넣는다.
+                   addr += extraAddr;
+                
+                } else {
+                    document.getElementById("sample6_extraAddress").value = '';
+                }
+ 
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('addZip').value = data.zonecode;
+                document.getElementById("addAddr").value = addr;
+                // 커서를 상세주소 필드로 이동한다.
+                document.getElementById("addAddr2").focus();
+ 
+     
+            }
+        }).open();  
+    }
+    
     </script>
 </html>
