@@ -5,15 +5,25 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.dj.shop.mapper.CartMapper;
 import com.dj.shop.mapper.OrderMapper;
+import com.dj.shop.mapper.ProductMapper;
 import com.dj.shop.vo.OrderVO;
+import com.dj.shop.vo.OrdersItemVO;
+import com.dj.shop.vo.OrdersVO;
 @Service
 public class OrderServiceImpl implements OrderService {
 	
 	@Autowired
-	OrderMapper order ;
+	OrderMapper order;
 	
+	@Autowired
+	CartMapper cart;
+	
+	@Autowired
+	ProductMapper product;
 	
 	@Override
 	public List<OrderVO> getProductInfo(List<OrderVO> orders) {
@@ -32,23 +42,12 @@ public class OrderServiceImpl implements OrderService {
 
 
 	@Override
-	public int insertOrder(OrderVO vo) {
-		
-		return order.insertOrder(vo);
-	}
-
-
-	@Override
-	public int deleteOrder(int OrderNum) {
-		
-		return order.deleteOrder(OrderNum);
-	}
-
-
-	@Override
-	public int updateOrder(OrderVO vo) {
-		
-		return order.updateOrder(vo);
+	@Transactional
+	public void order(OrdersVO ord) {
+		List<OrdersItemVO> orders =new ArrayList<OrdersItemVO>();
+		for(OrdersItemVO ori = ord.getOrders()) {
+			
+		}
 	}
 
 }

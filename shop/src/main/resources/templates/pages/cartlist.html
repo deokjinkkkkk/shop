@@ -61,11 +61,12 @@
                     <!-- 삭제 form 태그 -->
                     <form action="/cart/cartDelete" method="post" id="cartDelete">
                  		 <input id="delCartNum" type="hidden" name="cartNum">
+                 		 <input name="">
                 	</form>
                 	
                 	<!-- 주문 form 태그 -->
                		<form th:action="'/order/'+${session.email}" method="get" class="order_form">
-				
+						
 					</form>
                   </tr>
                   

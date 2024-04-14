@@ -28,4 +28,11 @@
 	FROM cart
 	where cart_num = #{cartNum}
 	</delete>
+	
+	<delete id="cartOrderDelete">
+	DELETE 
+	FROM cart
+	where user_number = #{userNumber} AND product_num = #{productNum}
+	
+	</delete>
 </mapper>

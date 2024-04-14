@@ -6,5 +6,21 @@
 		from product
 		where product_num =#{productNum}
 	</select>
-
+	
+	
+	<select id="getOrderInfo">
+	select product_num,pro_price
+	from product
+	where product_num =#{productNum}
+	</select>
+	
+	<insert id="insertOrder">
+	insert into orders(order_num,order_date,order_state,order_zip,order_add1,order_add2,tel,name,order_req)
+	values(#{orderNum},sysout(),'배송준비',#{orderZip},#{orderAdd1},#{orderAdd2},#{tel},#{name},#{orderReq})
+	</insert>
+	
+	<insert id="insertOrderItem">
+	insert into orderItem(order_dnum,order_num,product_num,order_price,order_cnt)
+	values(#{orderDnum},#{orderNum},#{productNum},#{orderPrice},#{orderCnt})
+	</insert>
 </mapper>
