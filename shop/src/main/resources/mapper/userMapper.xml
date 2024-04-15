@@ -29,7 +29,7 @@
 	<select id="getUserInfo" resultType="com.dj.shop.vo.UserVO">
 		Select *
 		From users
-		where email = #{email}
+		where user_number = #{userNumber}
 	</select>
 	
 </mapper>

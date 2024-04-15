@@ -8,5 +8,5 @@ public interface UserService {
 	public boolean idCheck(String id); //아이디 중복체크
 	public boolean emailChk(String email);
 	
-	public UserVO getUserInfo(String email);
+	public UserVO getUserInfo(int userNumber);
 }
