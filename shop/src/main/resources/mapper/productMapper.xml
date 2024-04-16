@@ -33,7 +33,7 @@
 		) b
 		WHERE b.rn BETWEEN #{first} AND #{last}
 	</select>
-
+		
 	<select id="getData" resultType="com.dj.shop.vo.ProductVO">
 		SELECT *
 		FROM PRODUCT
@@ -50,7 +50,7 @@
 	
 	<select id="categoryList" resultType="com.dj.shop.vo.ProductVO">
 	SELECT *,(category_num= #{categoryNum}) as selected
-		FROM category
+	FROM category
 	</select>
 	
 	<update id="updateMarket" parameterType="com.dj.shop.vo.ProductVO">

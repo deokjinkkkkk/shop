@@ -23,4 +23,10 @@
 	insert into orderItem(order_dnum,order_num,product_num,order_price,order_cnt)
 	values(#{orderDnum},#{orderNum},#{productNum},#{orderPrice},#{orderCnt})
 	</insert>
+	
+	<update id="deleteCnt">
+	UPDATE product
+	SET  pro_cnt =#{proCnt}
+	where product_num = #{productNum}
+	</update>
 </mapper>

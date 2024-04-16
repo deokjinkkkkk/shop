@@ -41,7 +41,7 @@ public class OrderServiceImpl implements OrderService {
 		for(OrderVO ord : orders) {
 			
 			OrderVO productInfo = order.getProductInfo(ord.getProductNum());
-			System.out.println(productInfo);
+			
 			productInfo.setProCnt(ord.getProCnt());
 			result.add(productInfo);
 		}
@@ -53,35 +53,43 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	@Transactional
 	public void order(OrdersVO ord) {
-	
-		List<OrdersItemVO> orders =new ArrayList<OrdersItemVO>();
+		
+		
+	//주문자 정보 가져오기
+		//회원정보
 		UserVO userNumber = user.getUserInfo(ord.getUserNumber());
+		//상품정보
+		List<OrdersItemVO> orders =new ArrayList<OrdersItemVO>();
 		for(OrdersItemVO ori : ord.getOrders()) {
-			OrdersItemVO orderItem = order.getOrderInfo(ori.getProductNum());
-			orderItem.setOrderCnt(ori.getOrderCnt());
 			
+			OrdersItemVO orderItem = order.getOrderInfo(ori.getProductNum());
+			//재고 수량
+			orderItem.setOrderCnt(ori.getOrderCnt());
+			//리스트에 상품 정보 넣기
 			orders.add(orderItem);
 		}
-		
+		//
 		ord.setOrders(orders);
-		
+	//DB에 주문 정보 넣기
+		//주문 번호 날짜로 해서 만들기
 		Date date = new Date();
 		SimpleDateFormat format = new SimpleDateFormat("_yyyyMMddmm");
 		
 		String orderNum = userNumber.getUserNumber() + format.format(date);
+		//DB에 넣기
 		ord.setOrderNum(orderNum);
 		for(OrdersItemVO ori : ord.getOrders()) {
 			ori.setOrderNum(orderNum);
 			order.insertOrderItem(ori);
 		}
-		
+		//상품 재고 주문한 만큼 삭제
 		for(OrdersItemVO ori : ord.getOrders()) {
-			ProductVO pro = product.getAllSangpums(ori.getProductNum());
+			ProductVO pro = product.getData(ori.getProductNum());
 			pro.setProCnt(pro.getProCnt() - ori.getOrderCnt());
 			
-			order.deleteOrder(pro);
+			order.deleteCnt(pro);
 		}
-		
+		//장바구니에 있는 상품 삭제
 		for(OrdersItemVO ori : ord.getOrders()) {
 			CartVO vo = new CartVO();
 			vo.setUserNumber(ord.getUserNumber());

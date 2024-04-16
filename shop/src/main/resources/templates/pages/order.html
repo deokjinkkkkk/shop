@@ -27,6 +27,7 @@
           <div class="col-md-12 col-sm-12">
             <h1>Checkout</h1>
             <!-- BEGIN CHECKOUT PAGE -->
+             <form action="/order/plus">
             <div class="panel-group checkout-page accordion scrollable" id="checkout-page">
 
               <!-- 사용자 상세 정보 -->
@@ -97,16 +98,16 @@
                     <div class="col-md-6 col-sm-6">
                       <div class="form-group">
                         <label for="firstname-dd">이름 <span class="require">*</span></label>
-                        <input type="text" id="firstname-dd" class="form-control" th:value="${addressInfo.addName}">
+                        <input type="text" id="firstname-dd" class="form-control" th:value="${addressInfo.addName}" name="name">
                       </div>
                       
                       <div class="form-group">
                         <label for="email-dd">이메일 <span class="require">*</span></label>
-                        <input type="text" id="email-dd" class="form-control" >
+                        <input type="text" id="email-dd" class="form-control" name="email">
                       </div>
                       <div class="form-group">
                         <label for="telephone-dd">전화번호 <span class="require">*</span></label>
-                        <input type="text" id="telephone-dd" class="form-control" th:value="${addressInfo.addTel}">
+                        <input type="text" id="telephone-dd" name="tel" class="form-control" th:value="${addressInfo.addTel}">
                       </div>
                      
 
@@ -114,16 +115,16 @@
                     <div class="col-md-6 col-sm-6">
                       <div class="form-group">
                         <label for="post-code-dd">우편번호 <span class="require">*</span></label>
-                        <input type="text"  class="form-control" id="addZip" th:value="${addressInfo.addZip}">
+                        <input type="text"  class="form-control" name="orderZip" id="addZip" th:value="${addressInfo.addZip}">
 		                    <button type="button" class="btn btn-primary" id="zipSearch">우편번호 찾기</button>
                       </div>
                       <div class="form-group">
                         <label for="address1-dd">주소</label>
-                        <input type="text"  class="form-control" id="addAddr" th:value="${addressInfo.addAddr}">
+                        <input type="text"  class="form-control" name="orderAdd1" id="addAddr" th:value="${addressInfo.addAddr}">
                       </div>
                       <div class="form-group">
                         <label for="address2-dd">상세주소</label>
-                        <input type="text"  class="form-control" id="addAddr2" th:value="${addressInfo.addAddr2}">
+                        <input type="text"  class="form-control" name="orderAdd2 " id="addAddr2" th:value="${addressInfo.addAddr2}">
                       </div>
                     </div>
                     <div class="col-md-12">
@@ -222,6 +223,9 @@
                 </div>
               </div>
               <!-- 주문 목록 끝 -->
+
+
+              </form>
             </div>
             <!-- END CHECKOUT PAGE -->
           </div>
@@ -243,6 +247,11 @@
     $(document).ready(function(){
     	setPrice()
     })
+    
+    $("#button-confirm").on("click",function(){
+    	
+    })
+    
     function setPrice() {
     	let totalPrice = 0; //총 가격
     	let deliveryPrice = 0;// 배송비 
