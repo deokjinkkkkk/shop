@@ -27,7 +27,7 @@
           <div class="col-md-12 col-sm-12">
             <h1>Checkout</h1>
             <!-- BEGIN CHECKOUT PAGE -->
-             <form action="/order/plus">
+             <form action="/order/plus" method="post">
             <div class="panel-group checkout-page accordion scrollable" id="checkout-page">
 
               <!-- 사용자 상세 정보 -->
@@ -98,12 +98,12 @@
                     <div class="col-md-6 col-sm-6">
                       <div class="form-group">
                         <label for="firstname-dd">이름 <span class="require">*</span></label>
-                        <input type="text" id="firstname-dd" class="form-control" th:value="${addressInfo.addName}" name="name">
+                        <input type="text" id="firstname-dd" name="name" class="form-control" th:value="${addressInfo.addName}" >
                       </div>
                       
                       <div class="form-group">
                         <label for="email-dd">이메일 <span class="require">*</span></label>
-                        <input type="text" id="email-dd" class="form-control" name="email">
+                        <input type="text" id="email-dd" name="email" class="form-control" >
                       </div>
                       <div class="form-group">
                         <label for="telephone-dd">전화번호 <span class="require">*</span></label>
@@ -152,7 +152,7 @@
                       </div>
                       <div class="form-group">
                         <label for="delivery-comments">요청사항</label>
-                        <textarea id="delivery-comments" rows="8" class="form-control" th:text="${addressInfo.addReq}"></textarea>
+                        <textarea id="delivery-comments" rows="8" name="orderReq" class="form-control" th:text="${addressInfo.addReq}"></textarea>
                       </div>
                       <button class="btn btn-primary  pull-right" type="submit" id="button-shipping-method" data-toggle="collapse" data-parent="#checkout-page" data-target="#payment-method-content">Continue</button>
                     </div>
@@ -182,7 +182,7 @@
                           <th class="checkout-price">상품 가격</th>
                           <th class="checkout-price">합계 가격</th>
                         </tr>
-                        <tr th:each="order : ${orderList}">
+                        <tr th:each="order : ${orderList}" class="product-list">
                          <td class="goods-page-image">
                       <a th:href="'/product/detail?productNum='+${order.productNum}"><img th:src="'/image/'+${order.proImg1}"></a>
                     </td>
@@ -193,8 +193,8 @@
 					<td class="goods-page-price">
                       <strong th:text="${order.proPrice}" id="price"><span>원</span></strong>
                     </td>
-                    <td class="goods-page-totalPrice">
-                      <strong id="oneTotalPrice"><span>원</span></strong>
+                    <td class="goods-page-price" id ="goods-page-totalPrice">
+                      <strong th:text="${order.proPrice * order.proCnt}" id="oneTotalPrice"><span>원</span></strong>
                     </td>
                         </tr>
                       </table>
@@ -223,8 +223,10 @@
                 </div>
               </div>
               <!-- 주문 목록 끝 -->
-
-
+              <!-- 주문시 상품 정보 -->
+				<input name="productNum" id="productNum" type="hidden">
+				<input name="orderPrice" id="orderPrice" type="hidden">
+				<input name="orderCnt"  id="orderCnt" type="hidden">
               </form>
             </div>
             <!-- END CHECKOUT PAGE -->
@@ -249,15 +251,28 @@
     })
     
     $("#button-confirm").on("click",function(){
+    	$('.product-list').each(function(index,element){
+    		var price = $(element).find('#price').text()
+    		$("#orderPrice")
+    	})
+    	$("#orderCnt")
     	
+    	$("#productNum")
     })
     
     function setPrice() {
     	let totalPrice = 0; //총 가격
     	let deliveryPrice = 0;// 배송비 
     	let finalPrice = 0;//최종 가격
-    	$('.goods-page-price').each(function(index,element){
-    		totalPrice += parseInt($(element).find('#oneTotalPrice').text());
+    	$('#goods-page-totalPrice').each(function(index,element){
+    		console.log($(element).find('#oneTotalPrice').text())
+    		numericValue = parseInt($(element).find('#oneTotalPrice').text());
+    		
+				totalPrice += numericValue
+			
+		    
+    		
+    		
     	});
     	
     	if(totalPrice => 30000){
@@ -269,9 +284,9 @@
     	}
     	finalPrice = deliveryPrice + totalPrice;
     	
-    	$('.totalPrice').text(totalPrice)
-    	$('.deliveryPrice').text(deliveryPrice)
-    	$('.finalPrice').text(finalPrice)
+    	$('.totalPrice').text(totalPrice +"원")
+    	$('.deliveryPrice').text(deliveryPrice +"원")
+    	$('.finalPrice').text(finalPrice +"원")
     	
     	
     }

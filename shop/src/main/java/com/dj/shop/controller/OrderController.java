@@ -45,7 +45,8 @@ public class OrderController {
 	
 	@PostMapping("/plus")
 	public String orderPlus(OrdersVO ovo ,UserVO uvo,HttpServletRequest request) {
-		System.out.println(ovo);
+		System.out.println(ovo.getOrders());
+		System.out.println(ovo.getName());
 		
 		orderservice.order(ovo);
 		uvo.setUserNumber(ovo.getUserNumber());
