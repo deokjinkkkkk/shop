@@ -101,4 +101,11 @@ public class OrderServiceImpl implements OrderService {
 		order.insertOrder(ord);
 	}
 
+
+	@Override
+	public List<OrdersVO> getOrderInfo(OrdersVO vo) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'getOrderInfo'");
+	}
+
 }
