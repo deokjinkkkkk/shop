@@ -1,16 +1,19 @@
 <!DOCTYPE html>
-<!--¶óÀÌºê·¯¸® ÂüÁ¶ : Thymeleaf & Thymeleaf Layout -->
+<!--ï¿½ï¿½ï¿½Ìºê·¯ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ : Thymeleaf & Thymeleaf Layout -->
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-    <body>
-        <!--Header ¿µ¿ªÀ» ÂüÁ¶ÇÕ´Ï´Ù.-->
+    <body><!--config ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.-->
+        <config th:replace="common/fragments/config::ConfigFragment"></config>
+        <!--Header ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.-->
         <header th:replace="common/fragments/header::HeaderFragment"></header>
     
-        <!--Content ³»¿ë ¿µ¿ªÀ» ÂüÁ¶ÇÕ´Ï´Ù-->
+        <!--Content ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½-->
         <th:block layout:fragment="Content"></th:block>
     
-        <!--Footer ¿µ¿ªÀ» ÂüÁ¶ÇÕ´Ï´Ù.-->
+        <!--Footer ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.-->
         <footer th:replace="common/fragments/footer::FooterFragment"></footer>
+
+                
     </body>
 </html>

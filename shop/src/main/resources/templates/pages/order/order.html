@@ -11,79 +11,76 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <meta name="viewport"
               content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0"/>
-        <title></title>
+      
       </head>
 
 <div class="main">
-      <div class="container">
-        <ul class="breadcrumb">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="">Store</a></li>
-            <li class="active">Checkout</li>
-        </ul>
+  <div class="container">
+    <ul class="breadcrumb">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="">Store</a></li>
+      <li class="active">Checkout</li>
+    </ul>
         <!-- BEGIN SIDEBAR & CONTENT -->
-        <div class="row margin-bottom-40">
+    <div class="row margin-bottom-40">
           <!-- BEGIN CONTENT -->
-          <div class="col-md-12 col-sm-12">
-            <h1>Checkout</h1>
+      <div class="col-md-12 col-sm-12">
+        <h1>Checkout</h1>
             <!-- BEGIN CHECKOUT PAGE -->
-             <form action="/order/plus" method="post">
-            <div class="panel-group checkout-page accordion scrollable" id="checkout-page">
+        
+          <div class="panel-group checkout-page accordion scrollable" id="checkout-page">
 
               <!-- 사용자 상세 정보 -->
-              <div id="payment-address" class="panel panel-default">
-                <div class="panel-heading">
-                  <h2 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#checkout-page" href="#payment-address-content" class="accordion-toggle">
+            <div id="payment-address" class="panel panel-default">
+              <div class="panel-heading">
+                <h2 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#checkout-page" href="#payment-address-content" class="accordion-toggle">
                       사용자 상세정보
-                    </a>
-                  </h2>
-                </div>
-                <div id="payment-address-content" class="panel-collapse collapse">
-                  <div class="panel-body row">
-                    <div class="col-md-6 col-sm-6">
-                      <h3>상세정보</h3>
-                      <div class="form-group">
-                        <label for="firstname">이름 <span class="require">*</span></label>
-                        <input type="text" id="firstname" class="form-control" th:value="${userInfo.name}">
-                      </div>
-                      <div class="form-group">
-                        <label for="email">이메일 <span class="require">*</span></label>
-                        <input type="text" id="email" class="form-control" th:value="${userInfo.email}">
-                      </div>
-                      <div class="form-group">
-                        <label for="telephone">전화번호 <span class="require">*</span></label>
-                        <input type="text" id="telephone" class="form-control" th:value="${userInfo.tel}">
-                      </div> 
-
+                  </a>
+                </h2>
+              </div>
+              <div id="payment-address-content" class="panel-collapse collapse">
+                <div class="panel-body row">
+                  <div class="col-md-6 col-sm-6">
+                    <h3>상세정보</h3>
+                    <div class="form-group">
+                      
+                      <label for="firstname">이름 <span class="require">*</span></label>
+                      <input type="text" id="firstname" class="form-control" th:value="${userInfo.name}">
                     </div>
-                    <div class="col-md-6 col-sm-6">
-                      <h3>주소 정보</h3>
-                    	<div class="form-group">
-                        <label for="post-code">우편번호 <span class="require">*</span></label>
-                        <input type="text" id="post-code" class="form-control" th:value="${addressInfo.addZip}">
-                      </div>
-                      <div class="form-group">
-                        <label for="address1">주소</label>
-                        <input type="text" id="address1" class="form-control" th:value="${addressInfo.addAddr}">
-                      </div>
-                      <div class="form-group">
-                        <label for="address2">상세주소</label>
-                        <input type="text" id="address2" class="form-control" th:value="${addressInfo.addAddr2}">
-                      </div>
-
-
- 
+                    <div class="form-group">
+                      <label for="email">이메일 <span class="require">*</span></label>
+                      <input type="text" id="email" class="form-control" th:value="${userInfo.email}">
                     </div>
-                    <hr>
-                    <div class="col-md-12">                      
-                      <button class="btn btn-primary  pull-right" type="submit" data-toggle="collapse" data-parent="#checkout-page" data-target="#shipping-address-content" id="button-payment-address">Continue</button>                      
+                    <div class="form-group">
+                      <label for="telephone">전화번호 <span class="require">*</span></label>
+                      <input type="text" id="telephone" class="form-control" th:value="${userInfo.tel}">
+                    </div> 
+
+                  </div>
+                  <div class="col-md-6 col-sm-6">
+                    <h3>주소 정보</h3>
+                    <div class="form-group">
+                      <label for="post-code">우편번호 <span class="require">*</span></label>
+                      <input type="text" id="post-code" class="form-control" th:value="${addressInfo.addZip}">
                     </div>
+                    <div class="form-group">
+                      <label for="address1">주소</label>
+                      <input type="text" id="address1" class="form-control" th:value="${addressInfo.addAddr}">
+                    </div>
+                    <div class="form-group">
+                      <label for="address2">상세주소</label>
+                      <input type="text" id="address2" class="form-control" th:value="${addressInfo.addAddr2}">
+                    </div>
+                  </div> <hr>
+                  <div class="col-md-12">                      
+                    <button class="btn btn-primary  pull-right" type="submit" data-toggle="collapse" data-parent="#checkout-page" data-target="#shipping-address-content" id="button-payment-address">Continue</button>                      
                   </div>
                 </div>
               </div>
+            </div>
               <!-- 사용자 상세정보 끝 -->
-
+		    <form action="/order/plus" method="post" class="checkOut_form">
               <!-- 주소지 정보 -->
               <div id="shipping-address" class="panel panel-default">
                 <div class="panel-heading">
@@ -105,18 +102,17 @@
                         <label for="email-dd">이메일 <span class="require">*</span></label>
                         <input type="text" id="email-dd" name="email" class="form-control" >
                       </div>
+                      
                       <div class="form-group">
                         <label for="telephone-dd">전화번호 <span class="require">*</span></label>
                         <input type="text" id="telephone-dd" name="tel" class="form-control" th:value="${addressInfo.addTel}">
-                      </div>
-                     
-
+                      </div> 
                     </div>
                     <div class="col-md-6 col-sm-6">
                       <div class="form-group">
                         <label for="post-code-dd">우편번호 <span class="require">*</span></label>
                         <input type="text"  class="form-control" name="orderZip" id="addZip" th:value="${addressInfo.addZip}">
-		                    <button type="button" class="btn btn-primary" id="zipSearch">우편번호 찾기</button>
+		                <button type="button" class="btn btn-primary" id="zipSearch">우편번호 찾기</button>
                       </div>
                       <div class="form-group">
                         <label for="address1-dd">주소</label>
@@ -134,8 +130,7 @@
                 </div>
               </div>
               <!-- 주소지 정보 끝 -->
-				<!-- 주문 form -->
-
+              
               <!-- 요청사항 -->
               <div id="shipping-method" class="panel panel-default">
                 <div class="panel-heading">
@@ -160,7 +155,8 @@
                 </div>
               </div>
               <!-- 요청사항 끝 -->
-
+              <div class="checkOut_div"></div>
+			</form>
               <!-- 주문 목록 -->
               <div id="confirm" class="panel panel-default">
                 <div class="panel-heading">
@@ -174,30 +170,34 @@
                   <div class="panel-body row">
                     <div class="col-md-12 clearfix">
                       <div class="table-wrapper-responsive">
-                      <table>
-                        <tr>
-                          <th class="checkout-image">상품 이미지</th>
-                          <th class="checkout-description">상품명</th>
-                          <th class="checkout-quantity">상품수량</th>
-                          <th class="checkout-price">상품 가격</th>
-                          <th class="checkout-price">합계 가격</th>
-                        </tr>
-                        <tr th:each="order : ${orderList}" class="product-list">
-                         <td class="goods-page-image">
-                      <a th:href="'/product/detail?productNum='+${order.productNum}"><img th:src="'/image/'+${order.proImg1}"></a>
-                    </td>
-                    <td class="goods-page-description">
-                      <h3><a th:href="'/product/detail?productNum='+${order.productNum}" th:text="${order.proName}"></a></h3>
-                    </td>
-					<td class="checkout-quantity" th:text="${order.proCnt}"></td>
-					<td class="goods-page-price">
-                      <strong th:text="${order.proPrice}" id="price"><span>원</span></strong>
-                    </td>
-                    <td class="goods-page-price" id ="goods-page-totalPrice">
-                      <strong th:text="${order.proPrice * order.proCnt}" id="oneTotalPrice"><span>원</span></strong>
-                    </td>
-                        </tr>
-                      </table>
+                        <table>
+                          <tr>
+                            <th class="checkout-image">상품 이미지</th>
+                            <th class="checkout-description">상품명</th>
+                            <th class="checkout-quantity">상품수량</th>
+                            <th class="checkout-price">상품 가격</th>
+                            <th class="checkout-price">합계 가격</th>
+                          </tr>
+                          <tr th:each="order : ${orderList}" class="product-list">
+                            <td class="goods-page-image">
+                              <a th:href="'/product/detail?productNum='+${order.productNum}"><img th:src="'/image/'+${order.proImg1}"></a>
+                            </td>
+                            <td class="goods-page-description">
+                              <h3><a th:href="'/product/detail?productNum='+${order.productNum}" th:text="${order.proName}"></a></h3>
+                            </td>
+					        <td class="checkout-quantity" th:text="${order.proCnt}"></td>
+					        <td class="goods-page-price">
+                              <strong th:text="${order.proPrice}" id="price"><span>원</span></strong>
+                            </td>
+                            <td class="goods-page-price" id ="goods-page-totalPrice">
+                              <strong th:text="${order.proPrice * order.proCnt}" id="oneTotalPrice"><span>원</span></strong>
+                            </td>
+                            <input name="productNum" id="productNum" type="hidden" th:value="${order.productNum}">
+                            <input name="proCnt" id="proCnt" type="hidden" th:value="${order.proCnt}">
+                            <input name="proPrice" id="proPrice" type="hidden" th:value="${order.proPrice}">
+                            
+                          </tr>
+                        </table>
                       </div>
                       <div class="checkout-total-block">
                         <ul>
@@ -224,10 +224,9 @@
               </div>
               <!-- 주문 목록 끝 -->
               <!-- 주문시 상품 정보 -->
-				<input name="productNum" id="productNum" type="hidden">
-				<input name="orderPrice" id="orderPrice" type="hidden">
-				<input name="orderCnt"  id="orderCnt" type="hidden">
-              </form>
+
+			  <!-- 주문시 상품 정보 끝 -->				
+               <input type="hidden" id="userNumber" th:value="${userInfo.userNumber}">
             </div>
             <!-- END CHECKOUT PAGE -->
           </div>
@@ -251,44 +250,61 @@
     })
     
     $("#button-confirm").on("click",function(){
-    	$('.product-list').each(function(index,element){
-    		var price = $(element).find('#price').text()
-    		$("#orderPrice")
-    	})
-    	$("#orderCnt")
+      let contents = "";
+      let orderDnum = 0;
+      let user = $("#userNumber").val();
+      $('.product-list').each(function(index,element){
+    	  
+    	  
+    	//상퓸번호 
+        let productNum = $(element).find("#productNum").val();
     	
-    	$("#productNum")
+        //상품수량
+    	let proCnt = $(element).find("#proCnt").val();
+    	
+        //
+        let proPrice = $(element).find("#proPrice").val();
+        
+        //상품 번호 input태그 만들기
+    	let productNum_input = "<input name ='orders[" + orderDnum + "].productNum' type ='hidden' value='" + productNum + "'>";
+    	let orderCnt_input = "<input name ='orders[" + orderDnum + "].orderCnt'type ='hidden' value='" + proCnt + "'>";
+    	let orderPrice_input = "<input name ='orders[" + orderDnum + "].orderPrice'type ='hidden' value='" + proPrice + "'>";
+    	
+    	contents += productNum_input;
+    	contents += orderCnt_input;
+    	contents += orderPrice_input;
+    	
+    	orderDnum += 1;
+      })
+      if(!contents){
+    	  alert("주문 정보가 존재하지 않습니다.")
+      }
+      contents += "<input name ='userNumber' type ='hidden' value='" + user + "'>"
+      $(".checkOut_div").html(contents);
+      $(".checkOut_form").submit();
     })
     
     function setPrice() {
-    	let totalPrice = 0; //총 가격
-    	let deliveryPrice = 0;// 배송비 
-    	let finalPrice = 0;//최종 가격
-    	$('#goods-page-totalPrice').each(function(index,element){
-    		console.log($(element).find('#oneTotalPrice').text())
-    		numericValue = parseInt($(element).find('#oneTotalPrice').text());
-    		
-				totalPrice += numericValue
-			
-		    
-    		
-    		
+      let totalPrice = 0; //총 가격
+      let deliveryPrice = 0;// 배송비 
+      let finalPrice = 0;//최종 가격
+        $('.product-list').each(function(index,element){
+    	  console.log($(element).find('#oneTotalPrice').text());
+    	  numericValue = parseInt($(element).find('#oneTotalPrice').text());  		
+		  totalPrice += numericValue;		
     	});
     	
     	if(totalPrice => 30000){
-    		deliveryPrice = 0;
+    	  deliveryPrice = 0;
     	}else if(totalPrice == 0){
-    		deilveryPrice = 0;
+    	  deilveryPrice = 0;
     	}else{
-    		deliveryPrice = 3000;
+    	  deliveryPrice = 3000;
     	}
     	finalPrice = deliveryPrice + totalPrice;
-    	
     	$('.totalPrice').text(totalPrice +"원")
     	$('.deliveryPrice').text(deliveryPrice +"원")
-    	$('.finalPrice').text(finalPrice +"원")
-    	
-    	
+    	$('.finalPrice').text(finalPrice +"원")	
     }
     
    	/* 우편번호 api */
@@ -307,7 +323,7 @@
                 } else { // 사용자가 지번 주소를 선택했을 경우(J)
                     addr = data.jibunAddress;
                 }
- 
+
                 // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
                 if(data.userSelectedType === 'R'){
                     // 법정동명이 있을 경우 추가한다. (법정리는 제외)

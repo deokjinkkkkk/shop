@@ -23,4 +23,5 @@ public interface ProductService {
 	public List<ProductVO> categoryList(ProductVO vo); 
 	//상품 이미지 등록
 	public String saveImage(MultipartFile file, String saveFolder); 
+	
 }

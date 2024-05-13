@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -98,7 +97,9 @@ public class ProductServiceImpl implements ProductService{
 
 	@Override
 	public List<ProductVO> categoryList(ProductVO vo) {
-	
+		int category = vo.getCategoryNum();
+		vo.setCategoryNum(category);
+		
 		return product.categoryList(vo);
 	}
 

@@ -72,4 +72,10 @@
 	FROM PRODUCT
 	WHERE product_num =#{productNum}
 	</delete>
+	
+	<select id="productCheck" resultType="int">
+	SELECT pro_cnt
+	FROM product
+	where product_num = #{productNum}
+	</select>
 </mapper>

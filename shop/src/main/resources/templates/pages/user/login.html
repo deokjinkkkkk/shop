@@ -3,10 +3,9 @@
 	>
 
 <head>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<link th:href="@{assets/pages/css/login.css}" rel="stylesheet">
-<script th:src="@{assets/pages/scripts/login.js}" type="text/javascript"></script>
+<script th:src="@{/assets/plugins/jquery.min.js}"></script>
+<link th:href="@{/assets/pages/css/login.css}" rel="stylesheet">
+<script th:src="@{/assets/pages/scripts/login.js}" type="text/javascript"></script>
 <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 
 </head>
@@ -22,9 +21,9 @@
 				<input type="text" name="name"id="name" placeholder="Name">
 				
 				<label for="email">이메일</label>
-				<input type="email" name="email" id="email" placeholder="Email" th:style="${'width: 45%; display:inline-block'}" required oninput="checkEmail()">
+				<input type="email" name="email" id="email" placeholder="Email" th:style="${'width: 45%; display:inline-block'}" onkeyup="checkEmail()">
 				<span th:style="${'color: #7369AB'}">@</span>
-				<select id="domain" >
+				<select id="domain" oninput="checkEmail()">
 					<option value diasbled>선택해주세요</option>
 					<option value="naver.com">naver.com</option>
 					<option value="daum.net">daum.net</option>
@@ -64,12 +63,12 @@
 
 		<!-- Sign in form -->
 		<div id="sign-in-container" class="hide">
-			<h3>Welcome Back</h3>
+			<h3>로그인</h3>
 			<form method="post" action="/loginProc">
-				<label for="username">Username</label> <input type="text"
+				<label for="username">이메일</label> <input type="text"
 					name="email" id="email" placeholder="user@example.com">
 
-				<label for="userPwd">Password</label> <input type="password"
+				<label for="userPwd">비밀번호</label> <input type="password"
 					name="userPwd" id="userPwd"
 					placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;">
 
@@ -78,10 +77,8 @@
 					<button type="button" id="toggleSignUp">Sign Up</button>
 				</div>
 
-				<input type="checkbox" name="terms" id="terms"> <label
-					for="terms">I agree to the <a href="#" class="termsLink">Terms
-						of service</a> and <a href="#" class="termsLink">Privacy Policy</a>.
-				</label>
+				<input type="hidden" name="terms" id="terms"> 
+
 			</form>
 		</div>
 
@@ -175,6 +172,7 @@ $("#emailBtn").click(function() {
 function checkEmail(){
     var email  = $("#email").val() + "@"+$("#domain").val();
     var emailSel = $("#domain").val();
+    
     if(emailSel == ''){
     	$(".email_com").css("display","inline-block")
     	$(".email_alr").css("display","none")
@@ -185,30 +183,33 @@ function checkEmail(){
          $(".email_alr").css("display","none")
          $(".email_com").css("display","none")
     }
-    $.ajax({
-        url : "/user/emailChk",
-        type:'post',
-        data : {
-            "email" : email
-        },
-        success : function(data) {
-            console.log(data);
-            if (data == "success") {
-                console.log("성공하였습니다.")
-                $(".email_chk").css("display","inline-block")
-                $(".email_alr").css("display","none")
-                $(".email_com").css("display","none")
-            } else {
-                console.log("아이디가 중복상태입니다.")
-                $(".email_alr").css("display","inline-block")
-                $(".email_chk").css("display","none")
-                $(".email_com").css("display","none")
+    
+    	$.ajax({
+            url : "/user/emailChk",
+            type:'post',
+            data : {
+                "email" : email
+            },
+            success : function(data) {
+               
+                if (data == "success") {
+                    
+                    $(".email_chk").css("display","inline-block")
+                    $(".email_alr").css("display","none")
+                    $(".email_com").css("display","none")
+                } else {
+                    
+                    $(".email_alr").css("display","inline-block")
+                    $(".email_chk").css("display","none")
+                    $(".email_com").css("display","none")
+                }
+            },
+            error : function(xhr, status, error) {
+                console.log(error)
             }
-        },
-        error : function(xhr, status, error) {
-            console.log(error)
-        }
-    });
+        });
+    
+    
 }
 
 function pwdChk(){

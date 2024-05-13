@@ -16,8 +16,7 @@ public class CartVO {
     private String proImg1; //상품이미지 1
     private int price ;//가격
     
-    private int rn; //rownum 사용
-    
+    private int rn; //rownum 사용 
     //상품 총가격
     
 }

@@ -11,58 +11,40 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <meta name="viewport"
               content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0"/>
-        <title></title>
+        
       </head>
       
       
     <div class="title-wrapper">
      	<div class="container">
       		<div class="container-inner">
-		       	<h1><span>MEN</span> CATEGORY</h1>
-		       	<em>Over 4000 Items are available here</em>
+		       
      	 	</div>
       	</div>
     </div>
 
     <div class="main">
       <div class="container">
-        <ul class="breadcrumb">
-            <li><a href="/">Home</a></li>
-            <li><a href="">가구</a></li>
-            <li class="active">책상</li>
-        </ul>
+       <ul class="breadcrumb">
+		<li><a href="/">Home</a></li>
+	      <li class="active" id="link">책상</li>
+	  </ul>
         <!-- BEGIN SIDEBAR & CONTENT -->
         <div class="row margin-bottom-40">
           <!-- BEGIN SIDEBAR -->
-          <div class="sidebar col-md-3 col-sm-5">
-            <ul class="list-group margin-bottom-25 sidebar-menu">
-              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> 침대</a></li>
-              <li class="list-group-item clearfix dropdown active">
-                <a href="javascript:void(0);" class="collapsed"><i class="fa fa-angle-right"></i>책상</a>
+	      <div class="sidebar col-md-3 col-sm-5">
+	        <ul class="list-group margin-bottom-25 sidebar-menu">
+              <li class="list-group-item clearfix" th:each="category : ${categories}" th:classappend="${category.selected == 1 ? 'dropdown active' : ''}">
+                <a th:href="@{/product/list(category=${category.categoryNum})}" >
+                  <i class="fa fa-angle-right"></i> [[${category.categoryName}]]
+                </a>
+                <input type="hidden" id="selCateogry" th:value="${category.categoryNum}" th:if="${category.selected == 1 }">
+                <input type="hidden" id="catName" th:value="${category.categoryName}" th:if="${category.selected == 1 }">
               </li>
-              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> 의자</a></li>
-              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> 식탁</a></li>
-              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> 옷장</a></li>
             </ul>
-
-            <div class="sidebar-filter margin-bottom-25">
-              <h2>Filter</h2>
-              <h3>Availability</h3>
-              <div class="checkbox-list">
-                <label><input type="checkbox"> Not Available (3)</label>
-                <label><input type="checkbox"> In Stock (26)</label>
-              </div>
-
-              <h3>Price</h3>
-              <p>
-                <label for="amount">Range:</label>
-                <input type="text" id="amount" style="border:0; color:#f6931f; font-weight:bold;">
-              </p>
-              <div id="slider-range"></div>
-            </div>
-
-          </div>
+	      </div>
           <!-- END SIDEBAR -->
+         
            <!-- BEGIN CONTENT -->
           <div class="col-md-9 col-sm-7">
             <div class="product-page">
@@ -161,6 +143,7 @@
 				<input type="hidden" name="orders[0].productNum" th:value="${pro.productNum}">
 				<input type="hidden" name="orders[0].orderCnt" value="">
 			</form>
+			
                 <div class="sticker sticker-sale"></div>
               </div>
             </div>
@@ -205,6 +188,8 @@
       					alert("장바구니에 이미 상품이 있습니다.")
       				}else if(result == 3){
       					alert("로그인이 필요 합니다.")
+      				}else if(result == 4){
+      					alert("상품의 재고가 부족합니다.")
       				}
       			}
       		

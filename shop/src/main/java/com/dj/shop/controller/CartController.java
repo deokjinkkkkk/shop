@@ -30,13 +30,14 @@ public class CartController {
 	@ResponseBody
 	public int cartInsert(@RequestParam("cnt") int cnt,
 			CartVO vo,UserVO uvo, HttpServletRequest request) {
-		String email = (String) request.getSession().getAttribute("email");
-		uvo = user.userSelect(email);
+		String email = (String) request.getSession().getAttribute("email"); //세션 이메일값 가져오기
+		uvo = user.userSelect(email); 
 		
 		if(uvo == null) {
 			return 3;
 		}
-		vo.setUserNumber(uvo.getUserNumber());
+		
+		vo.setUserNumber(uvo.getUserNumber()); 
 		vo.setCartCnt(cnt);
 		int result = cart.addCart(vo);
 		return result ;
@@ -47,7 +48,15 @@ public class CartController {
 	public List<CartVO> headcartList(@RequestParam("email")String email,
 									UserVO vo, CartVO cvo) {
 		vo = user.userSelect(email);
-		List<CartVO> result = cart.cartList(vo.getUserNumber());
+		
+		List<CartVO> result = null;
+		// 상품 카트 에 값이 없을경우 처리
+		try {
+			result = cart.cartList(vo.getUserNumber());
+		} catch (NullPointerException e) {
+			result = null; 
+		}
+		
 		
 		return result;
 		
@@ -57,18 +66,23 @@ public class CartController {
 	public String CartList(CartVO vo,@RequestParam("email")String email,
 							Model model,UserVO uvo) {
 		uvo.setEmail(email);
+		
 		uvo = user.userSelect(email);
+		
 		if(uvo == null) {
 			return "redirect:/";
 		}
+		
 		List<CartVO> result = cart.cartList(uvo.getUserNumber());
-		System.out.println(result);
+		
 		if(result.isEmpty()) {
-			return "pages/nullCartList";
+			return "pages/cart/nullCartList";
 		}
+		
 		model.addAttribute("cartList", result);
-		return "pages/cartlist" ;	
+		return "pages/cart/cartlist" ;	
 	}
+	
 	@PostMapping("/cartDelete")
 	public String cartListDelete(CartVO vo,HttpServletRequest request) {
 		String email = (String) request.getSession().getAttribute("email");

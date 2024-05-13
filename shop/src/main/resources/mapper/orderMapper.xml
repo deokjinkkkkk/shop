@@ -15,12 +15,12 @@
 	</select>
 	
 	<insert id="insertOrder">
-	insert into orders(order_num,order_date,order_state,order_zip,order_add1,order_add2,tel,name,order_req)
-	values(#{orderNum},sysout(),'배송준비',#{orderZip},#{orderAdd1},#{orderAdd2},#{tel},#{name},#{orderReq})
+	insert into orders(order_num,order_state,order_zip,order_add1,order_add2,tel,name,order_req,user_number)
+	values(#{orderNum},'배송준비',#{orderZip},#{orderAdd1},#{orderAdd2},#{tel},#{name},#{orderReq},#{userNumber})
 	</insert>
 	
 	<insert id="insertOrderItem">
-	insert into orderItem(order_dnum,order_num,product_num,order_price,order_cnt)
+	insert into order_item(order_dnum,order_num,product_num,order_price,order_cnt)
 	values(#{orderDnum},#{orderNum},#{productNum},#{orderPrice},#{orderCnt})
 	</insert>
 	
@@ -29,4 +29,11 @@
 	SET  pro_cnt =#{proCnt}
 	where product_num = #{productNum}
 	</update>
+
+	<select id="getOrdersInfo">
+	select s.*,i.order_price,i.order_dnum,i.product_num,i.order_cnt
+	from orders s join order_item i
+	on s.order_num = i.order_num 
+	where s.user_number = #{userNumber}
+	</select>
 </mapper>

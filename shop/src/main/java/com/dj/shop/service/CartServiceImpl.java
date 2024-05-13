@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dj.shop.mapper.CartMapper;
+import com.dj.shop.mapper.ProductMapper;
 import com.dj.shop.vo.CartVO;
 
 @Service
@@ -13,18 +14,26 @@ public class CartServiceImpl implements CartService {
 
     @Autowired
     CartMapper cart;
-
+    
+    @Autowired
+    ProductMapper product;
     @Override
     public int addCart(CartVO vo) {
-    	System.out.println(vo.getProductNum());
+    	int cntCheck = product.productCheck(vo.getProductNum());
+    	//장바구니 확인 여부
        if(cart.checkCart(vo) != null) {
     	   return 2;
        }
        
+       if(cntCheck < 1 || cntCheck < vo.getCartCnt()) {
+    	   return 4;
+       }
+       
         try {
+        	//장바구니 추가
 			return cart.addCart(vo);
 		} catch (Exception e) {
-			
+			//장바구니 추가 실패
 			return 0;
 		}
 		

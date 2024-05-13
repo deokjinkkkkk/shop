@@ -4,7 +4,6 @@ import com.dj.shop.vo.OrderVO;
 import com.dj.shop.vo.OrdersItemVO;
 import com.dj.shop.vo.OrdersVO;
 import com.dj.shop.vo.ProductVO;
-import com.dj.shop.vo.ProductVO;
 
 public interface OrderMapper {
 	/*상품 정보*/
@@ -19,4 +18,6 @@ public interface OrderMapper {
 	public int deleteOrder(int OrderNum);
 	/*주문 재고 변경*/
 	public int deleteCnt(ProductVO pvo);
+	/*주문 내역 */
+	public OrdersVO getOrdersInfo(int userNumber);
 }

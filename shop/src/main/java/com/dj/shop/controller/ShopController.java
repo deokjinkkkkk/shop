@@ -8,15 +8,5 @@ public class ShopController {
 	public String main() {
 		return "pages/index";
 	}
-	@GetMapping("/login")
-	public String login() {
-		return "pages/login";
-	}
-	
-	@GetMapping("/review")
-	public String review() {
-		return "pages/review";
-	}
-	
-
+		
 }

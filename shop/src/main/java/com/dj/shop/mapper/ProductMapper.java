@@ -26,5 +26,6 @@ public interface ProductMapper {
 	//상품 이미지 등록
 	public String saveImage(MultipartFile file, String saveFolder); 
 	
-	
+	//상품재고 확인
+	public int productCheck(int num);
 }

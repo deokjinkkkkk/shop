@@ -66,6 +66,7 @@ public class OrderServiceImpl implements OrderService {
 			//재고 수량
 			orderItem.setOrderCnt(ori.getOrderCnt());
 			//리스트에 상품 정보 넣기
+			orderItem.setOrderPrice(ori.getOrderPrice());
 			orders.add(orderItem);
 		}
 		//
@@ -97,6 +98,7 @@ public class OrderServiceImpl implements OrderService {
 			
 			cart.cartOrderDelete(vo);
 		}
+		order.insertOrder(ord);
 	}
 
 }

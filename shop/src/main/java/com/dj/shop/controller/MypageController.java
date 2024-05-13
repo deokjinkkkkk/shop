@@ -29,9 +29,13 @@ public class MypageController {
 		String id = (String) request.getSession().getAttribute("email");
 		vo.setEmail(id);
 		vo =userService.userSelect(id);
+		try {
+			model.addAttribute("addressInfo", addressService.getAddressInfo(vo.getUserNumber()));
+		} catch (NullPointerException e) {
+			// 로그인 하지 않고 주문목록 접근시 동작
+		}
 		
-		model.addAttribute("addressInfo", addressService.getAddressInfo(vo.getUserNumber()));
-		return "pages/myAddress";
+		return "pages/user/myAddress";
 	}
 	
 	@PostMapping("/address/create")
@@ -53,9 +57,10 @@ public class MypageController {
 		addressService.deleteAddress(avo);
 		return "redirect:/myPage/myAddress";
 	}
+	
 	@GetMapping("/wishlist")
 	public String wishlist() {
 		
-		return "pages/wishlist";
+		return "pages/user/wishlist";
 	}
 }

@@ -9,6 +9,12 @@ public interface OrderService {
 	/*주문 상품 정보*/
 	public List<OrderVO> getProductInfo(List<OrderVO> orders);
 	
+	/*주문 결제 */
 	public void order(OrdersVO vo);
-	
+
+	/*주문 목록 */
+	public List<OrdersVO> getOrderInfo(OrdersVO vo);
+	/*주문 취소 */
+
+	/*주문 상태 변경 */
 }

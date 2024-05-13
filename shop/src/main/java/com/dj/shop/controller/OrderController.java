@@ -1,7 +1,6 @@
 package com.dj.shop.controller;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.dj.shop.service.AddressService;
 import com.dj.shop.service.OrderService;
 import com.dj.shop.service.UserService;
+import com.dj.shop.vo.AddressVO;
 import com.dj.shop.vo.OrderPageVO;
 import com.dj.shop.vo.OrdersVO;
 import com.dj.shop.vo.UserVO;
@@ -36,17 +36,18 @@ public class OrderController {
 			OrderPageVO ovo,Model model,UserVO vo) {
 		vo = userService.userSelect(email);
 		int userNumber = vo.getUserNumber();
-		
+		AddressVO address = addressService.getAddressInfo(userNumber);
 		model.addAttribute("orderList",orderservice.getProductInfo(ovo.getOrders()));
 		model.addAttribute("userInfo", vo);
-		model.addAttribute("addressInfo",addressService.getAddressInfo(userNumber));
-		return "pages/order";
+		if(address == null) {
+			address = addressService.getAddressInfo(2);
+		}
+		model.addAttribute("addressInfo",address);
+		return "pages/order/order";
 	}
 	
 	@PostMapping("/plus")
 	public String orderPlus(OrdersVO ovo ,UserVO uvo,HttpServletRequest request) {
-		System.out.println(ovo.getOrders());
-		System.out.println(ovo.getName());
 		
 		orderservice.order(ovo);
 		uvo.setUserNumber(ovo.getUserNumber());
