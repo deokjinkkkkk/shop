@@ -13,8 +13,8 @@ public interface OrderService {
 	public void order(OrdersVO vo);
 
 	/*주문 목록 */
-	public List<OrdersVO> getOrderInfo(OrdersVO vo);
+	public List<OrdersVO> getOrdersInfo(OrdersVO vo);
 	/*주문 취소 */
 
-	/*주문 상태 변경 */
+
 }

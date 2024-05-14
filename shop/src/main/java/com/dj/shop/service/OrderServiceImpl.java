@@ -103,9 +103,9 @@ public class OrderServiceImpl implements OrderService {
 
 
 	@Override
-	public List<OrdersVO> getOrderInfo(OrdersVO vo) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'getOrderInfo'");
+	public List<OrdersVO> getOrdersInfo(OrdersVO vo) {
+		
+		return  getOrdersInfo(vo);
 	}
 
 }

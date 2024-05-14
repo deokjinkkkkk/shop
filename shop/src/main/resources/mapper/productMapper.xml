@@ -23,15 +23,16 @@
 
 	<select id="getAllSangpums"
 		resultType="com.dj.shop.vo.ProductVO">
-		SELECT b.*
-		FROM (
-		SELECT @ROWNUM := @ROWNUM + 1 AS rn, p.*
-		FROM PRODUCT p
-		JOIN category c ON p.category_num = c.category_num
-		CROSS JOIN (SELECT @ROWNUM := 0) r
-		WHERE c.category_num = #{categoryNum}
-		) b
-		WHERE b.rn BETWEEN #{first} AND #{last}
+		SELECT *
+	FROM (
+    	SELECT 
+        ROW_NUMBER() OVER (ORDER BY p.product_num) AS rn, 
+        p.*
+    	FROM PRODUCT p
+    	JOIN category c ON p.category_num = c.category_num
+    	WHERE c.category_num = #{categoryNum}
+	) AS numbered_products
+	WHERE rn BETWEEN #{first} AND #{last}
 	</select>
 		
 	<select id="getData" resultType="com.dj.shop.vo.ProductVO">

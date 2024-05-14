@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layouts/layout}"
+      layout:fragment="Content">
+<head>
+      <!--Common Head-->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="viewport"
+              content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0"/>
+       
+      </head>
+<div class="container mt-5">
+    <h2>주문 현황</h2>
+    <table class="table table-striped mt-3">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">주문 번호</th>
+                <th scope="col">상품명</th>
+                <th scope="col">주문자</th>
+                <th scope="col">주문 상태</th>
+                <th scope="col">주문 시간</th>
+            </tr>
+        </thead>
+        <tbody id="orderTableBody">
+            <!-- 여기에 주문 데이터가 들어갑니다 -->
+        </tbody>
+    </table>
+</div>
+</html>

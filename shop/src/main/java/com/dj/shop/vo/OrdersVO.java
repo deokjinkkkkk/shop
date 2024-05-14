@@ -24,5 +24,7 @@ public class OrdersVO {
 	
 	private List<OrdersItemVO> orders;
 	
-	
+	/*페이징 처리 */
+	Integer first;
+	Integer last;
 }

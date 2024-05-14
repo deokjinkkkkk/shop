@@ -58,7 +58,6 @@ public class ProdcutController {
 	    // 사이드바 카테고리 데이터
 		List<ProductVO> categories = productservice.categoryList(vo);
 	    
-	    model.addAttribute("pagination", pagination);
 	    model.addAttribute("tableList", tableList);
 	    model.addAttribute("categories", categories);
 	    
