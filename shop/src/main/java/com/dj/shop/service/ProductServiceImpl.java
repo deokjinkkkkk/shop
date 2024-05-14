@@ -29,7 +29,7 @@ public class ProductServiceImpl implements ProductService{
 
 	@Override
 	public List<ProductVO> getAllSangpums(ProductVO vo) {
-
+		
 		return product.getAllSangpums(vo);
 	}
 
