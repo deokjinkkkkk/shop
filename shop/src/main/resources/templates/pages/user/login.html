@@ -15,7 +15,7 @@
 	<div id="form-inner-container">
 		<!-- Sign up form -->
 		<div id="sign-up-container">
-			<a href="/" >쇼핑몰</a>
+			<h3>회원가입</h3>
 			<form method="post" action="/user/signUp" id="signUpProc">
 				<label for="name">이름</label> 
 				<input type="text" name="name"id="name" placeholder="Name">
@@ -54,10 +54,7 @@
 					<button type="button" id="toggleSignIn">Sign In</button>
 				</div>
 
-				<input type="checkbox" name="terms" id="terms"> <label
-					for="terms">I agree to the <a href="#" class="termsLink">Terms
-						of service</a> and <a href="#" class="termsLink">Privacy Policy</a>.
-				</label>
+				<input type="hidden" name="terms" id="terms"> 
 			</form>
 		</div>
 

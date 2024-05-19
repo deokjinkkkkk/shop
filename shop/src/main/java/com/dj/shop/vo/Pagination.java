@@ -4,8 +4,8 @@ import lombok.Data;
 @Data
 public class Pagination {
 
-	int pageUnit=10 ; 		//한페이지 출력할 레코드 건수
-	int pageSize=10 ; 		//페이지번호 수 (5) 1~ 5까지
+	int pageUnit=9 ; 		//한페이지 출력할 레코드 건수
+	int pageSize=5 ; 		//페이지번호 수 (5) 1~ 5까지
 	int lastPage;     		//마지막 페이지번호
 	int totalRecord = 126;		//전체 레코드건수
 	Integer page = 1;		//현재 페이지

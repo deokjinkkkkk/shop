@@ -67,7 +67,6 @@
             </ul>
               <div class="text-right">
                 <a th:href="'/cart/cartlist?email='+${session.email}" class="btn btn-default">장바구니</a>
-                <a href="shop-checkout.html" class="btn btn-primary">Checkout</a>
               </div>
             </div>
           </div>            
@@ -91,26 +90,7 @@
 			</ul>
             </li>
             
-            <li class="dropdown dropdown100 nav-catalogue">
-              <ul class="dropdown-menu">
-                <li>
-                  <div class="header-navigation-content">
-                    <div class="row">
-                      <div class="col-md-3 col-sm-4 col-xs-6" th:each="product : ${productList}">
-                        <div class="product-item">
-                          <div class="pi-img-wrapper">
-                            <a href="shop-item.html"><img th:src="'/image/'+${product.proImg1}" class="img-responsive" th:alt="${product.proName}"></a>
-                          </div>
-                          <h3><a href="shop-item.html" th:text="${product.proName}"</a></h3>
-                          <div class="pi-price" th:text="${product.proPrice}"></div>
-                          <a href="javascript:;" class="btn btn-default add2cart"></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </li>
+
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">마이페이지</a>
            

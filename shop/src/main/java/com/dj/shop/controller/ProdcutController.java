@@ -43,8 +43,6 @@ public class ProdcutController {
 	    if(page != null) {
 	    	pagination.setPage(page);
 	    }
-	    pagination.setPageSize(5); //한 페이지에 보여질 페이지 갯수	
-	    pagination.setPageUnit(9);//한 페이지에 출력할 레코드 건수
 	    
 	    //상품 총 개수 
 	    int totalCount = productservice.count(vo);
@@ -60,7 +58,7 @@ public class ProdcutController {
 	    
 	    model.addAttribute("tableList", tableList);
 	    model.addAttribute("categories", categories);
-	    
+	    model.addAttribute("pagination", pagination);
 	    return "pages/product/productList";
 	}
 	

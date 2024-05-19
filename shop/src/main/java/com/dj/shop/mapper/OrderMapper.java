@@ -1,11 +1,8 @@
 package com.dj.shop.mapper;
 
-import java.util.List;
-
 import com.dj.shop.vo.OrderVO;
 import com.dj.shop.vo.OrdersItemVO;
 import com.dj.shop.vo.OrdersVO;
-import com.dj.shop.vo.Pagination;
 import com.dj.shop.vo.ProductVO;
 
 public interface OrderMapper {

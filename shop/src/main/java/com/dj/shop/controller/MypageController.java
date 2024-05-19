@@ -32,7 +32,7 @@ public class MypageController {
 		try {
 			model.addAttribute("addressInfo", addressService.getAddressInfo(vo.getUserNumber()));
 		} catch (NullPointerException e) {
-			// 로그인 하지 않고 주문목록 접근시 동작
+			// 로그인 하지 않고 주소지목록 접근시 동작
 		}
 		
 		return "pages/user/myAddress";
