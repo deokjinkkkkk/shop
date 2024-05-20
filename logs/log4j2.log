@@ -1,1 +1,2 @@
-[2024-05-15 17:13:39.553]  WARN 24996 --- [l-9 housekeeper] c.z.h.p.HikariPool                       : HikariPool-9 - Thread starvation or clock leap detected (housekeeper delta=1h27m44s385ms646?s500ns).
+[2024-05-20 20:14:25.528]  INFO 14212 --- [nio-8090-exec-6] c.d.s.s.ProductServiceImpl               : get
+[2024-05-20 20:14:25.541]  INFO 14212 --- [nio-8090-exec-6] c.d.s.c.ProdcutController                : 상품 완료

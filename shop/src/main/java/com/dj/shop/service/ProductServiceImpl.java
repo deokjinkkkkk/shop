@@ -15,7 +15,11 @@ import org.springframework.web.multipart.MultipartFile;
 import com.dj.shop.mapper.ProductMapper;
 import com.dj.shop.vo.ProductVO;
 
+import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
+
 @Service
+@Log4j2
 public class ProductServiceImpl implements ProductService{
 	@Value("${saveimg}")
 	private String saveimg;
@@ -101,6 +105,12 @@ public class ProductServiceImpl implements ProductService{
 		vo.setCategoryNum(category);
 		
 		return product.categoryList(vo);
+	}
+
+	@Override
+	public List<ProductVO> productList(ProductVO vo) {
+		log.info("get");
+		return product.productList(vo);
 	}
 
 }

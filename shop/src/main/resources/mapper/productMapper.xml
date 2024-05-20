@@ -23,7 +23,7 @@
 
 	<select id="getAllSangpums"
 		resultType="com.dj.shop.vo.ProductVO">
-		SELECT *
+	SELECT *
 	FROM (
     	SELECT 
         ROW_NUMBER() OVER (ORDER BY p.product_num) AS rn, 
@@ -78,5 +78,20 @@
 	SELECT pro_cnt
 	FROM product
 	where product_num = #{productNum}
+	</select>
+
+	<select id="productList" resultType="com.dj.shop.vo.ProductVO">
+	SELECT *
+FROM (
+    SELECT 
+        ROW_NUMBER() OVER (ORDER BY product_num) AS rn,
+        p.*
+    FROM PRODUCT p
+    <if test="keyword != null">
+        WHERE pro_name LIKE CONCAT('%', #{keyword}, '%')
+    </if>
+) AS numbered_products
+WHERE rn BETWEEN #{first} AND #{last}
+
 	</select>
 </mapper>

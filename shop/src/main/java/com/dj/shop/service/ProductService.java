@@ -23,5 +23,8 @@ public interface ProductService {
 	public List<ProductVO> categoryList(ProductVO vo); 
 	//상품 이미지 등록
 	public String saveImage(MultipartFile file, String saveFolder); 
+
+	//상품 검색
+	public List<ProductVO> productList(ProductVO vo);
 	
 }

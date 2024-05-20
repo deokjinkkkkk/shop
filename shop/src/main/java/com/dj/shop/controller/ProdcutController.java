@@ -19,6 +19,7 @@ import com.dj.shop.vo.ProductVO;
 @Controller
 @RequestMapping("/product")
 public class ProdcutController {
+	private static final org.slf4j.Logger logger =org.slf4j.LoggerFactory.getLogger(ProdcutController.class);
 	@Autowired
 	ProductService productservice;
 	
@@ -121,9 +122,33 @@ public class ProdcutController {
 	}
 	
 	@GetMapping("/search")
-	public String searchForm() {
+	public String searchForm(ProductVO vo, Model model, 
+							@RequestParam(value = "page",required = false) Integer page
+							,@RequestParam(value = "pageunit",required = false) Integer pageunit) {
+	    Pagination pagination = new Pagination();
+	    //페이지의 값이 있는경우
+	    if(page != null) {
+	    	pagination.setPage(page);
+	    }
+	    
+	    //상품 총 개수 
+	    int totalCount = productservice.count(vo);
+	    //상품 개수 에 맞춰서 출력
+		if(pageunit != null){
+			pagination.setPageUnit(pageunit);
+		}
 		
-		return "pages/productSearch/search";			
+	    pagination.setTotalRecord(totalCount);
+	    //보여질 페이지 vo에 담아주기
+		vo.setFirst(pagination.getFirst());
+		vo.setLast(pagination.getLast());
+		//상품 페이지 출력
+		List<ProductVO> productList = productservice.productList(vo);
+	    
+	    model.addAttribute("productList", productList);
+	    model.addAttribute("pagination", pagination);
+		logger.info("상품 완료");
+		return "pages/product/productSearch";			
 	}
 	
 	@PostMapping("/productDelete")
@@ -131,6 +156,7 @@ public class ProdcutController {
 		productservice.deleteMarket(vo);
 		return "redirect:/";			
 	}
+	
 	
 
 }

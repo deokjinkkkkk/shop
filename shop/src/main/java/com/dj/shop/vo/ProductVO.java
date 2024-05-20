@@ -17,13 +17,17 @@ public class ProductVO{
 	private Date proDate; //상품등록일
 	private int proCnt; //재고
 	private String proDel; //상품 삭제여부
-	
-	Integer first;  //페이징 
+
+	//페이징 
+	Integer first;  
 	Integer last;
 	
 	//카테고리
 	private String categoryName;
 	private int selected;
 	
-	//상품 카트 
+	//검색 기능
+	private String keyword;
+	
+
 }

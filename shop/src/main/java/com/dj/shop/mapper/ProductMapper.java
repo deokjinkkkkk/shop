@@ -28,4 +28,10 @@ public interface ProductMapper {
 	
 	//상품재고 확인
 	public int productCheck(int num);
+
+
+	//상품 검색
+	public List<ProductVO> productList(ProductVO vo);
+	
+
 }
