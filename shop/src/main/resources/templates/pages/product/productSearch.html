@@ -19,7 +19,7 @@
         <div class="row margin-bottom-40">
           <!-- BEGIN CONTENT -->
           <div class="col-md-12 col-sm-7">
-            <form action="product/search">
+            <form action="/product/search" method="get" id="searchForm">
             <div class="content-search margin-bottom-20">
               <div class="row">
                 <div class="col-md-6">
@@ -27,7 +27,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="input-group">
-                      <input type="text" name="keyword" placeholder="Search again" class="form-control">
+                      <input type="text" name="keyword" th:value="${keyword}" placeholder="Search again" class="form-control">
                       <span class="input-group-btn">
                         <button class="btn btn-primary" type="submit">Search</button>
                       </span>
@@ -41,12 +41,12 @@
               <div class="col-md-10 col-sm-10">
                 <div class="pull-right">
                   <label class="control-label">Show:</label>
-                  <select class="form-control input-sm" onchange="">
-                    <option value="#?pageunit=9" selected="selected">9</option>
-                    <option value="#?pageunit=21">21</option>
-                    <option value="#?pageunit=33">33</option>
-                    <option value="#?pageunit=45">45</option>
-                    <option value="#?pageunit=60">60</option>
+                  <select class="form-control input-sm" name="pageunit" onchange="pageunitChange()">
+                    <option value="9" selected="selected">9</option>
+                    <option value="21">21</option>
+                    <option value="33">33</option>
+                    <option value="45">45</option>
+                    <option value="60">60</option>
                   </select>
                 </div>
                 <div class="pull-right">
@@ -87,21 +87,22 @@
             </div>
             <!-- END PRODUCT LIST -->
             <!-- BEGIN PAGINATOR -->
-            <div class="row">
-              <div class="col-md-4 col-sm-4 items-info">Items 1 to 9 of 10 total</div>
-              <div class="col-md-8 col-sm-8">
-                <ul class="pagination pull-right">
-                  <li><a href="javascript:;">&laquo;</a></li>
-                  <li><a href="javascript:;">1</a></li>
-                  <li><span>2</span></li>
-                  <li><a href="javascript:;">3</a></li>
-                  <li><a href="javascript:;">4</a></li>
-                  <li><a href="javascript:;">5</a></li>
-                  <li><a href="javascript:;">&raquo;</a></li>
-                </ul>
-              </div>
-            </div>
-            <!-- END PAGINATOR -->
+		<div class="row">
+		  <div class="col-md-8 col-sm-8">
+		    <ul class="pagination pull-right">
+			  <li th:if="${pagination.startPage > 1}">
+			    <a th:href="|javascript:gopage(${pagination.startPage-1})|">&laquo;</a>
+			  </li>
+			  <li th:each="num : ${#numbers.sequence(pagination.startPage, pagination.endPage)}" th:if="${num != 1}">
+			    <a th:href="|javascript:gopage(${num})|">[[${num}]]</a>
+			  </li>
+              <li th:if="${pagination.endPage < pagination.lastPage}">
+                <a th:href="|javascript:gopage(${pagination.endPage+1})|">&raquo;</a>
+              </li>
+			</ul>
+		  </div>
+		</div>
+<!-- END PAGINATOR -->
           </div>
           <!-- END CONTENT -->
         </div>
@@ -109,13 +110,15 @@
       </div>
     </div>
 <script>
-  function pageunitchange(){
-    $.ajax({
-      url:,
-      type:,
-      data:,
-    })
+  
+  function gopage(page) {
+		let loc = window.location.href;
+    location.href = loc +"&page="+ page;
+}
+  function pageunitChange(){
+    $('#searchForm').submit();
   }
+  
 
 </script>
 </html>

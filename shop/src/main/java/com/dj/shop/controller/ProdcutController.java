@@ -144,7 +144,7 @@ public class ProdcutController {
 		vo.setLast(pagination.getLast());
 		//상품 페이지 출력
 		List<ProductVO> productList = productservice.productList(vo);
-	    
+	    model.addAttribute("keyword", vo.getKeyword());
 	    model.addAttribute("productList", productList);
 	    model.addAttribute("pagination", pagination);
 		logger.info("상품 완료");
