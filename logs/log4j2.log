@@ -1,2 +1,0 @@
-[2024-05-20 20:14:25.528]  INFO 14212 --- [nio-8090-exec-6] c.d.s.s.ProductServiceImpl               : get
-[2024-05-20 20:14:25.541]  INFO 14212 --- [nio-8090-exec-6] c.d.s.c.ProdcutController                : 상품 완료
