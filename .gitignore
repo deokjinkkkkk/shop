@@ -1,3 +1,4 @@
 logs/log4j2.2024-05-21-06-02.1.log.gz
-logs/log4j2.log
+logs/log4j2.**
 logs/log4j2.2024-05-21-06-03.1.log.gz
+logs/log4j2.2024-05-22-04-35.1.log.gz

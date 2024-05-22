@@ -49,7 +49,8 @@
                     <option value="60">60</option>
                   </select>
                 </div>
-                <div class="pull-right">
+                <!-- 가격대별 가나다순 정렬 미구현 -->
+                <!--<div class="pull-right">
                   <label class="control-label">Sort&nbsp;By:</label>
                   <select class="form-control input-sm">
                     <option value="#?sort=p.sort_order&amp;order=ASC" selected="selected">Default</option>
@@ -62,24 +63,24 @@
                     <option value="#?sort=p.model&amp;order=ASC">Model (A - Z)</option>
                     <option value="#?sort=p.model&amp;order=DESC">Model (Z - A)</option>
                   </select>
-                </div>
+                </div>-->
               </div>
             </div>
           </form>
             <!-- BEGIN PRODUCT LIST -->
             <div class="row product-list">
               <!-- PRODUCT ITEM START -->
-              <div class="col-md-4 col-sm-6 col-xs-12">
+              <div class="col-md-4 col-sm-6 col-xs-12" th:each="product : ${productList}">
                 <div class="product-item">
                   <div class="pi-img-wrapper">
-                    <img src="assets/pages/img/products/model1.jpg" class="img-responsive" alt="Berry Lace Dress">
+                    <img th:src="'/image/'+${product.proImg1}" class="img-responsive" th:alt="${product.proName}">
                     <div>
                       <a href="assets/pages/img/products/model1.jpg" class="btn btn-default fancybox-button">Zoom</a>
                       <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
                     </div>
                   </div>
-                  <h3><a href="shop-item.html">Berry Lace Dress</a></h3>
-                  <div class="pi-price">$29.00</div>
+                  <h3> <a th:href="@{/product/detail(proNum=${product.productNum})}" th:text="${product.proName}"></a></h3>
+                  <div class="pi-price" th:text="${product.proPrice}"></div>
                   <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
                 </div>
               </div>
