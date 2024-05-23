@@ -8,11 +8,120 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0"/>
-    </head>
-    <body>
-        <div>
-    
+        <style>
+            
+            .reviewlist {
+                font-family: Arial, sans-serif;
+                background-color: #f4f4f4;
+                margin: 50px;
+                padding: 50px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 40vh;
+            }
+            
+            .reviewlist .container {
+                background: white;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 0 10px rgba(0,0,0,0.1);
+                width: 90%;
+                max-width: 600px;
+            }
+            
+            .reviewlist h1, h2 {
+                text-align: center;
+            }
+            
+            .reviewlist .review-form, .reviewlist .reviews {
+                margin-top: 20px;
+            }
+            
+            .reviewlist label {
+                display: block;
+                margin-top: 10px;
+            }
+            
+            .reviewlist input[type="text"], .reviewlist textarea {
+                width: 100%;
+                padding: 10px;
+                margin-top: 5px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+            
+            .reviewlist button {
+                display: block;
+                width: 100%;
+                padding: 10px;
+                margin-top: 15px;
+                background-color: #5cb85c;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+            
+            .reviewlist button:hover {
+                background-color: #4cae4c;
+            }
+            
+            .reviewlist ul {
+                list-style-type: none;
+                padding: 0;
+            }
 
+            .reviewlist li {
+                background: #f9f9f9;
+                margin-top: 10px;
+                padding: 10px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+            }
+            
+                </style>
+    </head>
+    <div class="reviewlist">  
+        <div class="container">
+            <h1>리뷰 게시판</h1>
+            <div class="review-form">
+                <h2>리뷰 작성</h2>
+                <form id="reviewForm">
+                    <label for="name">이름:</label>
+                    <input type="text" id="name" name="name" required>
+                    <label for="review">리뷰:</label>
+                    <textarea id="review" name="review" required></textarea>
+                    <button type="submit">리뷰 작성</button>
+                </form>
+            </div>
+            <div class="reviews">
+                <h2>리뷰 목록</h2>
+                <ul id="reviewList">
+                    <!-- 리뷰 항목들이 여기에 추가됩니다 -->
+                </ul>
+            </div>
         </div>
-    </body>
+    </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+    const reviewForm = document.getElementById('reviewForm');
+    const reviewList = document.getElementById('reviewList');
+
+    reviewForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const name = document.getElementById('name').value;
+        const review = document.getElementById('review').value;
+
+        const li = document.createElement('li');
+        li.innerHTML = `<strong>${name}</strong><p>${review}</p>`;
+
+        reviewList.appendChild(li);
+
+        reviewForm.reset();
+    });
+});
+        </script>
+    
 </html>
