@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dj.shop.mapper.ReviewMapper">
     
-    <insert id="ReviewAdd">
+    <insert id="reviewAdd">
         insert into review(user_number,product_num,rev_star,rev_content)
         values(#{userNumber},#{productNum},#{revStar},#{revContent})
     </insert>

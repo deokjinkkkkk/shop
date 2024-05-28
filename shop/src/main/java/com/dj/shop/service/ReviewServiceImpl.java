@@ -14,7 +14,6 @@ public class ReviewServiceImpl implements ReviewService{
 	@Override
 	public int reviewAdd(ReviewVO vo) {
 		int result = review.reviewAdd(vo);
-		
 		return result;
 	}
 }
