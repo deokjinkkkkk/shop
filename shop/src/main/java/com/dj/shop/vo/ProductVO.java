@@ -5,7 +5,7 @@ import java.util.Date;
 import lombok.Data;
 
 @Data
-public class ProductVO{
+public class ProductVO extends Pagination{ 
 	private int productNum;
 	private int categoryNum; //카테고리 구분
 	private String proName; //상품이름
@@ -17,10 +17,6 @@ public class ProductVO{
 	private Date proDate; //상품등록일
 	private int proCnt; //재고
 	private String proDel; //상품 삭제여부
-
-	//페이징 
-	Integer first;  
-	Integer last;
 	
 	//카테고리
 	private String categoryName;

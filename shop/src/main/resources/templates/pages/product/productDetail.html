@@ -118,6 +118,7 @@
                         <div class="review-item-content">
                             <p >Sed velit quam, auctor id semper a, hendrerit eget justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Duis vel arcu pulvinar dolor tempus feugiat id in orci. Phasellus sed erat leo. Donec luctus, justo eget ultricies tristique, enim mauris bibendum orci, a sodales lectus purus ut lorem.</p>
                         </div>
+						
                       </div>
 
                       <!-- BEGIN FORM-->
@@ -142,6 +143,7 @@
                         <div class="padding-top-20">                  
                           <button type="submit" id="review_button" class="btn btn-primary">작성</button>
                         </div>
+						
                       <!-- END FORM--> 
                     </div>
                   </div>
@@ -229,8 +231,34 @@
 					} else if(result == 2){
 						alert("로그인후에 댓글등록이 가능합니다.")
 					}
+					if (result == 3) {
+						alert("리뷰를 작성한 상품 입니다.")
+					} 
 				}
 			})
 		})
+		function reviewlist(){
+			$.ajax({
+				url: '/review/list',
+				type : 'get',
+				data : {},
+				success : function(data){
+					let reviewText = '';
+					$(data).each(function(index,reviews){	
+						reviewText 	+='<div class="review-item-submitted">'
+						reviewText  +=' <strong>'+reviews.email+'</strong>'
+						reviewText  +='<em>'+reviews.revDate+'</em>'
+						reviewText  +='<div class="rateit" data-rateit-value="5" data-rateit-ispreset="true" data-rateit-readonly="true"></div>'
+						reviewText 	+='</div>'                                              
+						reviewText  +='<div class="review-item-content">'
+						reviewText  +='<p>'+reviews.revContent+'</p>'
+						reviewText	+='</div>';
+					})
+					$(".review-item clearfix").html(reviewText);
+				}
+			})
+			
+			
+		}
       </script>
 </html>

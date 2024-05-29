@@ -1,5 +1,7 @@
 package com.dj.shop.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,9 @@ import com.dj.shop.service.ReviewService;
 import com.dj.shop.service.UserService;
 import com.dj.shop.vo.ReviewVO;
 import com.dj.shop.vo.UserVO;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 @RestController
@@ -33,11 +38,15 @@ public class ReviewController {
 		}
 		uvo = user.userSelect(id);
 		int userNumber = uvo.getUserNumber();
-		
-		vo.setProductNum(userNumber);
+		vo.setUserNumber(userNumber);
 
-		logger.info("댓글 등록 완료");
 		return review.reviewAdd(vo);
+	}
+	
+	@GetMapping("/list")
+	public List<ReviewVO> getMethodName(ReviewVO rvo) {
+		List<ReviewVO> result = review.reviewList(rvo);
+		return result;
 	}
 	
 }

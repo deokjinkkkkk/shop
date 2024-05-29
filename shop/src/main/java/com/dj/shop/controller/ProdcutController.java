@@ -50,8 +50,6 @@ public class ProdcutController {
 	    //상품 개수를 페이징 처리하기 위해 넣어주기
 	    pagination.setTotalRecord(totalCount);
 	    //보여질 페이지 vo에 담아주기
-		vo.setFirst(pagination.getFirst());
-		vo.setLast(pagination.getLast());
 		//상품 페이지 출력
 		List<ProductVO> tableList = productservice.getAllSangpums(vo);
 	    // 사이드바 카테고리 데이터
