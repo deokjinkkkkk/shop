@@ -46,6 +46,7 @@ public class ReviewController {
 	@GetMapping("/list")
 	public List<ReviewVO> getMethodName(ReviewVO rvo) {
 		List<ReviewVO> result = review.reviewList(rvo);
+		logger.info("로그"+result);
 		return result;
 	}
 	

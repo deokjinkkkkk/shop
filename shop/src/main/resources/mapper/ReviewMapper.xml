@@ -13,15 +13,21 @@
         where product_num = #{productNum} AND user_number =#{userNumber}
     </select>
     <select id="reviewList" resultType="com.dj.shop.vo.ReviewVO">
-    SELECT *
-	FROM (
-    	SELECT 
-        ROW_NUMBER() OVER (ORDER BY r.rev_num) AS rn,  
-        p.*,r.*
-    	FROM PRODUCT p
-    	JOIN review r ON p.product_num = r.product_num
-    	WHERE r.product_num = #{productNum}
-	) AS numbered_products
-	WHERE rn BETWEEN #{first} AND #{last}
+        SELECT *
+        FROM (
+            SELECT 
+            ROW_NUMBER() OVER (ORDER BY r.rev_num) AS rn,  
+            r.*,u.email
+            FROM PRODUCT p
+            JOIN review r ON p.product_num = r.product_num
+            join users u on r.user_number = u.user_number
+            WHERE r.product_num = #{productNum}
+        ) AS numbered_products
+        WHERE rn BETWEEN #{first} AND #{last}
+    </select>
+    <select id="reviewCount" resultType="int">
+        select count(rev_num)
+        from review
+        where product_num = #{productNum}
     </select>
 </mapper>

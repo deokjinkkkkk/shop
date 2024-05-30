@@ -24,6 +24,8 @@
 		.rate input input:checked ~ label:hover,
 		.rate input:checked ~ .rate label:hover ~ label,  
 		.rate label:hover ~ input:checked ~ label { color: #f73c32 !important;  } 
+		.rate2{background: url(https://aldo814.github.io/jobcloud/html/images/user/star_bg02.png) no-repeat;width: 121px;height: 20px;position: relative;display: inline-block;}
+		.rate2 span{position: absolute;background: url(https://aldo814.github.io/jobcloud/html/images/user/star02.png);width: auto;height: 20px;}
 		</style>
       </head>
       
@@ -106,21 +108,16 @@
                   </ul>
                   <div id="myTabContent" class="tab-content">
                     <div class="tab-pane fade in active" id="Reviews">
-                      <!--<p>There are no reviews for this product.</p>-->
-                      <div class="review-item clearfix">
-                        <div class="review-item-submitted">
-                          <strong >Bob</strong>
-						 
-						<em>30/12/2013 - 07:37</em>
-                          <div class="rateit" data-rateit-value="5" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
-                        </div>
-						                                              
-                        <div class="review-item-content">
-                            <p >Sed velit quam, auctor id semper a, hendrerit eget justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Duis vel arcu pulvinar dolor tempus feugiat id in orci. Phasellus sed erat leo. Donec luctus, justo eget ultricies tristique, enim mauris bibendum orci, a sodales lectus purus ut lorem.</p>
-                        </div>
-						
+                     
+                      <div class="review-item clearfix">	
                       </div>
-
+					  <div class="row">
+						<div class="col-md-8 col-sm-8">
+							<ul class="pagination pull-right" id="pagination">
+								<!-- 페이지네이션 항목들이 여기에 동적으로 추가됩니다 -->
+							</ul>
+						</div>
+					</div>
                       <!-- BEGIN FORM-->
                         <h2>리뷰 작성</h2>
 						<fieldset class="rate">
@@ -211,12 +208,13 @@
 		$("#review_button").click("on",function(){
 			let review = $("#reviewText").val()
 			let revStar = $("input[name='rating']:checked").val();
-			console.log(revStar)
 			if (review == "") {
 				alert("내용을 작성해 주세요")
+				return;
 			}
 			if(revStar == undefined){
 				alert("별점을 입력해주세요")
+				return;
 			}
 			$.ajax({
 				url : "/review/add",
@@ -228,6 +226,7 @@
 				success : function(result){
 					if (result == 1) {
 						alert("등록완료")
+						reviewlist()
 					} else if(result == 2){
 						alert("로그인후에 댓글등록이 가능합니다.")
 					}
@@ -241,24 +240,39 @@
 			$.ajax({
 				url: '/review/list',
 				type : 'get',
-				data : {},
+				data : {productNum : productNum},
 				success : function(data){
 					let reviewText = '';
 					$(data).each(function(index,reviews){	
 						reviewText 	+='<div class="review-item-submitted">'
-						reviewText  +=' <strong>'+reviews.email+'</strong>'
+						reviewText  +='<div class="rate2"> <span style="width: '+reviews.revStar+'0%"></span> </div>'
+						reviewText  +='<strong>'+reviews.email+'</strong>'
 						reviewText  +='<em>'+reviews.revDate+'</em>'
-						reviewText  +='<div class="rateit" data-rateit-value="5" data-rateit-ispreset="true" data-rateit-readonly="true"></div>'
-						reviewText 	+='</div>'                                              
+						reviewText  +='<div class="rateit" data-rateit-value="" data-rateit-ispreset="true" data-rateit-readonly="true"></div>'
+						reviewText 	+='</div>'			                     
 						reviewText  +='<div class="review-item-content">'
 						reviewText  +='<p>'+reviews.revContent+'</p>'
 						reviewText	+='</div>';
 					})
-					$(".review-item clearfix").html(reviewText);
+					$(".review-item.clearfix").html(reviewText);
+					let paginationText = '';
+                    if (data.pagination.startPage > 1) {
+                        paginationText += '<li><a href="javascript:gopage(' + (data.pagination.startPage - 1) + ')">&laquo;</a></li>';
+                    }
+                    for (let num = data.pagination.startPage; num <= data.pagination.endPage; num++) {
+                        if (num != 1) {
+                            paginationText += '<li><a href="javascript:gopage(' + num + ')">' + num + '</a></li>';
+                        }
+                    }
+                    if (data.pagination.endPage < data.pagination.lastPage) {
+                        paginationText += '<li><a href="javascript:gopage(' + (data.pagination.endPage + 1) + ')">&raquo;</a></li>';
+                    }
+                    $("#pagination").html(paginationText);
 				}
-			})
-			
-			
+			})		
 		}
+		$(document).ready(function(){
+        	reviewlist()
+        })
       </script>
 </html>
