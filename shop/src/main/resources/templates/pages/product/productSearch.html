@@ -10,6 +10,8 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <meta name="viewport"
               content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0"/>
+
+        <script th:src="@{/assets/pages/scripts/productSearch.js}" type="text/javascript"></script>
  </head>
 
 <div class="main">
@@ -110,16 +112,4 @@
         <!-- END SIDEBAR & CONTENT -->
       </div>
     </div>
-<script>
-  
-  function gopage(page) {
-		let loc = window.location.href;
-    location.href = loc +"&page="+ page;
-}
-  function pageunitChange(){
-    $('#searchForm').submit();
-  }
-  
-
-</script>
 </html>

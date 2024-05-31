@@ -11,6 +11,7 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <meta name="viewport"
               content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0"/>
+        <script th:src="@{/assets/pages/scripts/productUpdate.js}" type="text/javascript"></script>
       </head>
 <!-- BEGIN SIDEBAR & CONTENT -->
         <div class="row margin-bottom-40 conatiner">
@@ -95,23 +96,6 @@
 </div>
    
 <script type="text/javascript">
-function previewImage(input, previewId) {
-    var preview = document.getElementById(previewId);
-    var file = input.files[0];
 
-    if (file) {
-        var reader = new FileReader();
-
-        reader.onload = function (e) {
-            preview.src = e.target.result
-           
-            	preview.setAttribute('data-BigImgsrc', e.target.result);
-
-            
-        };
-
-        reader.readAsDataURL(file);
-    }
-}
 </script>
 </html>
