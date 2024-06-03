@@ -60,7 +60,6 @@ public class MypageController {
 	
 	@GetMapping("/wishlist")
 	public String wishlist() {
-		
 		return "pages/user/wishlist";
 	}
 }
