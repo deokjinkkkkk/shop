@@ -13,6 +13,11 @@ import com.dj.shop.service.AddressService;
 import com.dj.shop.service.UserService;
 import com.dj.shop.vo.AddressVO;
 import com.dj.shop.vo.UserVO;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestBody;
+
+
 
 @Controller
 @RequestMapping("/myPage")
@@ -62,4 +67,18 @@ public class MypageController {
 	public String wishlist() {
 		return "pages/user/wishlist";
 	}
+	@GetMapping("/mypage/checkWishiList")
+	@ResponseBody
+	public String getMethodName(@RequestParam("productNum") String productNum) {
+		return new String();
+	}
+	@PostMapping("/mypage/changeWishiList")
+	@ResponseBody
+	public String postMethodName(@RequestBody String entity) {
+		//TODO: process POST request
+		
+		return entity;
+	}
+	
+	
 }

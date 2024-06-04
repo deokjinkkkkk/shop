@@ -113,3 +113,48 @@ function reviewlist(){
         }
     });
 }
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    checkWishlistStatus(1);  // 초기 로드 시 상품 ID 1의 위시리스트 상태 확인
+});
+
+function checkWishlistStatus(productNum) {
+    // 서버에 현재 상품의 위시리스트 상태를 요청합니다.
+    fetch(`/mypage/checkWishiList?productNum=${productNum}`)
+        .then(response => response.json())
+        .then(data => {
+            const wishlistButton = $('#wishlist-button');
+            if (data.inWishlist) {
+                wishlistButton.textContent = '★';
+            } else {
+                wishlistButton.textContent = '☆';
+            }
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+}
+
+function toggleWishlist(productId) {
+    const wishlistButton = document.getElementById('wishlist-button');
+    const action = wishlistButton.textContent === '☆' ? 'add' : 'remove';
+
+    fetch(`/mypage/changeWishiList`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ productId: productId, action: action }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            wishlistButton.textContent = action === 'add' ? '★' : '☆';
+        } else {
+            alert('Failed to update wishlist.');
+        }
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+}

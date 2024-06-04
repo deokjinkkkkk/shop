@@ -1,3 +1,4 @@
+/*별점 css*/
 @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
        	.rate { display: inline-block;border: 0;margin-right: 15px;}
 		.rate > input {display: none;}
@@ -12,3 +13,16 @@
 		.rate label:hover ~ input:checked ~ label { color: #f73c32 !important;  } 
 		.rate2{background: url(https://aldo814.github.io/jobcloud/html/images/user/star_bg02.png) no-repeat;width: 121px;height: 20px;position: relative;display: inline-block;}
 		.rate2 span{position: absolute;background: url(https://aldo814.github.io/jobcloud/html/images/user/star02.png);width: auto;height: 20px;}
+		/*즐겨찾기 css*/
+		.bookmark-button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 2rem;
+            color: gold;
+            transition: transform 0.2s;
+        }
+
+        .bookmark-button:hover {
+            transform: scale(1.2);
+        }

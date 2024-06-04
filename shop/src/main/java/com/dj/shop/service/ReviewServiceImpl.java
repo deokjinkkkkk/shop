@@ -31,7 +31,6 @@ private static final org.slf4j.Logger logger =org.slf4j.LoggerFactory.getLogger(
 	public List<ReviewVO> reviewList(ReviewVO vo) {
 		int count = review.reviewCount(vo);	
 		vo.setTotalRecord(count);
-		logger.info(""+vo.getProductNum());
 		return review.reviewList(vo);
 	}
 }
