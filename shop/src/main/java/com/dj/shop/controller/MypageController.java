@@ -11,8 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.dj.shop.service.AddressService;
 import com.dj.shop.service.UserService;
+import com.dj.shop.service.wishilistService;
 import com.dj.shop.vo.AddressVO;
 import com.dj.shop.vo.UserVO;
+import com.dj.shop.vo.WishlistVO;
+
+
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,6 +32,9 @@ public class MypageController {
 	@Autowired
 	AddressService addressService;
 	
+	@Autowired
+	wishilistService wishilist;
+
 	@GetMapping("/myAddress")
 	public String myAddress(UserVO vo, HttpServletRequest request,Model model) {
 		/*세션 값을 통해서 유저 번호 가지고오기*/
@@ -69,15 +76,21 @@ public class MypageController {
 	}
 	@GetMapping("/mypage/checkWishiList")
 	@ResponseBody
-	public String getMethodName(@RequestParam("productNum") String productNum) {
-		return new String();
+	public int wishiListCheck(@RequestParam("productNum") int productNum,WishlistVO vo) {
+		int result = wishilist.checkWishiList(vo);
+		return result;
 	}
 	@PostMapping("/mypage/changeWishiList")
 	@ResponseBody
-	public String postMethodName(@RequestBody String entity) {
-		//TODO: process POST request
+	public int addWishiList(@RequestParam("productNum") int productNum,UserVO uvo,HttpServletRequest request,WishlistVO vo)) {
+		String id = (String) request.getSession().getAttribute("email");
+		uvo.setEmail(id);
+		uvo =userService.userSelect(id);
+		vo.setUserNumber(uvo.getUserNumber());
+		int result = wishilist.addWishiList(vo);
 		
-		return entity;
+		
+		return result;
 	}
 	
 	

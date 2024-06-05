@@ -2,14 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dj.shop.mapper.WishiListMapper">
 	<select id="checkWishiList" resultType="com.dj.shop.vo.AddressVO">
-	select *
+	select count(wishilist_Num)
     FROM wishlist
     where wishilist_Num = #{wishilistNum} AND user_number = #{userNumber}
 	</select>
 
 	<select id="getWishiList" resultType="com.dj.shop.vo.AddressVO">
-	select *
-    FROM wishilist
+	select w.*,p.pro_name,p.proPrice,p.pro_img1
+    FROM wishilist w JOIN product p 
+	on w.product_num = p.product_num
     where user_number = #{userNumber}
 	</select>
 	<insert id="addWishiList">
