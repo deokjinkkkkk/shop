@@ -1,27 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dj.shop.mapper.WishiListMapper">
-	<select id="checkWishiList" resultType="com.dj.shop.vo.AddressVO">
-	select count(wishilist_Num)
+	<select id="checkWishiList" resultType="int">
+	select count(*)
     FROM wishlist
-    where wishilist_Num = #{wishilistNum} AND user_number = #{userNumber}
+    where product_num= #{productNum} AND user_number = #{userNumber}
 	</select>
 
-	<select id="getWishiList" resultType="com.dj.shop.vo.AddressVO">
+	<select id="getWishiList" resultType="com.dj.shop.vo.WishlistVO">
 	select w.*,p.pro_name,p.proPrice,p.pro_img1
     FROM wishilist w JOIN product p 
 	on w.product_num = p.product_num
     where user_number = #{userNumber}
 	</select>
-	<insert id="addWishiList">
-	insert into wishilist(product_num,user_number)
-	values(#{productNum},#{userNumber})
-	</insert>
+<insert id="addWishiList">
+    insert into wishlist(product_num, user_number)
+    values(#{productNum}, #{userNumber})
+</insert>
 
-	
-	<delete id="removeWishiList">
-	Delete FROM address
-	where wishilist_num = #{wisilistNum}
-	
-	</delete>
+<delete id="removeWishiList">
+    delete from wishlist
+    where product_num = #{productNum} and user_number = #{userNumber}
+</delete>
 </mapper>

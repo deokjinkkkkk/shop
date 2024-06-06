@@ -121,14 +121,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 function checkWishlistStatus(productNum) {
     // 서버에 현재 상품의 위시리스트 상태를 요청합니다.
-    fetch(`/mypage/checkWishiList?productNum=${productNum}`)
+    fetch(`/myPage/checkWishiList?productNum=${productNum}`)
         .then(response => response.json())
         .then(data => {
             const wishlistButton = $('#wishlist-button');
-            if (data.inWishlist) {
-                wishlistButton.textContent = '★';
+            if (data == 1) {
+                wishlistButton.text('★');
             } else {
-                wishlistButton.textContent = '☆';
+                wishlistButton.text('☆');
             }
         })
         .catch((error) => {
@@ -136,10 +136,11 @@ function checkWishlistStatus(productNum) {
         });
 }
 
-function toggleWishlist(productNum) {
+function toggleWishlist() {
+    const productNum = $("input[name='productNum']").val();
     const wishlistButton = $('#wishlist-button');
-    const action = wishlistButton.textContent === '☆' ? 'add' : 'remove';
-    fetch(`/mypage/changeWishiList`, {
+    const action = wishlistButton.text() === '☆' ? 'add' : 'remove'; 
+    fetch(`/myPage/changeWishiList`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -148,10 +149,11 @@ function toggleWishlist(productNum) {
     })
     .then(response => response.json())
     .then(data => {
-        if (data.success) {
-            wishlistButton.textContent = action === 'add' ? '★' : '☆';
+        if (data == 1) {
+            wishlistButton.text(action === 'add' ? '★' : '☆');
         } else {
-            alert('Failed to update wishlist.');
+            alert(data.result);
+            console.log(data)
         }
     })
     .catch((error) => {

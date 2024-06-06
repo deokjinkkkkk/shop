@@ -1,5 +1,7 @@
 package com.dj.shop.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 @Controller
 @RequestMapping("/myPage")
 public class MypageController {
+	private static final org.slf4j.Logger logger =org.slf4j.LoggerFactory.getLogger(ProdcutController.class);
 	@Autowired
 	UserService userService;
 	
@@ -74,21 +77,37 @@ public class MypageController {
 	public String wishlist() {
 		return "pages/user/wishlist";
 	}
-	@GetMapping("/mypage/checkWishiList")
+	@GetMapping("/checkWishiList")
 	@ResponseBody
-	public int wishiListCheck(@RequestParam("productNum") int productNum,WishlistVO vo) {
+	public int wishiListCheck(@RequestParam("productNum") int productNum,WishlistVO vo,HttpServletRequest request) {
+		
+		String id = (String) request.getSession().getAttribute("email");
+		UserVO uvo = userService.userSelect(id);
+		vo.setUserNumber(uvo.getUserNumber());
+		vo.setProductNum(productNum);
 		int result = wishilist.checkWishiList(vo);
+		logger.info(productNum + " " +vo.getUserNumber() + " " + result);
 		return result;
 	}
-	@PostMapping("/mypage/changeWishiList")
+	@PostMapping("/changeWishiList")
 	@ResponseBody
-	public int addWishiList(@RequestParam("productNum") int productNum,UserVO uvo,HttpServletRequest request,WishlistVO vo)) {
-		String id = (String) request.getSession().getAttribute("email");
-		uvo.setEmail(id);
-		uvo =userService.userSelect(id);
-		vo.setUserNumber(uvo.getUserNumber());
-		int result = wishilist.addWishiList(vo);
+	public int changeWishiList(@RequestBody Map<String, Object> payload, HttpServletRequest request) {
+		int productNum = Integer.parseInt(payload.get("productNum").toString());
+    	String action = (String) payload.get("action");
 		
+		String id = (String) request.getSession().getAttribute("email");
+		UserVO uvo = userService.userSelect(id);
+		WishlistVO vo = new WishlistVO();
+		vo.setUserNumber(uvo.getUserNumber());
+		vo.setProductNum(productNum);
+		logger.info(productNum+"");
+		logger.info(vo.getUserNumber() + "");
+		int result = 0;
+		if ("add".equals(action)) {
+			result = wishilist.addWishiList(vo);
+		} else if ("remove".equals(action)) {
+			result = wishilist.removeWishiList(vo);
+		}
 		
 		return result;
 	}
