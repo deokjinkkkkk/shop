@@ -74,7 +74,12 @@ public class MypageController {
 	}
 	
 	@GetMapping("/wishlist")
-	public String wishlist() {
+	public String wishlist(WishlistVO vo,HttpServletRequest request,Model model) {
+		String email = (String)request.getSession().getAttribute("email");
+		UserVO uvo = new UserVO();
+		uvo = userService.userSelect(email);
+		vo.setUserNumber(uvo.getUserNumber());
+		model.addAttribute("wishilist", wishilist.getWishiList(vo));
 		return "pages/user/wishlist";
 	}
 	@GetMapping("/checkWishiList")
