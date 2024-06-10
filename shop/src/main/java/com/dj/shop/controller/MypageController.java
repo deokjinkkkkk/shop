@@ -12,9 +12,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.dj.shop.service.AddressService;
+import com.dj.shop.service.OrderService;
 import com.dj.shop.service.UserService;
 import com.dj.shop.service.wishilistService;
 import com.dj.shop.vo.AddressVO;
+import com.dj.shop.vo.OrderPageVO;
+import com.dj.shop.vo.OrdersVO;
 import com.dj.shop.vo.UserVO;
 import com.dj.shop.vo.WishlistVO;
 
@@ -37,6 +40,9 @@ public class MypageController {
 	
 	@Autowired
 	wishilistService wishilist;
+
+	@Autowired
+	OrderService order;
 
 	@GetMapping("/myAddress")
 	public String myAddress(UserVO vo, HttpServletRequest request,Model model) {
@@ -116,6 +122,25 @@ public class MypageController {
 		
 		return result;
 	}
+	@PostMapping("/delProduct")
+	public String postMethodName(WishlistVO vo, HttpServletRequest request) {
+		String id = (String) request.getSession().getAttribute("email");
+		UserVO uvo = userService.userSelect(id);
+		vo.setUserNumber(uvo.getUserNumber());
+		logger.info(vo.getProductNum()+"");
+		wishilist.removeWishiList(vo);
+		
+		return "redirect:/myPage/wishlist";
+	}
 	
+	@GetMapping("/orderList")
+	public String orderListForm(OrdersVO vo,HttpServletRequest request,Model model) {
+		String email = (String)request.getSession().getAttribute("email");
+		UserVO uvo = new UserVO();
+		uvo = userService.userSelect(email);
+		vo.setUserNumber(uvo.getUserNumber());
+		model.addAttribute("orderList", order.getOrdersInfo(vo));
+		return "pages/user/wishlist";
+	}
 	
 }

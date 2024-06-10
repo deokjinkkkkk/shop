@@ -19,8 +19,7 @@ public class wishilistServiceImpl implements wishilistService{
 
     @Override
     public List<WishlistVO> getWishiList(WishlistVO wvo) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getWishiList'");
+        return wish.getWishiList(wvo);
     }
 
     @Override

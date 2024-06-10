@@ -11,11 +11,6 @@
 	insert into address(user_number,add_name,add_zip,add_addr,add_addr2,add_tel,add_req)
 	values(#{userNumber},#{addName},#{addZip},#{addAddr},#{addAddr2},#{addTel},#{addReq})
 	</insert>
-	
-	<update id="updateAddress" >
-	
-	</update>
-	
 	<delete id="deleteAddress">
 	Delete FROM address
 	where add_num = #{addNum}
