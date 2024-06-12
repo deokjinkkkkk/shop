@@ -1,5 +1,7 @@
 package com.dj.shop.mapper;
 
+import java.util.List;
+
 import com.dj.shop.vo.OrderVO;
 import com.dj.shop.vo.OrdersItemVO;
 import com.dj.shop.vo.OrdersVO;
@@ -17,7 +19,7 @@ public interface OrderMapper {
 	/*주문 재고 변경*/
 	public int deleteCnt(ProductVO pvo);
 	/*주문 내역 (유저)*/
-	public OrdersVO getOrdersInfo(OrdersVO vo);
+	public List<OrdersVO> getOrdersInfo(int userNumber);
 	/*주문 취소 (미구현)*/
 	public int deleteOrder(int OrderNum);
 

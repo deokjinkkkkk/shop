@@ -4,37 +4,49 @@
       layout:decorate="~{common/layouts/layout}"
       layout:fragment="Content">
 <head>
-      <!--Common Head-->
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <meta name="viewport"
-              content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0"/>
-        
- </head>
- <div class="container mt-5">
-      <h2>주문 목록</h2>
-      <div class="card-deck">
-          <div class="card">
-              <div class="card-body">
-                  <h5 class="card-title">주문 번호: 001</h5>
-                  <p class="card-text">고객 이름: 홍길동</p>
-                  <p class="card-text">상품명: 노트북</p>
-                  <p class="card-text">수량: 1</p>
-                  <p class="card-text">가격: ₩1,200,000</p>
-                  <p class="card-text"><small class="text-muted">주문 날짜: 2024-06-10</small></p>
-              </div>
-          </div>
-          <div class="card">
-              <div class="card-body">
-                  <h5 class="card-title">주문 번호: 002</h5>
-                  <p class="card-text">고객 이름: 이영희</p>
-                  <p class="card-text">상품명: 스마트폰</p>
-                  <p class="card-text">수량: 2</p>
-                  <p class="card-text">가격: ₩800,000</p>
-                  <p class="card-text"><small class="text-muted">주문 날짜: 2024-06-11</small></p>
-              </div>
-          </div>
-      </div>
-  </div>
- </html>
+    <!--Common Head-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+</head>
+<body>
+    <div class="main">
+        <div class="container mt-5">
+            <ul class="breadcrumb">
+                <li><a href="/">Home</a></li>
+                <li><a>마이페이지</a></li>
+                <li class="active">주소지</li>
+            </ul>
+            <!-- BEGIN SIDEBAR & CONTENT -->
+            <div class="row margin-bottom-40">
+                <!-- BEGIN SIDEBAR -->
+                <div class="sidebar col-md-3 col-sm-3">
+                    <ul class="list-group margin-bottom-25 sidebar-menu">
+                        <li class="list-group-item clearfix"><a href="javascript:;"><i class="fa fa-angle-right"></i> 주문목록</a></li>
+                        <li class="list-group-item clearfix dropdown active"><a href="javascript:;"><i class="fa fa-angle-right"></i> 주소지</a></li>
+                        <li class="list-group-item clearfix"><a href="javascript:;"><i class="fa fa-angle-right"></i> 위시리스트</a></li>
+                        <li class="list-group-item clearfix"><a href="javascript:;"><i class="fa fa-angle-right"></i> 리뷰 작성목록</a></li>
+                    </ul>
+                </div>
+                <!-- END SIDEBAR -->
+                <div class="col-md-9 col-sm-7">
+                    <h2>주문 목록</h2>
+                    <div class="card-deck">
+                        <!-- 주문 목록을 Thymeleaf를 통해 동적으로 렌더링 -->
+                        <div th:each="order : ${orderList}" class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">주문 번호: <span th:text="${order.orderNum}"></span></h5>
+                                <p class="card-text">상품명: <span th:text="${order.productName}"></span></p>
+                                <p class="card-text">수량: <span th:text="${order.quantity}"></span></p>
+                                <p class="card-text">가격: <span th:text="${order.price}"></span></p>
+                                <p class="card-text"><small class="text-muted">주문 날짜: <span th:text="${order.orderDate}"></span></small></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END SIDEBAR & CONTENT -->
+        </div>
+    </div>
+</body>
+</html>

@@ -30,11 +30,32 @@
 	where product_num = #{productNum}
 	</update>
 
-	<select id="getOrdersInfo">
+	<select id="getOrdersInfo" resultMap="orderResultMap" parameterType="int">
 	select s.*,i.order_price,i.order_dnum,i.product_num,i.order_cnt
 	from orders s join order_item i
 	on s.order_num = i.order_num 
 	where s.user_number = #{userNumber}
 	</select>
 
+	<resultMap id="orderResultMap" type="com.dj.shop.vo.OrdersVO">
+        <id property="orderNum" column="order_num" />
+        <result property="userNumber" column="user_number" />
+        <result property="orderDate" column="order_date" />
+        <result property="orderState" column="order_state" />
+        <result property="orderZip" column="order_zip" />
+        <result property="orderAdd1" column="order_add1" />
+        <result property="orderAdd2" column="order_add2" />
+        <result property="tel" column="tel" />
+        <result property="name" column="name" />
+        <result property="orderReq" column="order_req" />
+        <result property="proImg1" column="pro_img1" />
+
+        <collection property="orders" ofType="com.dj.shop.vo.OrdersItemVO">
+            <result property="orderDnum" column="order_dnum" />
+            <result property="orderNum" column="order_num" />
+            <result property="productNum" column="product_num" />
+            <result property="orderPrice" column="order_price" />
+            <result property="orderCnt" column="order_cnt" />
+        </collection>
+    </resultMap>
 </mapper>

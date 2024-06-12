@@ -1,5 +1,6 @@
 package com.dj.shop.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -138,9 +139,9 @@ public class MypageController {
 		String email = (String)request.getSession().getAttribute("email");
 		UserVO uvo = new UserVO();
 		uvo = userService.userSelect(email);
-		vo.setUserNumber(uvo.getUserNumber());
-		model.addAttribute("orderList", order.getOrdersInfo(vo));
-		return "pages/user/wishlist";
+		List<OrdersVO> orderList = order.getOrdersInfo(uvo.getUserNumber());
+		model.addAttribute("orderList", orderList);
+		return "pages/user/orderlist";
 	}
 	
 }

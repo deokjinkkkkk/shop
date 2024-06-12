@@ -103,9 +103,9 @@ public class OrderServiceImpl implements OrderService {
 
 
 	@Override
-	public List<OrdersVO> getOrdersInfo(OrdersVO vo) {
-		
-		return  getOrdersInfo(vo);
+	public List<OrdersVO> getOrdersInfo(int userNumber) {
+
+		return  order.getOrdersInfo(userNumber);
 	}
 
 }

@@ -13,7 +13,7 @@ public interface OrderService {
 	public void order(OrdersVO vo);
 
 	/*주문 목록 */
-	public List<OrdersVO> getOrdersInfo(OrdersVO vo);
+	public List<OrdersVO> getOrdersInfo(int userNumber);
 	/*주문 취소 */
 
 
