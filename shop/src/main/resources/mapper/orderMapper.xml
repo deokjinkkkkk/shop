@@ -31,9 +31,10 @@
 	</update>
 
 	<select id="getOrdersInfo" resultMap="orderResultMap" parameterType="int">
-	select s.*,i.order_price,i.order_dnum,i.product_num,i.order_cnt
-	from orders s join order_item i
-	on s.order_num = i.order_num 
+	select s.*,i.order_price,i.order_dnum,i.product_num,i.order_cnt,p.pro_name
+	from orders s
+    join order_item i on s.order_num = i.order_num
+    join product p on i.product_num = p.product_num
 	where s.user_number = #{userNumber}
 	</select>
 

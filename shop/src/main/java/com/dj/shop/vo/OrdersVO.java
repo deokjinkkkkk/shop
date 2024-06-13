@@ -8,7 +8,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class OrdersVO {
+public class OrdersVO{
 	/*주문 정보*/
 	private String orderNum;
 	private int userNumber;
