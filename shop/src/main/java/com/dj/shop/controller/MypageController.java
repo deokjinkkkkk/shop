@@ -17,7 +17,6 @@ import com.dj.shop.service.OrderService;
 import com.dj.shop.service.UserService;
 import com.dj.shop.service.wishilistService;
 import com.dj.shop.vo.AddressVO;
-import com.dj.shop.vo.OrderPageVO;
 import com.dj.shop.vo.OrdersVO;
 import com.dj.shop.vo.UserVO;
 import com.dj.shop.vo.WishlistVO;
@@ -141,6 +140,7 @@ public class MypageController {
 		uvo = userService.userSelect(email);
 		List<OrdersVO> orderList = order.getOrdersInfo(uvo.getUserNumber());
 		model.addAttribute("orderList", orderList);
+		logger.info(orderList.get(0)+"");
 		return "pages/user/orderlist";
 	}
 	

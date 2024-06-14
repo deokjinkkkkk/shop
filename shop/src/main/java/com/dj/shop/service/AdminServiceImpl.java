@@ -26,7 +26,6 @@ public class AdminServiceImpl implements AdminService{
     }
     @Override
     public int getOrderTotal(OrdersVO vo) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getOrderTotal'");
     }
 

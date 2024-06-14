@@ -38,7 +38,6 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public UserVO getUserInfo(int userNumber) {
-		// TODO Auto-generated method stub
 		return user.getUserInfo(userNumber);
 	}
 

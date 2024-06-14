@@ -3,11 +3,9 @@ package com.dj.shop.vo;
 import java.util.Date;
 import java.util.List;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class OrdersVO{
 	/*주문 정보*/
 	private String orderNum;
@@ -23,7 +21,7 @@ public class OrdersVO{
 	private String proImg1; // 상품이미지
 	
 	private List<OrdersItemVO> orders;
-	
+	private List<ProductVO> products;
 	/*페이징 처리 */
 	Integer first;
 	Integer last;

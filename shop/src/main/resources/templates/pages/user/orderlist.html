@@ -36,9 +36,9 @@
                         <div th:each="order : ${orderList}" class="card">
                             <div class="card-body">
                                 <h5 class="card-title">주문 번호: <span th:text="${order.orderNum}"></span></h5>
-                                <p class="card-text">상품명: <span th:text="${order.productName}"></span></p>
-                                <p class="card-text">수량: <span th:text="${order.quantity}"></span></p>
-                                <p class="card-text">가격: <span th:text="${order.price}"></span></p>
+                                <p class="card-text">상품명: <span th:each="product : ${order.products}" th:text="${product.proName}"></span></p>
+                                <p class="card-text">수량: <span th:each="ord : ${order.orders}" th:text="${ord.orderCnt}"></span></p>
+                                <p class="card-text">가격: <span th:each="ord : ${order.orders}" th:text="${ord.orderPrice}"></span></p>
                                 <p class="card-text"><small class="text-muted">주문 날짜: <span th:text="${order.orderDate}"></span></small></p>
                             </div>
                         </div>

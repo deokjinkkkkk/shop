@@ -58,5 +58,8 @@
             <result property="orderPrice" column="order_price" />
             <result property="orderCnt" column="order_cnt" />
         </collection>
+		<collection property="products" ofType="com.dj.shop.vo.ProductVO">
+			<result property="proName" column="pro_name" />
+		</collection>
     </resultMap>
 </mapper>
