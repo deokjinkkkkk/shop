@@ -1,21 +1,22 @@
 <!DOCTYPE html>
-<!--���̺귯�� ���� : Thymeleaf & Thymeleaf Layout -->
+
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
       <head>
+        <!-- config-->
         <config th:replace="common/fragments/config::ConfigFragment"></config>
 
       </head>
-    <body><!--config ������ �����մϴ�.-->
+    <body>
         
-        <!--Header ������ �����մϴ�.-->
+        <!--Header -->
         <header th:replace="common/fragments/header::HeaderFragment"></header>
     
-        <!--Content ���� ������ �����մϴ�-->
+        <!--Content -->
         <th:block layout:fragment="Content"></th:block>
     
-        <!--Footer ������ �����մϴ�.-->
+        <!--Footer -->
         <footer th:replace="common/fragments/footer::FooterFragment"></footer>
 
                 
