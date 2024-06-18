@@ -15,8 +15,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.dj.shop.mapper.ProductMapper;
 import com.dj.shop.vo.ProductVO;
 
-import lombok.extern.log4j.Log4j;
 import lombok.extern.log4j.Log4j2;
+import net.coobird.thumbnailator.Thumbnails;
 
 @Service
 @Log4j2
@@ -81,23 +81,33 @@ public class ProductServiceImpl implements ProductService{
 				
 	}
 
-	@Override
-	public String saveImage(MultipartFile file, String saveFolder) {
-		String fileName = null;
-		if (file != null && !file.isEmpty()) {
+	 @Override
+    public String saveImage(MultipartFile file, String saveFolder) {
+        String fileName = null;
+        if (file != null && !file.isEmpty()) {
             try {
-            	fileName = UUID.randomUUID().toString() + file.getOriginalFilename();
+                // 고유한 파일 이름 생성
+                fileName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
                 File uploadFile = new File(saveFolder, fileName);
-                // 파일을 서버에 업로드
-                file.transferTo(uploadFile);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-           
+
+                // 임시 파일로 저장
+                File tempFile = File.createTempFile("upload-", file.getOriginalFilename());
+                file.transferTo(tempFile);
+
+                // 이미지 크기 조정 (예: 800x600)
+                Thumbnails.of(tempFile)
+                          .size(800, 600)
+                          .toFile(uploadFile);
+
+                // 임시 파일 삭제
+                tempFile.delete();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-		return fileName;
-		
-	}
+        return fileName;
+    }
 
 	@Override
 	public List<ProductVO> categoryList(ProductVO vo) {

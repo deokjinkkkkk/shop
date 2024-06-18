@@ -12,7 +12,8 @@ $(document).ready(function() {
   }
 
   // Show the Sign In form
-  $signInBtn.click(() => {
+   // Show the Sign In form
+   $signInBtn.click(() => {
     changeForm($signUpForm, $signInForm);
   });
 
@@ -20,24 +21,60 @@ $(document).ready(function() {
   $signUpBtn.click(() => {
     changeForm($signUpForm, $signInForm);
   });
+  $("#signUp").click(function() {
+    // 유효성 검사 함수 호출
+    if (!validateForm()) {
+        // 유효성 검사를 통과하지 못하면 기본 제출을 막습니다.
+        event.preventDefault();
+        return false;
+    }
+    var emailSel = $("#email").val() + "@" + $("#domain").val();
+    $("#signUpProc").submit()
+    // 유효성 검사가 통과하면 폼 제출이 계속 진행됩니다.
+  });
 
+  $("#emailBtn").click(function() {
+    emailSel = $("#email").val() + "@" + $("#domain").val();
+    if(emailSel == '@'){
+      console.log("이메일을 입력해주세요")
+      return false;
+    }
+    if(!checkEmail()){
+      console.log("이메일이 중복 상태 입니다.")
+      return false;
+    }
+    $.ajax({
+        url : "/user/mailConfirm",
+        type:'post',
+        data : {
+            "email" : emailSel
+        },
+        success : function(data) {
+            console.log(data);
+            if (data == "success") {
+                console.log("성공하였습니다.")
+                $(".email_chk").css("display","inline-block")
+                $(".email_alr").css("display","none")
+                email_auth_cd = data; //인증번호 담아두기
+            } else {
+                console.log("아이디가 중복상태입니다.")
+                $(".email_alr").css("display","inline-block")
+                $(".email_chk").css("display","none")
+            }
+        },
+        error : function(xhr, status, error) {
+            console.log(error)
+        }
+    });
+  });
+  
 });
 
 //이메일 인증 번호 인증후에 버튼 활성화
 //비밀번호 8자 이상 숫자,문자 섞어 스게하기
 //휴대전호 번호 10자 이상 되야 하기
 //빈칸 있으면 경고문 드게 하기
-$("#signUp").click(function() {
-  // 유효성 검사 함수 호출
-  if (!validateForm()) {
-      // 유효성 검사를 통과하지 못하면 기본 제출을 막습니다.
-      event.preventDefault();
-      return false;
-  }
-  var emailSel = $("#email").val() + "@" + $("#domain").val();
-  $("#signUpProc").submit()
-  // 유효성 검사가 통과하면 폼 제출이 계속 진행됩니다.
-});
+
 
 // 기존 함수들을 활용하여 폼 유효성 검사 수행
 function validateForm() {
@@ -63,40 +100,6 @@ function validateForm() {
   return true; // 모든 유효성 검사를 통과했을 때 true 반환
 }
 
-$("#emailBtn").click(function() {
-  emailSel = $("#email").val() + "@" + $("#domain").val();
-  if(emailSel == '@'){
-    console.log("이메일을 입력해주세요")
-    return false;
-  }
-  if(!checkEmail()){
-    console.log("이메일이 중복 상태 입니다.")
-    return false;
-  }
-  $.ajax({
-      url : "/user/mailConfirm",
-      type:'post',
-      data : {
-          "email" : emailSel
-      },
-      success : function(data) {
-          console.log(data);
-          if (data == "success") {
-              console.log("성공하였습니다.")
-              $(".email_chk").css("display","inline-block")
-              $(".email_alr").css("display","none")
-              email_auth_cd = data; //인증번호 담아두기
-          } else {
-              console.log("아이디가 중복상태입니다.")
-              $(".email_alr").css("display","inline-block")
-              $(".email_chk").css("display","none")
-          }
-      },
-      error : function(xhr, status, error) {
-          console.log(error)
-      }
-  });
-});
 
 function checkEmail(){
   var email  = $("#email").val() + "@"+$("#domain").val();

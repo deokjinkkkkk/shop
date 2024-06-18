@@ -1,7 +1,6 @@
 package com.dj.shop.controller;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.dj.shop.service.AdminService;
 import com.dj.shop.vo.OrdersVO;
 import com.dj.shop.vo.Pagination;
-
-import lombok.extern.log4j.Log4j;
 import lombok.extern.log4j.Log4j2;
 
 import org.springframework.web.bind.annotation.GetMapping;
