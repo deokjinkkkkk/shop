@@ -1,4 +1,5 @@
 $(document).ready(function() {
+  const email_auth_cd = '';
   const $signInBtn = $('#toggleSignIn');
   const $signUpBtn = $('#toggleSignUp');
 
@@ -36,11 +37,7 @@ $(document).ready(function() {
   $("#emailBtn").click(function() {
     emailSel = $("#email").val() + "@" + $("#domain").val();
     if(emailSel == '@'){
-      console.log("이메일을 입력해주세요")
-      return false;
-    }
-    if(!checkEmail()){
-      console.log("이메일이 중복 상태 입니다.")
+      alert("이메일을 입력해주세요")
       return false;
     }
     $.ajax({
@@ -63,7 +60,7 @@ $(document).ready(function() {
             }
         },
         error : function(xhr, status, error) {
-            console.log(error)
+            alert("오류가 발생하였습니다.")
         }
     });
   });
@@ -96,7 +93,7 @@ function validateForm() {
       return false;
   }
 
-  console.log("폼이 성공적으로 제출되었습니다.");
+  if(email_auth_cd )
   return true; // 모든 유효성 검사를 통과했을 때 true 반환
 }
 
@@ -109,7 +106,6 @@ function checkEmail(){
     $(".email_com").css("display","inline-block")
     $(".email_alr").css("display","none")
     $(".email_chk").css("display","none")
-    return false
   }else {
      $(".email_chk").css("display","none")
        $(".email_alr").css("display","none")
@@ -123,7 +119,7 @@ function checkEmail(){
               "email" : email
           },
           success : function(data) {
-             
+            console.log(data)
               if (data == "success") {
                   
                   $(".email_chk").css("display","inline-block")
@@ -163,7 +159,11 @@ function pwdChk(){
 function pwdChk2(){
   var userPwd = $("#userPwd").val()
   var passchk = $("#passchk").val()
-
+  if(userPwd == ''){
+    $(".pwdC_chk").css("display","none")
+    $(".pwdC_bug").css("display","none")
+    return false;
+  }
   if(userPwd != passchk ){
       $(".pwdC_bug").css("display","inline-block")
       $(".pwdC_chk").css("display","none")
