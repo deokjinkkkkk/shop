@@ -4,6 +4,7 @@
 
 <p align="center">
   <br>
+  ![유저](https://github.com/deokjinkkkkk/shop/assets/116549186/8173eca1-8384-4180-a0c8-96ae1d6628b6)
   <br>
 </p>
 
