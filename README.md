@@ -4,7 +4,8 @@
 
 <p align="center">
   <br>
-  ![유저](https://github.com/deokjinkkkkk/shop/assets/116549186/8173eca1-8384-4180-a0c8-96ae1d6628b6)
+  
+![mse](https://github.com/deokjinkkkkk/shop/assets/116549186/271d06df-0324-446c-880b-e344b9d0f5a9)
   <br>
 </p>
 
