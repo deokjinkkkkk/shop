@@ -15,7 +15,7 @@ import org.springframework.web.servlet.resource.PathResourceResolver;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
-    // 외부 이미지 저장 경로를 설정한 프로퍼티
+    // 외부 이미지 저장 경로
     @Value("${saveimg}")
     private String saveimg;
 

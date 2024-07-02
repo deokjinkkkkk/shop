@@ -22,11 +22,11 @@ public class CartServiceImpl implements CartService {
     	int cntCheck = product.productCheck(vo.getProductNum());
     	//장바구니 확인 여부
        if(cart.checkCart(vo) != null) {
-    	   return 2;
+    	   return 2; 
        }
        
        if(cntCheck < 1 || cntCheck < vo.getCartCnt()) {
-    	   return 4;
+    	   return 4; //재고 확인 
        }
        
         try {

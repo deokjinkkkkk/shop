@@ -9,8 +9,10 @@ import com.dj.shop.mapper.WishiListMapper;
 import com.dj.shop.vo.WishlistVO;
 @Service
 public class wishilistServiceImpl implements wishilistService{
+    
     @Autowired
     WishiListMapper wish;
+
     @Override
     public int checkWishiList(WishlistVO wvo) {
         int result = wish.checkWishiList(wvo);

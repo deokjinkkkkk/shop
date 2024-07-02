@@ -15,7 +15,6 @@ public interface CartMapper {
     public int cartDelete(int cartNum);
     //장바구니 수정
     public int cartUpdate(CartVO vo);
-    
     //주문 시 장바구니 삭제
     public int cartOrderDelete(CartVO vo);
 }

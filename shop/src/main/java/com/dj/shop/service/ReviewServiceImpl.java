@@ -18,19 +18,21 @@ private static final org.slf4j.Logger logger =org.slf4j.LoggerFactory.getLogger(
 
 	@Override
 	public int reviewAdd(ReviewVO vo) {
-		Integer check = review.checkReview(vo);
+		Integer check = review.checkReview(vo); //상품 리뷰 작성여부 확인
+
 		int result;
 		if(check != null){
 			return result = 3;
 		}
 		result = review.reviewAdd(vo);
+
 		return result;
 	}
 
 	@Override
 	public List<ReviewVO> reviewList(ReviewVO vo) {
-		int count = review.reviewCount(vo);	
-		vo.setTotalRecord(count);
+		int count = review.reviewCount(vo);	 //리뷰 작성수 
+		vo.setTotalRecord(count); // 페이징 처리를 위해 리뷰 개수
 		return review.reviewList(vo);
 	}
 }

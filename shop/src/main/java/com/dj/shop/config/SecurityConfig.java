@@ -15,8 +15,8 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import com.dj.shop.user.LoginFailHandler;
 import com.dj.shop.user.LoginIdPwValidator;
 import com.dj.shop.user.LoginSuccessHandler;
-@Configuration // 스프링 환경 세팅을 돕는 어노테이션
-@EnableWebSecurity // 스프링 시큐리티 설정할 클래스라고 알려주는 어노테이션
+@Configuration 
+@EnableWebSecurity 
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
     LoginIdPwValidator loginIdPwValidator;
@@ -33,10 +33,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .formLogin()
                     .loginPage("/login")
                     .loginProcessingUrl("/loginProc") // 이 URI 호출시 스프링 시큐리티로 폼 정보를 제출 / form의 action
-                    .usernameParameter("email") // 폼 input name값: default - username
-                    .passwordParameter("userPwd") // 폼 input name값: default - password
-                    .successHandler(loginSuccessHandler()) // 로그인 성공을 다룰 핸들러
-                    .failureHandler(loginFailHandler()) // 로그인 실패를 다룰 핸들러
+                    .usernameParameter("email") 
+                    .passwordParameter("userPwd")
+                    .successHandler(loginSuccessHandler()) // 로그인 성공 핸들러
+                    .failureHandler(loginFailHandler()) // 로그인 실패 핸들러
                     .permitAll()
                 .and()
                     .logout()

@@ -3,16 +3,6 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{common/layouts/layout}"
       layout:fragment="Content">
-<head>
-      <!--Common Head-->
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <meta name="viewport"
-              content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0"/>
-        
- </head>
- 
     <div class="main">
       <div class="container">
         <!-- BEGIN SIDEBAR & CONTENT -->
@@ -127,7 +117,7 @@ $(".del-goods").on("click",function(e){
 	$('#cartDelete').submit()	
 })  
 /*주문 페이지 이동 */
-   	$("#checkoutBtn").on("click",function(){
+  $("#checkoutBtn").on("click",function(){
    		let contents ='';
    		let orderNum = 0;
    		$(".cart_info").each(function(index,element){

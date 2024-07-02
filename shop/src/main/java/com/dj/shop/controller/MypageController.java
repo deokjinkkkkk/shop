@@ -44,6 +44,7 @@ public class MypageController {
 	@Autowired
 	OrderService order;
 
+	//나의 배송지 정보가져오기
 	@GetMapping("/myAddress")
 	public String myAddress(UserVO vo, HttpServletRequest request,Model model) {
 		/*세션 값을 통해서 유저 번호 가지고오기*/
@@ -58,12 +59,14 @@ public class MypageController {
 		
 		return "pages/user/myAddress";
 	}
-	
+
+	//등록한 배송지 삭제
 	@PostMapping("/address/create")
 	public String addressCreate(AddressVO avo,UserVO uvo,HttpServletRequest request) {
 		/*세션 값을 통해서 유저 번호 가지고오기*/
 		String id = (String) request.getSession().getAttribute("email");
 		uvo.setEmail(id);
+		
 		uvo =userService.userSelect(id);
 		int usernumber = uvo.getUserNumber();
 		

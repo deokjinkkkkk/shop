@@ -33,7 +33,6 @@ public class ProductServiceImpl implements ProductService{
 
 	@Override
 	public List<ProductVO> getAllSangpums(ProductVO vo) {
-		
 		return product.getAllSangpums(vo);
 	}
 
@@ -44,7 +43,6 @@ public class ProductServiceImpl implements ProductService{
 
 	@Override
 	public ProductVO getData(int num) {
-		
 		return product.getData(num);
 	}
 
@@ -57,7 +55,7 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public int deleteMarket(ProductVO vo) {
 		ProductVO pro = product.getData(vo.getProductNum());
-		
+		//이미지 삭제
 		if(pro != null) {
 			Path path1 ;
 			Path path2 ;
