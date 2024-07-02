@@ -2,6 +2,7 @@
 <p align="center">
   <br>
 
+![image (1)](https://github.com/deokjinkkkkk/shop/assets/116549186/ce07f277-b09f-4680-8ba6-9be07cb4b020)
 
   <br>
 </p>
