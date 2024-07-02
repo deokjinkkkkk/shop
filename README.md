@@ -4,7 +4,7 @@
 
 <p align="center">
   <br>
-  <img src="./images/common/logo-sample.jpeg">
+  ![유저](https://github.com/deokjinkkkkk/shop/assets/116549186/13fe52b7-1c70-451d-963f-9eb2c591f519)
   <br>
 </p>
 
