@@ -43,7 +43,7 @@ GIF Images
 ### 위시리스트 ! AJAX를 사용해서 위시리스트 등록,삭제
 
 <br>
-### 개발 환경
+### 개발 환경 <br/>
 1. JAVA 11 <br/>
 2. SpringBoot 2.6.3 <br/>
 3. MariaDB <br/>
