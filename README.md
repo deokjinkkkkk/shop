@@ -1,6 +1,7 @@
 # Spring Boot Thymeleaf를 사용한 쇼핑몰
 <p align="center">
   <br>
+  ![mse](https://github.com/deokjinkkkkk/shop/assets/116549186/ef43457b-9f43-4020-a524-64e07a8e617c)
   <br>
 </p>
 
@@ -26,10 +27,10 @@ GIF Images
 
 <br>
 
-# 구현 기능
-<br>
-![mse](https://github.com/deokjinkkkkk/shop/assets/116549186/ef43457b-9f43-4020-a524-64e07a8e617c)
-<br>
+## 구현 기능
+  <br>
+    ![mse](https://github.com/deokjinkkkkk/shop/assets/116549186/ef43457b-9f43-4020-a524-64e07a8e617c)
+  <br>
 ### 상품CRUD !CR 구현 + 페이징처리 + 이미지업로드
 
 ### SECURITY 회원 로그인/회원가입 !-구현 + 이메일인증 + 유효성 검사
