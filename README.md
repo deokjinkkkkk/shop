@@ -31,7 +31,7 @@ GIF Images
 
 ## 구현 기능
 <br>
-![mse](https://github.com/deokjinkkkkk/shop/assets/116549186/271d06df-0324-446c-880b-e344b9d0f5a9)
+![mse](https://github.com/deokjinkkkkk/shop/assets/116549186/ef43457b-9f43-4020-a524-64e07a8e617c)
 <br>
 ### 상품CRUD !CR 구현 + 페이징처리 + 이미지업로드
 
