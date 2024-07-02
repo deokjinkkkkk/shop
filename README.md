@@ -1,7 +1,4 @@
 # Spring Boot Thymeleaf를 사용한 쇼핑몰
-
-![mse](https://github.com/deokjinkkkkk/shop/assets/116549186/ef43457b-9f43-4020-a524-64e07a8e617c)
-
 <p align="center">
   <br>
   <br>
@@ -29,7 +26,7 @@ GIF Images
 
 <br>
 
-## 구현 기능
+# 구현 기능
 <br>
 ![mse](https://github.com/deokjinkkkkk/shop/assets/116549186/ef43457b-9f43-4020-a524-64e07a8e617c)
 <br>
