@@ -1,4 +1,4 @@
-package com.dj.shop.service;
+package com.dj.shop.service.impl;
 
 import java.util.List;
 
@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dj.shop.mapper.WishiListMapper;
+import com.dj.shop.service.inf.wishilistService;
 import com.dj.shop.vo.WishlistVO;
 @Service
 public class wishilistServiceImpl implements wishilistService{

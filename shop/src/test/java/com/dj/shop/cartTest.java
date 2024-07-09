@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.dj.shop.service.CartService;
+import com.dj.shop.service.inf.CartService;
 import com.dj.shop.vo.CartVO;
 
 @SpringBootTest

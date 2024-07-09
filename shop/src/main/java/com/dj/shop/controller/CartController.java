@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.dj.shop.service.CartService;
-import com.dj.shop.service.UserService;
+import com.dj.shop.service.inf.CartService;
+import com.dj.shop.service.inf.UserService;
 import com.dj.shop.vo.CartVO;
 import com.dj.shop.vo.UserVO;
 
@@ -43,6 +43,7 @@ public class CartController {
 		return result ;
 		
 	}
+	
 	//AJAX 를 사용해서 홈페이지 상단 장바구니 정보 가져오기
 	@GetMapping("/headlist")
 	@ResponseBody
@@ -100,6 +101,7 @@ public class CartController {
 		int result =cart.cartDelete(cartNum);
 		return result;	
 	}
+
 	//장바구니 수량 변경
 	@PostMapping("/cartUpdate")
 	public String cartListUpdate(CartVO vo,HttpServletRequest request) {

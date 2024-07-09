@@ -1,4 +1,4 @@
-package com.dj.shop.service;
+package com.dj.shop.service.impl;
 
 import java.util.List;
 
@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dj.shop.mapper.AdminMapper;
+import com.dj.shop.service.inf.AdminService;
 import com.dj.shop.vo.OrdersVO;
 import com.dj.shop.vo.Pagination;
 @Service

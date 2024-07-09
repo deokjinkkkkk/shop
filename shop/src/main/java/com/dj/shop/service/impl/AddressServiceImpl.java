@@ -1,9 +1,10 @@
-package com.dj.shop.service;
+package com.dj.shop.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dj.shop.mapper.AddressMapper;
+import com.dj.shop.service.inf.AddressService;
 import com.dj.shop.vo.AddressVO;
 
 @Service

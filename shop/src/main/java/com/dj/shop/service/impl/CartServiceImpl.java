@@ -1,4 +1,4 @@
-package com.dj.shop.service;
+package com.dj.shop.service.impl;
 
 import java.util.List;
 
@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.dj.shop.mapper.CartMapper;
 import com.dj.shop.mapper.ProductMapper;
+import com.dj.shop.service.inf.CartService;
 import com.dj.shop.vo.CartVO;
 
 @Service

@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.dj.shop.service.ReviewService;
-import com.dj.shop.service.UserService;
+import com.dj.shop.service.inf.ReviewService;
+import com.dj.shop.service.inf.UserService;
 import com.dj.shop.vo.ReviewVO;
 import com.dj.shop.vo.UserVO;
 import org.springframework.web.bind.annotation.GetMapping;

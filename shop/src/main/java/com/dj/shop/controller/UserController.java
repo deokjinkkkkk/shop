@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dj.shop.service.EmailService;
-import com.dj.shop.service.UserService;
+import com.dj.shop.service.inf.UserService;
 import com.dj.shop.vo.UserVO;
 
 @Controller
@@ -35,24 +35,5 @@ public class UserController {
 		return "redirect:/login";
 	}
 
-	@PostMapping("/emailChk")
-	@ResponseBody
-	public String mailChk(@RequestParam("email") String email, boolean n) {
-		n = userservice.emailChk(email);
-		if (n) {
-			return "success";
-		} else {
-			return "fail";
-		}
-		
-	}
 	
-	//회원가입 이메일 비밀번호 발급
-		@PostMapping("/mailConfirm")
-		@ResponseBody
-		public String mailCheck(@RequestParam String email,HttpSession session) throws Exception {
-			String code = emailService.sendSimpleMessage(email);
-			session.setAttribute("emailCode", code);
-			return code;
-		}
 }

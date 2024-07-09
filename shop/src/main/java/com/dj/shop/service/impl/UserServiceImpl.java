@@ -1,10 +1,11 @@
-package com.dj.shop.service;
+package com.dj.shop.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.dj.shop.mapper.UserMapper;
+import com.dj.shop.service.inf.UserService;
 import com.dj.shop.vo.UserVO;
 @Service
 public class UserServiceImpl implements UserService{

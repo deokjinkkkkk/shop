@@ -1,4 +1,4 @@
-package com.dj.shop.service;
+package com.dj.shop.service.impl;
 
 import java.util.List;
 
@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.dj.shop.controller.ProdcutController;
 import com.dj.shop.mapper.ReviewMapper;
+import com.dj.shop.service.inf.ReviewService;
 import com.dj.shop.vo.ReviewVO;
 
 @Service

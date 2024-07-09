@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.dj.shop.service.ProductService;
+import com.dj.shop.service.inf.ProductService;
 import com.dj.shop.vo.Pagination;
 import com.dj.shop.vo.ProductVO;
 
@@ -25,11 +25,6 @@ public class ProdcutController {
 	
 	@Value("${saveimg}")
 	private String saveimg;
-	
-	@GetMapping("/admin")
-	public String product() {
-		return "pages/product/productAdd";
-	}
 	
 	@GetMapping("/list")
 	public String productList(ProductVO vo, Model model, 

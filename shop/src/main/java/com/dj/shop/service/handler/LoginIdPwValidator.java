@@ -1,4 +1,4 @@
-package com.dj.shop.user;
+package com.dj.shop.service.handler;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

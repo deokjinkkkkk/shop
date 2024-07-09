@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.dj.shop.service.AddressService;
-import com.dj.shop.service.OrderService;
-import com.dj.shop.service.UserService;
-import com.dj.shop.service.wishilistService;
+import com.dj.shop.service.inf.AddressService;
+import com.dj.shop.service.inf.OrderService;
+import com.dj.shop.service.inf.UserService;
+import com.dj.shop.service.inf.wishilistService;
 import com.dj.shop.vo.AddressVO;
 import com.dj.shop.vo.OrdersVO;
 import com.dj.shop.vo.UserVO;
@@ -91,6 +91,7 @@ public class MypageController {
 		model.addAttribute("wishilist", wishilist.getWishiList(vo));
 		return "pages/user/wishlist";
 	}
+
 	@GetMapping("/checkWishiList")
 	@ResponseBody
 	public int wishiListCheck(@RequestParam("productNum") int productNum,WishlistVO vo,HttpServletRequest request) {
@@ -103,6 +104,7 @@ public class MypageController {
 		logger.info(productNum + " " +vo.getUserNumber() + " " + result);
 		return result;
 	}
+
 	@PostMapping("/changeWishiList")
 	@ResponseBody
 	public int changeWishiList(@RequestBody Map<String, Object> payload, HttpServletRequest request) {
@@ -125,6 +127,7 @@ public class MypageController {
 		
 		return result;
 	}
+	
 	@PostMapping("/delProduct")
 	public String postMethodName(WishlistVO vo, HttpServletRequest request) {
 		String id = (String) request.getSession().getAttribute("email");

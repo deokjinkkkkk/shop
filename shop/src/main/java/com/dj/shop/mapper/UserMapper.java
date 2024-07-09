@@ -4,8 +4,8 @@ import com.dj.shop.vo.UserVO;
 
 
 public interface UserMapper {
-	//로그인
-	UserVO userSelect(String vo); 
+	//로그인(email을 사용해서 유저정보 가져오기)
+	UserVO userSelect(String email); 
 	//회원가입
 	int saveUser(UserVO vo); 
 	//아이디 중복체크

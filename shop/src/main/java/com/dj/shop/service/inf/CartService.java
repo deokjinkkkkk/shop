@@ -1,4 +1,4 @@
-package com.dj.shop.service;
+package com.dj.shop.service.inf;
 
 import java.util.List;
 

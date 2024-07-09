@@ -1,4 +1,4 @@
-package com.dj.shop.service;
+package com.dj.shop.service.impl;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.dj.shop.mapper.ProductMapper;
+import com.dj.shop.service.inf.ProductService;
 import com.dj.shop.vo.ProductVO;
 
 import lombok.extern.log4j.Log4j2;

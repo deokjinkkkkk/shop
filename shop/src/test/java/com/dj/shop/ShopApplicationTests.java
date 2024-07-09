@@ -4,8 +4,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.dj.shop.service.ProductService;
-import com.dj.shop.service.UserService;
+import com.dj.shop.service.inf.ProductService;
+import com.dj.shop.service.inf.UserService;
 import com.dj.shop.vo.ProductVO;
 import com.dj.shop.vo.UserVO;
 

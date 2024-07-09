@@ -21,12 +21,18 @@ public class UserVO implements UserDetails {
 	private String suspen;
 	private String signout;
 	private String roles;
+	
+	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		Collection<GrantedAuthority> authorities = new ArrayList<>();
-		for(String role : roles.split(",")) {
-			authorities.add(new SimpleGrantedAuthority(role));
-		}
+		authorities.add(new GrantedAuthority() {
+			
+			@Override
+			public String getAuthority() {
+				return roles;
+			}
+		});
 		return authorities;
 	}
 	@Override
@@ -42,22 +48,21 @@ public class UserVO implements UserDetails {
 	@Override
 	public boolean isAccountNonExpired() {
 		
-		return false;
+		return true;
 	}
 	@Override
 	public boolean isAccountNonLocked() {
 		
-		return false;
+		return true;
 	}
 	@Override
 	public boolean isCredentialsNonExpired() {
 		
-		return false;
+		return true;
 	}
 	@Override
 	public boolean isEnabled() {
-		
-		return false;
+		return true;
 	}
 	
 	

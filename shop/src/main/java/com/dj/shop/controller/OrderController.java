@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.dj.shop.service.AddressService;
-import com.dj.shop.service.OrderService;
-import com.dj.shop.service.UserService;
+import com.dj.shop.service.inf.AddressService;
+import com.dj.shop.service.inf.OrderService;
+import com.dj.shop.service.inf.UserService;
 import com.dj.shop.vo.AddressVO;
 import com.dj.shop.vo.OrderPageVO;
 import com.dj.shop.vo.OrdersVO;

@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.dj.shop.service.AdminService;
+import com.dj.shop.service.inf.AdminService;
 import com.dj.shop.vo.OrdersVO;
 import com.dj.shop.vo.Pagination;
 import lombok.extern.log4j.Log4j2;
@@ -21,6 +21,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class AdminController {
     @Autowired
     AdminService admin;
+    
+	@GetMapping("/product")
+	public String product() {
+		return "pages/product/productAdd";
+	}
     
     @GetMapping("/list")
     public String orderList(@RequestParam(value = "page",required = false) Integer page,
