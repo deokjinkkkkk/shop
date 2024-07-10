@@ -24,9 +24,9 @@
 
 ## 기술 스택
 
-| jQuery |  SringBoot |   JAVA    |   maridDB  |   maven  |  mybatis |
+| jQuery |  SringBoot |   JAVA    |   DB  |   maven  |  mybatis |
 | :----- | :--------: |  :----:   | :--------: | :------: | :------: | 
-|  js    |  Spring    |  java11   | maridDB    | maven    | maven    |
+|  js    |  Spring    |  java11   | mariaDB    | maven    | maven    |
 
 <br>
 
