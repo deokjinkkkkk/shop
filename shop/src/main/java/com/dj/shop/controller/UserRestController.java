@@ -5,7 +5,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dj.shop.service.EmailService;
@@ -15,7 +14,7 @@ import com.dj.shop.service.inf.UserService;
 public class UserRestController {
 	@Autowired
 	UserService userservice;
-	
+
 	@Autowired
 	EmailService emailService;
 	
@@ -37,4 +36,7 @@ public class UserRestController {
 		session.setAttribute("emailCode", code);
 		return code;
 	}
+	
+
+
 }

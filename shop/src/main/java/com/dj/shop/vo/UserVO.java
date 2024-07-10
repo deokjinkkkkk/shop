@@ -27,7 +27,6 @@ public class UserVO implements UserDetails {
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		Collection<GrantedAuthority> authorities = new ArrayList<>();
 		authorities.add(new GrantedAuthority() {
-			
 			@Override
 			public String getAuthority() {
 				return roles;

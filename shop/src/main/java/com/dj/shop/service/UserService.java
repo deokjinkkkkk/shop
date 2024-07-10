@@ -9,21 +9,21 @@ import org.springframework.stereotype.Service;
 import com.dj.shop.mapper.UserMapper;
 import com.dj.shop.vo.UserVO;
 
+import lombok.RequiredArgsConstructor;
+
 
 @Service
+@RequiredArgsConstructor
 public class UserService implements UserDetailsService{
 	
 	@Autowired
-	private UserMapper usermapper;
+	private final UserMapper usermapper;
 	
 	// 시큐리티 session(내부 Authentication(네부 UserDetails))
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		UserVO user = usermapper.userSelect(username);
-		if(user != null) {
-			return user;
-		}
-		return null;
+		return user;
 	}
 
 }

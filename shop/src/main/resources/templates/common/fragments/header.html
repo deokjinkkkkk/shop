@@ -20,7 +20,7 @@
                     <ul class="list-unstyled list-inline pull-right">
                         <li th:if="${session.roles != null}"><a href="myAddress">My Account</a></li>
                         <li th:if="${session.roles != null}"><a href="/myPage/wishlist">My Wishlist</a></li>
-                        <li th:if="${session.roles == null}"><a href="/user/login">Log In</a></li>
+                        <li th:if="${session.roles == null}"><a href="/user/loginForm">Log In</a></li>
                         <li th:if="${session.roles != null}"><a href="/logout" >Logout</a></li>
                     </ul>
                 </div>
