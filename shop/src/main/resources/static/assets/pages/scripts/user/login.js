@@ -64,7 +64,7 @@ $(document).ready(function() {
         }
     });
   });
-  
+
 });
 
 //이메일 인증 번호 인증후에 버튼 활성화
@@ -195,3 +195,5 @@ function telChk() {
       return false;
   }
 }
+
+
