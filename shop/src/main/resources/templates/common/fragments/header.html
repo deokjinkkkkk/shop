@@ -1,5 +1,6 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
      th:fragment="HeaderFragment">
 <!-- Head BEGIN -->
 
@@ -18,10 +19,10 @@
                 <!-- BEGIN TOP BAR MENU -->
                 <div class="col-md-6 col-sm-6 additional-nav">
                     <ul class="list-unstyled list-inline pull-right">
-                        <li th:if="${session.roles != null}"><a href="myAddress">My Account</a></li>
-                        <li th:if="${session.roles != null}"><a href="/myPage/wishlist">My Wishlist</a></li>
-                        <li th:if="${session.roles == null}"><a href="/user/loginForm">Log In</a></li>
-                        <li th:if="${session.roles != null}"><a href="/logout" >Logout</a></li>
+                        <li sec:authorize="isAuthenticated()"><a href="myAddress">My Account</a></li>
+                        <li sec:authorize="isAuthenticated()"><a href="/myPage/wishlist">My Wishlist</a></li>
+                        <li sec:authorize="isAnonymous()"><a href="/user/loginForm">Log In</a></li>
+                        <li sec:authorize="isAuthenticated()"><a href="/logout" >Logout</a></li>
                     </ul>
                 </div>
                 <!-- END TOP BAR MENU -->

@@ -23,6 +23,7 @@ public class UserService implements UserDetailsService{
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		UserVO user = usermapper.userSelect(username);
+		System.out.println("PrincipalDetailsService : 진입" + user.getUsername());
 		return user;
 	}
 

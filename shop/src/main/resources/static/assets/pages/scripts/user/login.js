@@ -5,7 +5,7 @@ $(document).ready(function() {
 
   const $signUpForm = $('#sign-up-container');
   const $signInForm = $('#sign-in-container');
-
+  
   // Change form when clicking on button
   const changeForm = ($form1, $form2) => {
     $form1.toggleClass('hide');
@@ -65,6 +65,26 @@ $(document).ready(function() {
     });
   });
 
+
+  // 로그인 폼 제출 이벤트 핸들러
+  $('#loginForm').on('submit', async function(event) {
+    event.preventDefault();
+    const email = $('#loginEmail').val();
+    const userPwd = $('#loginPassword').val();
+    console.log(email + "333 111" + userPwd)
+    try {
+    const response = await $.ajax({
+      url: '/login',
+      method: 'POST',
+      data: JSON.stringify({ email, userPwd }),
+      contentType: 'application/json'
+    });
+    console.log(response);
+    } catch (error) {
+    // 네트워크 오류 처리
+    }
+    });
+  
 });
 
 //이메일 인증 번호 인증후에 버튼 활성화
@@ -99,8 +119,8 @@ function validateForm() {
 
 
 function checkEmail(){
-  var email  = $("#email").val() + "@"+$("#domain").val();
-  var emailSel = $("#domain").val();
+  const email  = $("#email").val() + "@"+$("#domain").val();
+  const emailSel = $("#domain").val();
   
   if(emailSel == ''){
     $(".email_com").css("display","inline-block")

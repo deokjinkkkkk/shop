@@ -27,11 +27,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http.csrf().disable();// POST방식 허용
-		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)// 세션을 사용하지 않음
-				.and().addFilter(corsConfig.corsFilter()).formLogin().disable().httpBasic().disable()
+		http
+			.addFilter(corsConfig.corsFilter())
+			.csrf().disable();// POST방식 허용
+		http
+			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)// 세션을 사용하지 않음
+			.and()
+				.formLogin().disable()
+				.httpBasic().disable()
 				.addFilter(new JwtAuthenticationFilter(authenticationManager())) // AuthenticationManager
-				.addFilter(new JwtAuthorizationFilter(authenticationManager(), userMapper)).authorizeRequests()
+				.addFilter(new JwtAuthorizationFilter(authenticationManager(), userMapper))
+				.authorizeRequests()
 				// .antMatchers(
 				// "/home","/","/product/**","/assets/**","/user/login").permitAll() // 이 URI는
 				// 누구든 접근가능

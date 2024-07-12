@@ -61,21 +61,17 @@
 		<!-- Sign in form -->
 		<div id="sign-in-container" class="hide">
 			<h3>로그인</h3>
-			<form method="post" action="/login" id="loginForm">
-				<label for="username">이메일</label> <input type="text"
-					name="email" id="email" placeholder="user@example.com">
+			<form id="loginForm">
+				<label for="username">이메일</label> 
+				<input type="text" name="email" id="loginEmail" placeholder="user@example.com">
 
-				<label for="userPwd">비밀번호</label> <input type="password"
-					name="userPwd" id="userPwd"
-					placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;">
+				<label for="userPwd">비밀번호</label> 
+				<input type="password" name="userPwd" id="loginPassword" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;">
 
 				<div id="form-controls">
 					<button type="submit">Sign In</button>
 					<button type="button" id="toggleSignUp">Sign Up</button>
 				</div>
-
-				<input type="hidden" name="terms" id="terms"> 
-
 			</form>
 		</div>
 
@@ -88,7 +84,5 @@
 		</div>
 	</div>
 </div>
-
 </body>
-
 </html>

@@ -22,19 +22,20 @@ import com.dj.shop.vo.UserVO;
 public class JwtAuthorizationFilter extends BasicAuthenticationFilter{
 	
 	private UserMapper usermapper;
-	
+
 	public JwtAuthorizationFilter(AuthenticationManager authenticationManager,UserMapper userMapper) {
 		super(authenticationManager);
 		this.usermapper = userMapper;
 	}
-	
+
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		String header = request.getHeader(JwtProperties.HEADER_STRING);
+		System.out.println(request.getHeader("Authorization") + " ㅎㅎ");
 		if(header == null || !header.startsWith(JwtProperties.TOKEN_PREFIX)) {
 			chain.doFilter(request, response);
-                        return;
+	                    return;
 		}
 		System.out.println("header : "+header);
 		String token = request.getHeader(JwtProperties.HEADER_STRING)
@@ -59,8 +60,10 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter{
 			
 			// 강제로 시큐리티의 세션에 접근하여 값 저장
 			SecurityContextHolder.getContext().setAuthentication(authentication);
+			System.out.println("제대로 세션 정장됨");
+			
 		}
-	
+		System.out.println("제대로 안됨");
 		chain.doFilter(request, response);
 	}
 	
